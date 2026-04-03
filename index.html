@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>InConcertta — Plateforme de concertation</title>
-  <meta name="description" content="Solution clé en main de concertation territoriale (SaaS), modulable — formules ponctuelles, récurrentes ou instance dédiée. Données hébergées en Europe (Supabase, RGPD). Site de présentation.">
+  <title>InConcertta — Co-construire vos projets territoriaux en temps réel</title>
+  <meta name="description" content="Plateforme interactive pour co-construire vos projets territoriaux en temps réel. Citoyens, élus et experts sur une carte interactive — résultats exploitables tout de suite. Concertation et SaaS InConcertta.">
   <meta name="keywords" content="InConcertta, concertation, participation citoyenne, plateforme SaaS, territoire, collectivités, RGPD, InCitta">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://presentation.inconcertta.fr/">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://presentation.inconcertta.fr/">
-  <meta property="og:title" content="InConcertta — Plateforme de concertation">
-  <meta property="og:description" content="Solution de concertation territoriale modulable, données en Europe (RGPD). Formules et interface de présentation.">
+  <meta property="og:title" content="InConcertta — Co-construire vos projets territoriaux en temps réel">
+  <meta property="og:description" content="Plateforme interactive : citoyens, élus et experts sur une carte, résultats exploitables immédiatement. Moins de conflits, plus d’adhésion, décisions plus rapides.">
   <meta property="og:image" content="https://presentation.inconcertta.fr/assets/images/logos/Logo%20InConcertta.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -19,8 +19,8 @@
   <meta property="og:site_name" content="InConcertta">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://presentation.inconcertta.fr/">
-  <meta name="twitter:title" content="InConcertta — Plateforme de concertation">
-  <meta name="twitter:description" content="Plateforme SaaS de concertation territoriale — présentation, formules et démos.">
+  <meta name="twitter:title" content="InConcertta — Projets territoriaux en temps réel">
+  <meta name="twitter:description" content="Co-construction sur carte interactive, données exploitables tout de suite. Informations sur demande et démo intégrée à la page.">
   <meta name="twitter:image" content="https://presentation.inconcertta.fr/assets/images/logos/Logo%20InConcertta.png">
   <meta name="twitter:image:alt" content="Logo InConcertta — plateforme de concertation">
   <meta name="author" content="InCitta">
@@ -45,8 +45,8 @@
         "@type": "WebPage",
         "@id": "https://presentation.inconcertta.fr/#webpage",
         "url": "https://presentation.inconcertta.fr/",
-        "name": "InConcertta — Plateforme de concertation",
-        "description": "Solution clé en main de concertation territoriale (SaaS), modulable — formules ponctuelles, récurrentes ou instance dédiée.",
+        "name": "InConcertta — Plateforme interactive pour projets territoriaux",
+        "description": "Co-construction en temps réel sur carte interactive — citoyens, élus et experts ; résultats exploitables immédiatement.",
         "isPartOf": { "@id": "https://presentation.inconcertta.fr/#website" },
         "about": { "@id": "https://presentation.inconcertta.fr/#product" },
         "primaryImageOfPage": {
@@ -62,7 +62,7 @@
         "name": "InConcertta",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Web",
-        "description": "Plateforme de concertation et participation citoyenne pour collectivités et projets territoriaux.",
+        "description": "Plateforme interactive pour co-construire des projets territoriaux en temps réel, avec carte participative et données exploitables.",
         "url": "https://inconcertta.fr/",
         "provider": { "@id": "https://presentation.inconcertta.fr/#org" }
       },
@@ -158,6 +158,124 @@
       overflow: hidden;
       border-radius: 14px;
     }
+    .page-hero .page-title.hero-value-headline {
+      font-size: clamp(1.2rem, 2.65vw, 2rem);
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+      max-width: min(100%, 46ch);
+    }
+    .page-hero-text .hero-brand-kicker {
+      margin: 0 0 0.5rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      color: rgba(232, 241, 244, 0.55);
+      text-align: left;
+      text-justify: auto;
+      hyphens: none;
+      -webkit-hyphens: none;
+    }
+    .page-hero .page-lead.hero-value-sub {
+      font-size: 1.08rem;
+      line-height: 1.65;
+      max-width: 52ch;
+      margin-top: 0.85rem !important;
+      margin-bottom: 0.25rem;
+    }
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.65rem 0.85rem;
+      margin-top: 1.15rem;
+    }
+    .hero-cta-row a {
+      text-decoration: none;
+    }
+    .hero-cta-row .btn-primary {
+      box-shadow: none;
+      filter: none;
+    }
+    .hero-cta-row .btn-primary:hover {
+      box-shadow: none;
+      filter: none;
+    }
+    .hero-cta-row .btn-hero-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      min-height: 48px;
+      padding: 0 1.2rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: -0.01em;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      background: rgba(255, 255, 255, 0.1);
+      color: #f0f7fa;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      transition: transform 0.12s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .hero-cta-row .btn-hero-secondary:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.55);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+    }
+    .page-hero .hero-footnote {
+      margin-top: 1rem;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: rgba(232, 241, 244, 0.72);
+      max-width: 48ch;
+    }
+    .why-inconcertta-section {
+      margin: 1.85rem 0 2rem;
+      padding: 1.35rem 1.25rem 1.45rem;
+      background: rgba(0, 54, 74, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    }
+    .why-inconcertta-section h2 {
+      margin-top: 0 !important;
+      margin-bottom: 1rem !important;
+    }
+    .why-inconcertta-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem 1.5rem;
+      align-items: start;
+    }
+    @media (max-width: 540px) {
+      .why-inconcertta-list {
+        grid-template-columns: 1fr;
+        gap: 0.65rem;
+      }
+    }
+    .why-inconcertta-list li {
+      position: relative;
+      padding-left: 1.65rem;
+      margin: 0;
+      font-size: 1.02rem;
+      line-height: 1.55;
+      color: rgba(232, 241, 244, 0.95);
+      font-weight: 500;
+    }
+    .why-inconcertta-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 0.12em;
+      font-weight: 800;
+      color: #4de3c1;
+      font-size: 1.05em;
+    }
     /* Marque InConcertta — I (#BF7D40), n (#B79D30), Concertta dont le C (#B79D30) */
     .inconcertta-brand {
       font-weight: inherit;
@@ -219,22 +337,13 @@
     .main-read h2:not(.lux-split-chars):first-of-type {
       margin-top: 2rem;
     }
-    .main-read h2#incitta-title {
-      color: #f0f7fa;
-    }
-    /* InCitta : I & C #003333, reste #006666 */
-    .main-read h2#incitta-title .incitta-title-ic {
-      color: #003333;
-    }
-    .main-read h2#incitta-title .incitta-title-body {
-      color: #006666;
-    }
-    /* InConcertta dans ce titre : I & C #BF7D40, reste #B79D30 */
-    .main-read h2#incitta-title .inconcertta-title-ic {
-      color: #bf7d40;
-    }
+    /* Titre « InCitta & InConcertta » : tout en blanc */
+    .main-read h2#incitta-title,
+    .main-read h2#incitta-title .incitta-title-ic,
+    .main-read h2#incitta-title .incitta-title-body,
+    .main-read h2#incitta-title .inconcertta-title-ic,
     .main-read h2#incitta-title .inconcertta-title-body {
-      color: #b79d30;
+      color: #ffffff;
     }
     /* Zone de texte = largeur du bloc .main-read */
     .main-read p {
@@ -313,6 +422,13 @@
       hyphens: auto;
       -webkit-hyphens: auto;
     }
+    .page-hero-text .page-lead.hero-value-sub,
+    .page-hero-text .hero-footnote {
+      text-align: left;
+      text-justify: auto;
+      hyphens: manual;
+      -webkit-hyphens: manual;
+    }
     .inconcertta-offer-subtitle {
       font-size: clamp(1.05rem, 1.85vw, 1.22rem);
       font-weight: 700;
@@ -362,6 +478,9 @@
       background: rgba(255, 255, 255, 0.14);
       margin: 1.75rem 0;
       width: 100%;
+    }
+    .inconcertta-offer-section p.inconcertta-offer-formule-inclut {
+      margin-top: 1.35rem;
     }
     /* InCitta : phrases courtes puis listes en deux colonnes (lisibilité) */
     .incitta-intro-section .incitta-intro-lead p {
@@ -796,39 +915,42 @@
   <div class="content-wrap">
     <header class="page-hero">
       <div class="page-hero-text">
-        <h1 class="page-title lux-h1-animate">
+        <p class="hero-brand-kicker">
+          <span class="inconcertta-brand"><span class="inconcertta-i">I</span><span class="inconcertta-n">n</span><span class="inconcertta-i">C</span><span class="inconcertta-core">oncertta</span></span>
+        </p>
+        <h1 class="page-title lux-h1-animate hero-value-headline">
           <span class="lux-line lux-line--mask">
-            <span class="inconcertta-brand"><span class="inconcertta-i">I</span><span class="inconcertta-n">n</span><span class="inconcertta-i">C</span><span class="inconcertta-core">oncertta</span></span>
+            <span class="lux-h1-tail">La plateforme interactive pour co-construire</span>
           </span>
           <span class="lux-line lux-line--mask">
-            <span class="lux-h1-tail">— plateforme numérique de concertation</span>
+            <span class="lux-h1-tail">vos projets territoriaux en temps réel</span>
           </span>
         </h1>
-        <p class="page-lead" style="margin-top:0.75rem;">
-          <span class="inconcertta-brand inconcertta-brand--white"><span class="inconcertta-i">I</span><span class="inconcertta-n">n</span><span class="inconcertta-i">C</span><span class="inconcertta-core">oncertta</span></span> accompagne la concertation territoriale et l’évaluation des projets publics. Les avis, propositions et échanges se retracent au même endroit ; les projets deviennent plus lisibles et appropriables pour les habitants comme pour les équipes.
+        <p class="page-lead hero-value-sub">
+          Faites participer citoyens, élus et experts sur une carte interactive, avec résultats exploitables immédiatement.
         </p>
-        <p class="page-lead" style="margin-top:0.65rem;">
-          Conçue comme un outil de terrain, elle s’insère dans les démarches d’aménagement, de planification ou de renouvellement urbain — en complément des accompagnements InCitta.
-        </p>
-        <p class="page-lead" style="margin-top:0.65rem;">
-          L’application est proposée en <strong>version web mobile</strong> : accès depuis le <strong>navigateur</strong> sur <strong>smartphone</strong>, tablette ou ordinateur, avec interface adaptée — <strong>sans téléchargement d’application</strong> depuis les stores.
-        </p>
-        <p class="page-lead" style="margin-top:0.85rem;">
-          Chaque projet se règle sur trois leviers&nbsp;:
-        </p>
-        <ul class="page-lead inconcertta-tight-list" style="margin-top:0.35rem;margin-bottom:0.65rem;">
-          <li>Accès — du large public aux espaces sur invitation, listes contrôlées ou usage interne.</li>
-          <li>Outils — carte, sondages, forum, idées, actualités, comparaison d’images… activés à la carte.</li>
-          <li>Participation — de la consultation à la co-construction, ou simple information structurée.</li>
-        </ul>
-        <p class="page-lead" style="margin-top:0.35rem;">
-          Ces combinaisons couvrent par exemple les budgets participatifs, les concertations sur plans ou grands projets, ou des phases d’information encadrée.
+        <div class="hero-cta-row">
+          <a href="contact.html" class="btn-primary">Demander des informations</a>
+          <a href="#demo-inconcertta" class="btn-hero-secondary">Voir la démo</a>
+        </div>
+        <p class="hero-footnote">
+          <span class="inconcertta-brand inconcertta-brand--white"><span class="inconcertta-i">I</span><span class="inconcertta-n">n</span><span class="inconcertta-i">C</span><span class="inconcertta-core">oncertta</span></span> — application web sans installation ; mobile, tablette et ordinateur. Vous pouvez également bénéficier des accompagnements InCitta sur l’aménagement et la participation.
         </p>
       </div>
       <div class="page-hero-logo lux-parallax-slow">
         <img class="lux-distort" src="/assets/images/logos/Logo InConcertta.png" alt="InConcertta by InCitta" width="280" height="120" loading="eager">
       </div>
     </header>
+
+    <section class="why-inconcertta-section" id="pourquoi-inconcertta" aria-labelledby="why-inconcertta-title">
+      <h2 id="why-inconcertta-title" class="lux-split-chars">Pourquoi utiliser InConcertta&nbsp;?</h2>
+      <ul class="why-inconcertta-list" role="list">
+        <li>Réduisez les oppositions à vos projets</li>
+        <li>Impliquez réellement les habitants</li>
+        <li>Générez des données exploitables</li>
+        <li>Accélérez vos décisions</li>
+      </ul>
+    </section>
 
     <section class="inconcertta-demo-section" id="demo-inconcertta" aria-label="Démonstration interface InConcertta">
       <div id="view-login" class="demo-view">
@@ -979,7 +1101,7 @@
         <li><strong>Offre personnalisée</strong> — charte graphique, paramétrage et accompagnement au montage.</li>
         <li><strong>Instance dédiée (white-label)</strong> — identité propre, base isolée, services associés.</li>
       </ul>
-      <p>Chaque formule peut inclure :</p>
+      <p class="inconcertta-offer-formule-inclut">Chaque formule peut inclure :</p>
       <ul class="inconcertta-tight-list">
         <li>le déploiement technique de la plateforme</li>
         <li>la prise en main et la formation des équipes</li>

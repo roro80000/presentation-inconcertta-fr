@@ -14,6 +14,16 @@ export function prefersReducedLuxMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
+/** Page contact : pas d’écran de chargement (accès direct au formulaire). */
+function shouldSkipLuxPreloader() {
+  return /contact\.html$/i.test(window.location.pathname);
+}
+
+/** Page gestion : uniquement le rideau (pas de barre / pourcentage). */
+function shouldRunCurtainOnlyPreloader() {
+  return /gestion\.html$/i.test(window.location.pathname);
+}
+
 function initHeroReveal(gsap, SplitType) {
   const h1 = document.querySelector('.lux-h1-animate');
   if (!h1) return;
@@ -119,7 +129,10 @@ export async function bootLuxuryStack() {
 
   injectGrain();
 
-  document.body.classList.add('lux-preloader-lock');
+  const skipPreloader = shouldSkipLuxPreloader();
+  if (!skipPreloader) {
+    document.body.classList.add('lux-preloader-lock');
+  }
 
   let Lenis;
   let gsap;
@@ -155,7 +168,13 @@ export async function bootLuxuryStack() {
     return;
   }
 
-  await runPreloader({ minMs: document.querySelector('.lux-h1-animate') ? 720 : 420 });
+  if (!skipPreloader) {
+    if (shouldRunCurtainOnlyPreloader()) {
+      await runPreloader({ curtainOnly: true, curtainHoldMs: 100 });
+    } else {
+      await runPreloader({ minMs: document.querySelector('.lux-h1-animate') ? 720 : 420 });
+    }
+  }
 
   const lenis = new Lenis({
     smoothWheel: true,

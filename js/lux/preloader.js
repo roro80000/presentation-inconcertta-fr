@@ -1,14 +1,21 @@
 /**
  * Préchargeur : logo + barre + pourcentage, puis disparition en « rideau » (clip-path vers le haut).
+ * Mode `curtainOnly` : voile plein écran puis uniquement l’ouverture rideau (pas de % ni barre).
  */
 
-export function createPreloaderMarkup() {
+/**
+ * @param {{ curtainOnly?: boolean }} opts
+ */
+export function createPreloaderMarkup(opts = {}) {
   if (document.getElementById('lux-preloader')) return document.getElementById('lux-preloader');
 
   const el = document.createElement('div');
   el.id = 'lux-preloader';
   el.setAttribute('aria-busy', 'true');
-  el.innerHTML = `
+  if (opts.curtainOnly) {
+    el.classList.add('lux-preloader--curtain-only');
+  } else {
+    el.innerHTML = `
     <div class="lux-preloader__inner">
       <img class="lux-preloader__logo" src="/assets/images/logos/Logo InConcertta.png" alt="InConcertta" width="840" height="360" decoding="async">
       <div class="lux-preloader__track" aria-hidden="true">
@@ -17,17 +24,49 @@ export function createPreloaderMarkup() {
       <p class="lux-preloader__pct"><span class="lux-preloader__value">0</span><span class="lux-preloader__unit">%</span></p>
     </div>
   `;
+  }
   document.body.prepend(el);
   return el;
 }
 
+function playCurtainOut(root) {
+  return new Promise((resolve) => {
+    requestAnimationFrame(() => {
+      root.setAttribute('aria-busy', 'false');
+      root.classList.add('lux-preloader--curtain');
+      let finished = false;
+      const done = () => {
+        if (finished) return;
+        finished = true;
+        root.removeEventListener('transitionend', onTransitionEnd);
+        document.body.classList.remove('lux-preloader-lock');
+        root.remove();
+        resolve();
+      };
+      const onTransitionEnd = (e) => {
+        if (e.propertyName === 'clip-path' || e.propertyName === '-webkit-clip-path') done();
+      };
+      root.addEventListener('transitionend', onTransitionEnd);
+      setTimeout(done, 1200);
+    });
+  });
+}
+
 /**
- * @param {{ minMs?: number }} opts
+ * @param {{ minMs?: number, curtainOnly?: boolean, curtainHoldMs?: number }} opts
  * @returns {Promise<void>}
  */
 export function runPreloader(opts = {}) {
-  const { minMs = 700 } = opts;
-  const root = createPreloaderMarkup();
+  const { minMs = 700, curtainOnly = false, curtainHoldMs = 100 } = opts;
+  const root = createPreloaderMarkup({ curtainOnly });
+
+  if (curtainOnly) {
+    return Promise.all([
+      document.fonts?.ready ?? Promise.resolve(),
+      new Promise((r) => setTimeout(r, curtainHoldMs)),
+    ]).then(() => playCurtainOut(root));
+  }
+
   const bar = root.querySelector('.lux-preloader__bar');
   const valueEl = root.querySelector('.lux-preloader__value');
   const start = performance.now();
@@ -52,25 +91,6 @@ export function runPreloader(opts = {}) {
     new Promise((r) => setTimeout(r, minMs)),
   ]).then(() => {
     setPct(100);
-    return new Promise((resolve) => {
-      requestAnimationFrame(() => {
-        root.setAttribute('aria-busy', 'false');
-        root.classList.add('lux-preloader--curtain');
-        let finished = false;
-        const done = () => {
-          if (finished) return;
-          finished = true;
-          root.removeEventListener('transitionend', onTransitionEnd);
-          document.body.classList.remove('lux-preloader-lock');
-          root.remove();
-          resolve();
-        };
-        const onTransitionEnd = (e) => {
-          if (e.propertyName === 'clip-path' || e.propertyName === '-webkit-clip-path') done();
-        };
-        root.addEventListener('transitionend', onTransitionEnd);
-        setTimeout(done, 1200);
-      });
-    });
+    return playCurtainOut(root);
   });
 }
