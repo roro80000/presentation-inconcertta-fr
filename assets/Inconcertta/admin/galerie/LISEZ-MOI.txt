@@ -1,0 +1,13 @@
+Galerie « Espace de gestion » — page Site_InCitta/inconcertta.html
+
+Ordre d’affichage (préfixe numérique) :
+  01-tableau-de-bord.png          — vue d’ensemble / accès aux outils
+  02-parametres-projet.png        — réglages du projet et du dispositif
+  03-grille-admin.png             — grille, fond de plan, questions / sujets carte
+  04-creation-sondage.png         — conception d’enquêtes
+  05-outil-analyse-sondages.png   — analyses et exploitation des résultats
+  06-boite-a-idees.webp           — suivi des idées déposées
+
+Remplacer une capture : garder le même nom de fichier, ou renommer en suivant la série 01–06 et mettre à jour les balises <img> dans inconcertta.html.
+
+Dossier ../originaux/ : copie de secours du PNG boîte à idées (non utilisée dans la page ; la galerie utilise le .webp allégé).

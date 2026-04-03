@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Contact (présentation)</title>
+  <meta name="description" content="Contactez-nous pour l’offre, le déploiement ou une démonstration.">
+  <meta name="keywords" content="InConcertta, contact, démonstration, déploiement, concertation, collectivités, InCitta">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://presentation.inconcertta.fr/contact.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://presentation.inconcertta.fr/contact.html">
+  <meta property="og:title" content="Contact (présentation)">
+  <meta property="og:description" content="Demande d’information, démo ou déploiement.">
+  <meta property="og:image" content="https://presentation.inconcertta.fr/assets/images/logos/Logo%20InConcertta.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Contacter InConcertta — formulaire">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="InConcertta">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://presentation.inconcertta.fr/contact.html">
+  <meta name="twitter:title" content="Contact">
+  <meta name="twitter:description" content="Demande d’information, démo ou déploiement.">
+  <meta name="twitter:image" content="https://presentation.inconcertta.fr/assets/images/logos/Logo%20InConcertta.png">
+  <meta name="twitter:image:alt" content="Logo InConcertta">
+  <meta name="author" content="InCitta">
+  <meta name="theme-color" content="#002532">
+  <link rel="alternate" hreflang="fr-FR" href="https://presentation.inconcertta.fr/contact.html">
+  <link rel="alternate" hreflang="x-default" href="https://presentation.inconcertta.fr/contact.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://presentation.inconcertta.fr/#website",
+        "url": "https://presentation.inconcertta.fr/",
+        "publisher": { "@id": "https://presentation.inconcertta.fr/#org" }
+      },
+      {
+        "@type": "ContactPage",
+        "@id": "https://presentation.inconcertta.fr/contact.html#webpage",
+        "url": "https://presentation.inconcertta.fr/contact.html",
+        "name": "Contact",
+        "description": "Formulaire de contact pour l’offre, le déploiement et les démonstrations.",
+        "isPartOf": { "@id": "https://presentation.inconcertta.fr/#website" },
+        "inLanguage": "fr-FR",
+        "publisher": { "@id": "https://presentation.inconcertta.fr/#org" }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://presentation.inconcertta.fr/#org",
+        "name": "InCitta",
+        "url": "https://www.incitta.eu/",
+        "logo": "https://presentation.inconcertta.fr/assets/images/logos/Logo%20InConcertta.png",
+        "email": "contact@incitta.eu",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "email": "contact@incitta.eu",
+          "availableLanguage": [ "French" ],
+          "areaServed": "FR"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://presentation.inconcertta.fr/contact.html#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Présentation", "item": "https://presentation.inconcertta.fr/" },
+          { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://presentation.inconcertta.fr/contact.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+  <link rel="icon" type="image/png" href="/assets/Logo/Logo InConcertta.png">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .main-read {
+      width: min(100% - 40px, 1100px);
+      margin: 1.2rem auto 2rem;
+      padding: 1.6rem;
+      box-sizing: border-box;
+      background: #002532;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+    }
+    .page-hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 1.75rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .page-hero-logo { flex: 0 0 auto; }
+    .page-hero-logo img {
+      max-width: min(280px, 100%);
+      height: auto;
+      display: block;
+    }
+    .page-hero-text { flex: 1 1 280px; min-width: 0; }
+    .page-title {
+      font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+      color: #f0f7fa;
+      margin: 0 0 0.65rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+    .page-lead {
+      font-size: 1.05rem;
+      line-height: 1.72;
+      color: rgba(232, 241, 244, 0.92);
+      margin: 0;
+      font-weight: 400;
+      text-align: left;
+    }
+    .content-wrap { position: relative; padding-bottom: 2rem; }
+    /* Formulaire — carte #00364A comme les blocs fonctionnalités */
+    .contact-form-wrap { margin: 0; }
+    .contact-block.form-block {
+      margin: 0;
+      padding: 0;
+      border-radius: 22px;
+      overflow: hidden;
+      background: #00364A;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+    }
+    .block-header {
+      margin: 0;
+      padding: 2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-radius: 0 !important;
+      background: linear-gradient(90deg, var(--brand-orange-hover), var(--brand-orange)) !important;
+      box-shadow: none;
+    }
+    .block-header h3 {
+      color: #ffffff;
+      margin: 0;
+      letter-spacing: -0.01em;
+      font-size: clamp(1.05rem, 2vw, 1.2rem);
+      font-weight: 800;
+    }
+    .block-content { padding: 1.15rem 1.15rem 1.35rem; }
+    .form-inner { padding: 0.25rem 0 0; }
+    #contactForm { margin-top: 0.5rem; }
+    .contact-block .form-group label {
+      color: rgba(232, 241, 244, 0.92);
+      font-weight: 600;
+    }
+    .contact-block input,
+    .contact-block textarea,
+    .contact-block select {
+      background: rgba(255, 255, 255, 0.97);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+    .contact-block input::placeholder,
+    .contact-block textarea::placeholder {
+      color: rgba(7, 16, 16, 0.45);
+    }
+    #contactForm #submitBtn {
+      display: flex;
+      width: 100%;
+      max-width: 100%;
+      margin: 1.1rem auto 0;
+      min-height: 52px;
+      padding: 0 1.5rem;
+      box-sizing: border-box;
+    }
+    .form-message.success {
+      color: #7dffc8;
+      margin: 0.75rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .form-message.error {
+      color: #ffb4b4;
+      margin: 0.75rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    @media (max-width: 600px) {
+      .block-header { padding: 1.5rem 1rem; }
+      .block-content { padding: 1rem 0.85rem 1.15rem; }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <nav class="navbar" aria-label="Navigation principale">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <a href="index.html" class="nav-brand" aria-label="InConcertta — accueil">
+          <img src="/assets/images/logos/Logo InConcertta.png" alt="InConcertta" class="logo-img">
+        </a>
+      </div>
+      <ul class="nav-menu" role="list">
+        <li class="nav-item"><a href="index.html" class="nav-link">Présentation</a></li>
+        <li class="nav-item"><a href="https://inconcertta.fr/" class="nav-link" target="_blank" rel="noopener noreferrer">Allez sur l’application</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link active" aria-current="page">Contact</a></li>
+      </ul>
+      <button class="hamburger" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="main-read fade-in-up">
+    <div class="content-wrap">
+      <header class="page-hero">
+        <div class="page-hero-logo lux-parallax-slow">
+          <img class="lux-distort" src="/assets/images/logos/Logo InConcertta.png" alt="InConcertta by InCitta" width="280" height="120" loading="eager">
+        </div>
+        <div class="page-hero-text">
+          <h1 class="page-title lux-h1-animate">
+            <span class="lux-line lux-line--mask"><span class="lux-h1-tail">Nous contacter</span></span>
+          </h1>
+          <p class="page-lead">Demande d’information, démonstration ou cadrage d’un déploiement : envoyez-nous un message, nous vous répondons sur votre adresse courriel.</p>
+        </div>
+      </header>
+
+      <div class="contact-form-wrap">
+        <div class="contact-block form-block">
+          <div class="block-header">
+            <h3>
+              <i class="fas fa-envelope" style="margin-right:0.6rem;color:#ffffff;" aria-hidden="true"></i>
+              Formulaire de contact
+            </h3>
+          </div>
+
+          <div class="block-content">
+            <div class="form-inner">
+              <form id="contactForm" name="contact-inconcertta-presentation" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="contact.html">
+                <div style="display:none;">
+                  <label>Ne remplissez pas ce champ : <input name="bot-field"></label>
+                </div>
+                <input type="hidden" name="form-name" value="contact-inconcertta-presentation">
+                <input type="hidden" name="origine" value="Site présentation InConcertta (presentation.inconcertta.fr)">
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="firstName">Prénom *</label>
+                    <input type="text" id="firstName" name="firstName" required autocomplete="given-name">
+                  </div>
+                  <div class="form-group">
+                    <label for="lastName">Nom *</label>
+                    <input type="text" id="lastName" name="lastName" required autocomplete="family-name">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="email">Courriel *</label>
+                    <input type="email" id="email" name="email" required autocomplete="email">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="subject">Sujet *</label>
+                  <select id="subject" name="subject" required>
+                    <option value="">Choisir un sujet</option>
+                    <option value="infos-offre">Informations sur l’offre / la solution InConcertta</option>
+                    <option value="deploiement">Déploiement (ponctuel, récurrent, instance dédiée)</option>
+                    <option value="demo-commerciale">Démonstration ou prise de contact commercial</option>
+                    <option value="plateforme-live">Question sur la plateforme (inconcertta.fr)</option>
+                    <option value="partenariat">Partenariat ou autre demande</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="message">Message *</label>
+                  <textarea id="message" name="message" rows="6" placeholder="Contexte (collectivité, type de projet, calendrier, etc.)…" required></textarea>
+                </div>
+
+                <div id="formSuccess" class="form-message success" style="display:none;" role="status">
+                  <i class="fas fa-check-circle" aria-hidden="true"></i>
+                  <span>Votre message a été envoyé. Nous vous répondrons sur votre adresse courriel.</span>
+                </div>
+                <div id="formError" class="form-message error" style="display:none;" role="alert">
+                  <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
+                  <span>Envoi impossible. Réessayez plus tard ou écrivez-nous à contact@incitta.eu</span>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-large" id="submitBtn">
+                  <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                  Envoyer
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer footer--presentation">
+    <div class="container" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.25rem 1rem 1.1rem;">
+      <a href="https://www.incitta.eu/" target="_blank" rel="noopener noreferrer" style="display:inline-block;line-height:0;border-radius:10px;" aria-label="Site InCitta — incitta.eu">
+        <img src="/assets/Logo/LogoPied.png" alt="" class="footer-logo" style="height:120px;width:auto;display:block;margin:0 auto;">
+      </a>
+      <p style="margin:0.85rem 0 0;font-size:0.95rem;max-width:none;width:100%;text-align:center;">
+        &copy; 2026 InConcertta · <a href="mentions-legales.html">Mentions légales</a> · <a href="index.html">Présentation</a>
+      </p>
+    </div>
+  </footer>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

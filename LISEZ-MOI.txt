@@ -1,0 +1,21 @@
+Site statique — presentation.inconcertta.fr
+==========================================
+
+Source : dérivé de Site_InCitta/inconcertta.html (contenu présentation).
+
+Arborescence :
+  index.html       Page principale (présentation + bouton vers l’interface de gestion)
+  gestion.html     Galerie et texte « espace de gestion » (barre de navigation identique, retour vers index)
+  contact.html     Formulaire de contact (Netlify Forms)
+  mentions-legales.html  Mentions propres au site de présentation (éditeur InCitta ; distinction app inconcertta.fr)
+  styles.css       Copie depuis Site_InCitta
+  js/              Copie depuis Site_InCitta (point d’entrée : js/main.js)
+  assets/
+    Inconcertta/   Captures, galerie admin…
+    Logo/          Logo pied de page, favicon InConcertta
+    images/logos/  Logo chapô
+
+Déploiement : publier le dossier à la racine du domaine (chemins absolus /assets/...).
+Mise à jour du contenu : reporter les changements depuis Site_InCitta/inconcertta.html ou resynchroniser les copies.
+
+Liens externes utilisés : inconcertta.fr, www.incitta.eu (contact, démarche, mentions légales).

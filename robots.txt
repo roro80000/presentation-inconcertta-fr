@@ -1,0 +1,5 @@
+# Présentation InConcertta — https://presentation.inconcertta.fr
+User-agent: *
+Allow: /
+
+Sitemap: https://presentation.inconcertta.fr/sitemap.xml

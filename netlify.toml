@@ -1,0 +1,16 @@
+# Déploiement Netlify — site presentation.inconcertta.fr (statique)
+# Dans le tableau Netlify : répertoire de base = Presentation.InConcertta.fr (si dépôt monorepo).
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, immutable"
