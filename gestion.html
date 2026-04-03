@@ -161,8 +161,12 @@
       line-height: 1.3;
     }
     .main-read h2:not(.lux-split-chars):first-of-type { margin-top: 0; }
-    .inconcertta-admin-gallery-section > h2.lux-split-chars {
+    .inconcertta-admin-gallery-section > h2#admin-gallery-title.lux-split-chars {
       margin-top: 0.35rem;
+    }
+    .inconcertta-admin-gallery-section > h2#donnees-securite-title.lux-split-chars {
+      margin-top: 2.5rem;
+      margin-bottom: 0.35rem;
     }
     .main-read h2#incitta-title,
     .main-read h2#incitta-title .incitta-title-ic,
@@ -488,6 +492,56 @@
       hyphens: none;
       -webkit-hyphens: none;
     }
+    /* RGPD / hébergement / sécurité (sous le chapô galerie admin) */
+    .inconcertta-admin-gallery-section .institution-trust-grid {
+      margin: 0.85rem 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem 1.25rem;
+    }
+    @media (max-width: 720px) {
+      .inconcertta-admin-gallery-section .institution-trust-grid {
+        grid-template-columns: 1fr;
+        gap: 0.85rem;
+      }
+    }
+    .inconcertta-admin-gallery-section .institution-trust-grid > li {
+      margin: 0;
+      padding: 0.95rem 1rem 1rem;
+      background: rgba(0, 54, 74, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      min-height: 0;
+    }
+    .inconcertta-admin-gallery-section .institution-trust-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #f0f7fa;
+      letter-spacing: -0.02em;
+    }
+    .inconcertta-admin-gallery-section .institution-trust-kicker i {
+      color: #4de3c1;
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+    .inconcertta-admin-gallery-section .institution-trust-desc {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.58;
+      color: rgba(232, 241, 244, 0.88);
+      font-weight: 400;
+      text-align: left;
+      hyphens: none;
+      -webkit-hyphens: none;
+    }
     .cta-row {
       display: flex;
       flex-wrap: wrap;
@@ -774,6 +828,21 @@
       <p class="admin-gallery-outro">
         Du passage d’information à la co-construction, la plateforme s’adapte au niveau d’ambition que vous fixez pour associer habitants et usagers à votre projet.
       </p>
+      <h2 id="donnees-securite-title" class="lux-split-chars">Données, hébergement et conformité</h2>
+      <ul class="institution-trust-grid" role="list" aria-label="RGPD, hébergement et sécurité">
+        <li>
+          <span class="institution-trust-kicker"><i class="fas fa-user-shield" aria-hidden="true"></i> RGPD</span>
+          <p class="institution-trust-desc">Finalités documentées, information des participants, gestion du consentement lorsque requis, droits d’accès, de rectification et d’effacement, registre des traitements côté responsable : la plateforme s’inscrit dans une démarche de conformité au règlement européen, avec des précisions contractuelles et des politiques publiées sur l’application.</p>
+        </li>
+        <li>
+          <span class="institution-trust-kicker"><i class="fas fa-server" aria-hidden="true"></i> Hébergement</span>
+          <p class="institution-trust-desc">Les données sont stockées en Union européenne via Supabase (base de données, authentification, stockage de fichiers) — infrastructure utilisée par de nombreuses organisations exigeantes. Cela facilite les réponses aux clauses types des marchés publics sur la localisation et le traitement des données.</p>
+        </li>
+        <li>
+          <span class="institution-trust-kicker"><i class="fas fa-lock" aria-hidden="true"></i> Sécurité</span>
+          <p class="institution-trust-desc">Mécanismes d’authentification, cloisonnement des projets, transmissions chiffrées selon les standards du web moderne ; les précisions sur l’architecture, la sous-traitance et les mesures de protection figurent dans les mentions légales et la politique de confidentialité de l’application InConcertta.</p>
+        </li>
+      </ul>
     </section>
 
     <div class="gestion-back-row">

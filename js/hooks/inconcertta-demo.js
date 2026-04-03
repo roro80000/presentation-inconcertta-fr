@@ -1,12 +1,17 @@
 /**
- * Visionneuse démo InConcertta (login → interface → captures).
- * Aligné sur Site_InCitta/js/pages/inconcertta-demo.js — chemins /assets/Inconcertta/.
+ * Visionneuse démo InConcertta (interface + captures).
+ * Carrousel automatique toutes les 3 s jusqu’au premier clic / toucher sur la zone démo ;
+ * alors arrêt, retour à la vue principale, navigation manuelle.
  */
 
 const CAPTURE_BASE = '/assets/Inconcertta/captures/';
 const MAIN_BG_LIGHT = '/assets/Inconcertta/pageprincipale.png';
 const MAIN_BG_DARK = '/assets/Inconcertta/pageprincipale-dark.png';
 const INCONCERTTA_LOGIN_URL = 'https://inconcertta.fr/login';
+
+const CAROUSEL_INTERVAL_MS = 3000;
+/** Ordre de défilement : vue principale (index 0) puis les outils. */
+const CAROUSEL_TOOL_ORDER = ['forum', 'sondages', 'idees', 'actualites', 'carte', 'evolutions', 'mon-compte'];
 
 const LOGOUT_CONFIRM_MSG =
   'Quitter la démonstration et ouvrir la page de connexion InConcertta (inconcertta.fr) dans cet onglet ?';
@@ -36,6 +41,10 @@ export function initInconcerttaDemo() {
   let demoDarkMode = false;
   let openToolSlug = null;
   let openToolLabel = null;
+
+  let carouselTimer = null;
+  let carouselNextIndex = 1;
+  let userDismissedCarousel = false;
 
   function useDarkAssets() {
     return demoDarkMode;
@@ -105,7 +114,58 @@ export function initInconcerttaDemo() {
     viewMain.hidden = false;
   }
 
+  function stopAutoCarousel() {
+    if (carouselTimer != null) {
+      window.clearInterval(carouselTimer);
+      carouselTimer = null;
+    }
+  }
+
+  function carouselSlideCount() {
+    return 1 + CAROUSEL_TOOL_ORDER.length;
+  }
+
+  function runCarouselTick() {
+    if (userDismissedCarousel || viewMain.hidden) return;
+
+    if (carouselNextIndex === 0) {
+      goMainMap();
+    } else {
+      const slug = CAROUSEL_TOOL_ORDER[carouselNextIndex - 1];
+      const btn = viewportFrame.querySelector(`button.demo-hit[data-tool="${slug}"]`);
+      openTool(slug, btn?.getAttribute('data-label') || slug);
+    }
+    carouselNextIndex = (carouselNextIndex + 1) % carouselSlideCount();
+  }
+
+  function startAutoCarousel() {
+    if (userDismissedCarousel) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    stopAutoCarousel();
+    demoDarkMode = false;
+    goMainMap();
+    carouselNextIndex = 1;
+    carouselTimer = window.setInterval(runCarouselTick, CAROUSEL_INTERVAL_MS);
+  }
+
+  function onViewportUserIntent(e) {
+    if (userDismissedCarousel) return;
+
+    userDismissedCarousel = true;
+    stopAutoCarousel();
+    goMainMap();
+
+    e.preventDefault();
+    e.stopPropagation();
+    if (typeof e.stopImmediatePropagation === 'function') {
+      e.stopImmediatePropagation();
+    }
+  }
+
   hitLogin.addEventListener('click', showMain);
+
+  viewportFrame.addEventListener('pointerdown', onViewportUserIntent, { capture: true });
 
   viewportFrame.addEventListener('click', (e) => {
     const btn = e.target.closest('button');
@@ -136,4 +196,7 @@ export function initInconcerttaDemo() {
   }
   applyDemoHash();
   window.addEventListener('hashchange', applyDemoHash);
+
+  showMain();
+  startAutoCarousel();
 }

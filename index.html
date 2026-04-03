@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>InConcertta — Co-construire vos projets territoriaux en temps réel</title>
-  <meta name="description" content="Plateforme interactive pour co-construire vos projets territoriaux en temps réel. Citoyens, élus et experts sur une carte interactive — résultats exploitables tout de suite. Concertation et SaaS InConcertta.">
+  <title>InConcertta — Co-construisez vos projets territoriaux avec les citoyens, en temps réel</title>
+  <meta name="description" content="Co-construisez vos projets territoriaux avec les citoyens, en temps réel. Carte interactive, données exploitables. Conçu pour les collectivités : RGPD, hébergement en Union européenne, sécurité des données (Supabase).">
   <meta name="keywords" content="InConcertta, concertation, participation citoyenne, plateforme SaaS, territoire, collectivités, RGPD, InCitta">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://presentation.inconcertta.fr/">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://presentation.inconcertta.fr/">
-  <meta property="og:title" content="InConcertta — Co-construire vos projets territoriaux en temps réel">
-  <meta property="og:description" content="Plateforme interactive : citoyens, élus et experts sur une carte, résultats exploitables immédiatement. Moins de conflits, plus d’adhésion, décisions plus rapides.">
+  <meta property="og:title" content="InConcertta — Co-construisez avec les citoyens, en temps réel">
+  <meta property="og:description" content="Projets territoriaux et participation en temps réel. Exigences institutionnelles : RGPD, hébergement UE, sécurité — pour collectivités et acteurs publics.">
   <meta property="og:image" content="https://presentation.inconcertta.fr/assets/images/logos/Logo%20InConcertta.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -19,8 +19,8 @@
   <meta property="og:site_name" content="InConcertta">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://presentation.inconcertta.fr/">
-  <meta name="twitter:title" content="InConcertta — Projets territoriaux en temps réel">
-  <meta name="twitter:description" content="Co-construction sur carte interactive, données exploitables tout de suite. Informations sur demande et démo intégrée à la page.">
+  <meta name="twitter:title" content="InConcertta — Co-construisez avec les citoyens">
+  <meta name="twitter:description" content="Temps réel, carte interactive. RGPD, hébergement européen, sécurité — pensé pour les collectivités.">
   <meta name="twitter:image" content="https://presentation.inconcertta.fr/assets/images/logos/Logo%20InConcertta.png">
   <meta name="twitter:image:alt" content="Logo InConcertta — plateforme de concertation">
   <meta name="author" content="InCitta">
@@ -37,7 +37,7 @@
         "@id": "https://presentation.inconcertta.fr/#website",
         "url": "https://presentation.inconcertta.fr/",
         "name": "InConcertta — présentation",
-        "description": "Site de présentation de la plateforme InConcertta, solution de concertation territoriale.",
+        "description": "InConcertta — co-construction de projets territoriaux avec les citoyens en temps réel ; conformité RGPD, hébergement et sécurité pour collectivités.",
         "inLanguage": "fr-FR",
         "publisher": { "@id": "https://presentation.inconcertta.fr/#org" }
       },
@@ -45,8 +45,8 @@
         "@type": "WebPage",
         "@id": "https://presentation.inconcertta.fr/#webpage",
         "url": "https://presentation.inconcertta.fr/",
-        "name": "InConcertta — Plateforme interactive pour projets territoriaux",
-        "description": "Co-construction en temps réel sur carte interactive — citoyens, élus et experts ; résultats exploitables immédiatement.",
+        "name": "InConcertta — Co-construisez vos projets territoriaux avec les citoyens",
+        "description": "Participation en temps réel sur carte interactive. Cadre RGPD, hébergement en Union européenne et sécurité des données pour les collectivités.",
         "isPartOf": { "@id": "https://presentation.inconcertta.fr/#website" },
         "about": { "@id": "https://presentation.inconcertta.fr/#product" },
         "primaryImageOfPage": {
@@ -62,7 +62,7 @@
         "name": "InConcertta",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Web",
-        "description": "Plateforme interactive pour co-construire des projets territoriaux en temps réel, avec carte participative et données exploitables.",
+        "description": "Co-construction de projets territoriaux avec les citoyens en temps réel. Données protégées : RGPD, hébergement UE, infrastructure sécurisée.",
         "url": "https://inconcertta.fr/",
         "provider": { "@id": "https://presentation.inconcertta.fr/#org" }
       },
@@ -118,6 +118,11 @@
       border-radius: 18px;
       box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
     }
+    /* Deuxième carte (InCitta) : un seul conteneur .main-read, sans wrap interne */
+    .main-read.main-read--incitta-follow {
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
     .main-read section + section {
       border-top-color: rgba(255, 255, 255, 0.1);
     }
@@ -164,11 +169,13 @@
       letter-spacing: -0.02em;
       max-width: min(100%, 46ch);
     }
+    /* InConcertta : même échelle que « Co-construisez… » */
     .page-hero-text .hero-brand-kicker {
-      margin: 0 0 0.5rem;
-      font-size: 0.95rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
+      margin: 0 0 0.55rem;
+      font-size: clamp(1.2rem, 2.65vw, 2rem);
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+      font-weight: 800;
       text-transform: none;
       color: rgba(232, 241, 244, 0.55);
       text-align: left;
@@ -231,11 +238,16 @@
       color: rgba(232, 241, 244, 0.72);
       max-width: 48ch;
     }
+    /* Alignement horizontal des blocs RGPD (sous-section) sur le cadre « Pourquoi » */
+    :root {
+      --why-inconcertta-pad-x: 1.25rem;
+      --why-inconcertta-border: 1px;
+    }
     .why-inconcertta-section {
       margin: 1.85rem 0 2rem;
-      padding: 1.35rem 1.25rem 1.45rem;
+      padding: 1.35rem var(--why-inconcertta-pad-x) 1.45rem;
       background: rgba(0, 54, 74, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: var(--why-inconcertta-border) solid rgba(255, 255, 255, 0.1);
       border-radius: 16px;
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
     }
@@ -275,6 +287,60 @@
       font-weight: 800;
       color: #4de3c1;
       font-size: 1.05em;
+    }
+    /* RGPD / hébergement / sécurité — section séparée sous « Pourquoi » */
+    .main-read .institution-trust-below-section {
+      margin: 0 0 1.85rem;
+      /* Même bande utile que l’intérieur du cadre « Pourquoi » (bordure + padding) */
+      padding: 0 calc(var(--why-inconcertta-pad-x) + var(--why-inconcertta-border));
+      border-top: none; /* annule section + section (styles.css) */
+      box-sizing: border-box;
+    }
+    .institution-trust-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem 1.25rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    @media (max-width: 720px) {
+      .institution-trust-grid {
+        grid-template-columns: 1fr;
+        gap: 0.85rem;
+      }
+    }
+    .institution-trust-grid > li {
+      margin: 0;
+      padding: 0.95rem 1rem 1rem;
+      background: rgba(0, 54, 74, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      min-height: 0;
+    }
+    .institution-trust-grid .institution-trust-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #f0f7fa;
+      letter-spacing: -0.02em;
+    }
+    .institution-trust-grid .institution-trust-kicker i {
+      color: #4de3c1;
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+    .institution-trust-grid .institution-trust-desc {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.58;
+      color: rgba(232, 241, 244, 0.88);
+      font-weight: 400;
     }
     /* Marque InConcertta — I (#BF7D40), n (#B79D30), Concertta dont le C (#B79D30) */
     .inconcertta-brand {
@@ -483,12 +549,14 @@
       margin-top: 1.35rem;
     }
     /* InCitta : phrases courtes puis listes en deux colonnes (lisibilité) */
-    .incitta-intro-section .incitta-intro-lead p {
+    .incitta-intro-section .incitta-intro-lead p,
+    .main-read--incitta-follow .incitta-intro-lead p {
       margin-bottom: 0.65rem;
       line-height: 1.65;
       max-width: 62ch;
     }
-    .incitta-intro-section .incitta-intro-lead p:last-child {
+    .incitta-intro-section .incitta-intro-lead p:last-child,
+    .main-read--incitta-follow .incitta-intro-lead p:last-child {
       margin-bottom: 1rem;
     }
     .incitta-paircols {
@@ -517,6 +585,39 @@
       .incitta-paircols {
         grid-template-columns: 1fr;
         gap: 0.85rem;
+      }
+    }
+    .main-read--incitta-follow .incitta-companion-kicker {
+      margin: 0 0 1rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(232, 241, 244, 0.52);
+      text-align: left;
+    }
+    .main-read--incitta-follow h2#incitta-title {
+      margin-top: 0 !important;
+    }
+    .incitta-follow-footer {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .incitta-follow-site-wrap {
+      margin: 0;
+      width: 100%;
+      text-align: center;
+      transform: translateX(calc(-1.75rem + 3.5cm));
+    }
+    .main-read--incitta-follow .retour-btn {
+      align-self: flex-end;
+    }
+    @media (max-width: 480px) {
+      .incitta-follow-site-wrap {
+        transform: translateX(calc(-0.65rem + 2cm));
       }
     }
     .features-grid {
@@ -771,8 +872,7 @@
       border-color: var(--brand-orange);
       transform: translateY(-1px);
     }
-    .content-wrap { position: relative; padding-bottom: 3.5rem; }
-    .retour-btn { position: absolute; right: 0.5rem; bottom: 0.5rem; }
+    .content-wrap { position: relative; padding-bottom: 1rem; }
     .retour-btn.btn {
       background: #00364A !important;
       color: #ffffff !important;
@@ -785,7 +885,6 @@
       border-color: rgba(255, 255, 255, 0.32);
     }
     @media (max-width: 900px) {
-      .retour-btn { position: static; display: inline-block; margin-top: 1rem; }
       .content-wrap { padding-bottom: 1rem; }
     }
     /* Visionneuse démo (Site_InCitta / inconcertta-demo.html — même logique) */
@@ -920,10 +1019,10 @@
         </p>
         <h1 class="page-title lux-h1-animate hero-value-headline">
           <span class="lux-line lux-line--mask">
-            <span class="lux-h1-tail">La plateforme interactive pour co-construire</span>
+            <span class="lux-h1-tail">Co-construisez vos projets territoriaux</span>
           </span>
           <span class="lux-line lux-line--mask">
-            <span class="lux-h1-tail">vos projets territoriaux en temps réel</span>
+            <span class="lux-h1-tail">avec les citoyens, en temps réel</span>
           </span>
         </h1>
         <p class="page-lead hero-value-sub">
@@ -952,9 +1051,26 @@
       </ul>
     </section>
 
+    <section class="institution-trust-below-section" aria-label="RGPD, hébergement et sécurité">
+      <ul class="institution-trust-grid" role="list">
+        <li>
+          <span class="institution-trust-kicker"><i class="fas fa-user-shield" aria-hidden="true"></i> RGPD</span>
+          <p class="institution-trust-desc">Traitement des données personnelles dans le respect du règlement européen : base légale, information des personnes, exercice des droits, sous-traitance encadrée et documentation adaptée aux responsables de traitement publics.</p>
+        </li>
+        <li>
+          <span class="institution-trust-kicker"><i class="fas fa-server" aria-hidden="true"></i> Hébergement</span>
+          <p class="institution-trust-desc">Données hébergées en Union européenne, sur une infrastructure reconnue (Supabase : base, authentification, fichiers) — critère souvent imposé par les marchés publics et les DSI territoriales.</p>
+        </li>
+        <li>
+          <span class="institution-trust-kicker"><i class="fas fa-lock" aria-hidden="true"></i> Sécurité</span>
+          <p class="institution-trust-desc">Architecture conçue pour la confidentialité et l’intégrité des échanges : accès authentifiés, bonnes pratiques de stockage ; le détail opérationnel et juridique complète vos documents (mentions légales, politique de confidentialité de l’application).</p>
+        </li>
+      </ul>
+    </section>
+
     <section class="inconcertta-demo-section" id="demo-inconcertta" aria-label="Démonstration interface InConcertta">
-      <div id="view-login" class="demo-view">
-        <p class="demo-invite">Venez découvrir l’interface à destination du public&nbsp;: pour cela, cliquez sur <strong>Se connecter</strong> dans l’illustration ci-dessous.</p>
+      <div id="view-login" class="demo-view" hidden>
+        <p class="demo-invite">Écran de connexion (illustration)&nbsp;: cliquez sur <strong>Se connecter</strong> pour afficher l’interface dans la vue ci-dessous.</p>
         <p class="demo-invite" style="margin-top:0.4rem;font-size:0.95rem;opacity:0.9;">Il s’agit d’un <strong>aperçu statique</strong>, pas de l’application réelle.</p>
         <p class="demo-invite demo-invite-platform">
           Pour découvrir la plateforme, rendez-vous sur
@@ -968,7 +1084,12 @@
         </div>
       </div>
 
-      <div id="view-main" class="demo-view" hidden>
+      <p class="demo-invite">L’interface ci-dessous <strong>défile automatiquement</strong> toutes les 3&nbsp;secondes (aperçu statique). <strong>Cliquez ou touchez la capture</strong> pour arrêter le défilement, revenir à la page principale et utiliser vous-même le menu et les zones cliquables.</p>
+      <p class="demo-invite" style="margin-top:0.4rem;font-size:0.95rem;opacity:0.9;">Ce n’est pas l’application réelle — pour la plateforme&nbsp;:
+        <a href="https://inconcertta.fr/" class="btn-primary-ic" style="margin-left:0.35rem;vertical-align:middle;" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt" aria-hidden="true"></i> inconcertta.fr</a>
+      </p>
+
+      <div id="view-main" class="demo-view">
         <div class="demo-frame" id="demo-viewport-frame">
           <img id="demo-viewport-img" class="demo-bg" src="/assets/Inconcertta/pageprincipale.png" width="1810" height="1420" alt="Interface InConcertta (démo)" loading="lazy" decoding="async">
           <button type="button" class="demo-hit" id="hit-logo"
@@ -1067,6 +1188,9 @@
 
     <section class="inconcertta-offer-section" aria-labelledby="offre-inconcertta-title">
       <h2 id="offre-inconcertta-title" class="lux-split-chars">Offre et mise à disposition</h2>
+      <p class="inconcertta-lede">
+        L’outil est conçu pour se <strong>déployer par projet</strong> : vous ouvrez un espace dédié, vous le paramétrez et vous y ajoutez vos contenus — sans chantier informatique lourd. Vous pouvez <strong>ne demander un accompagnement que pour un seul dispositif</strong> ; lorsque le cadrage est clair, la <strong>mise en place peut être très rapide, en quelques jours</strong>, pour ouvrir la concertation sans traîner.
+      </p>
       <div class="inconcertta-offer-cols">
         <div class="inconcertta-offer-cols__col">
           <p class="inconcertta-lede">
@@ -1109,56 +1233,50 @@
       </ul>
     </section>
 
-    <section aria-labelledby="donnees-securite-title">
-      <h2 id="donnees-securite-title" class="lux-split-chars">Données, hébergement et conformité</h2>
-      <p>
-        Les données sont <strong>stockées et protégées</strong> via <strong>Supabase</strong> (base de données, authentification, fichiers) — infrastructure adoptée par de <strong>nombreuses entreprises et grands groupes</strong>.
-      </p>
-      <p>
-        L’hébergement est situé en <strong>Union européenne</strong>, dans un cadre compatible avec le <strong>RGPD</strong>. Le détail (droits, sous-traitance, sécurité) figure dans les mentions légales et la politique de confidentialité de l’application.
-      </p>
-    </section>
-
-    <section class="incitta-intro-section" aria-labelledby="incitta-title">
-      <h2 id="incitta-title" class="lux-block-reveal"><span class="incitta-title-mark"><span class="incitta-title-ic">I</span><span class="incitta-title-body">n</span><span class="incitta-title-ic">C</span><span class="incitta-title-body">itta</span></span> &amp; <span class="inconcertta-title-mark"><span class="inconcertta-title-ic">I</span><span class="inconcertta-title-body">n</span><span class="inconcertta-title-ic">C</span><span class="inconcertta-title-body">oncertta</span></span></h2>
-      <div class="incitta-intro-lead">
-        <p>
-          <strong>InCitta</strong> accompagne les territoires sur la <strong>programmation</strong>, la <strong>concertation</strong> et la <strong>stratégie</strong> de projet.
-        </p>
-        <p>
-          <strong class="inconcertta-brand inconcertta-brand--white"><span class="inconcertta-i">I</span><span class="inconcertta-n">n</span><span class="inconcertta-i">C</span><span class="inconcertta-core">oncertta</span></strong> en est le <strong>prolongement numérique</strong>.
-        </p>
-      </div>
-      <div class="incitta-paircols">
-        <div class="incitta-paircols__col">
-          <ul class="inconcertta-tight-list">
-            <li>Un <strong>support interactif</strong> pour présenter et faire évoluer les projets</li>
-            <li>Des <strong>échanges structurés</strong> entre acteurs et participants</li>
-            <li>Des <strong>analyses et restitutions</strong> directement exploitables</li>
-          </ul>
-        </div>
-        <div class="incitta-paircols__col">
-          <ul class="inconcertta-tight-list">
-            <li><strong>Mise en service</strong> selon la formule (ponctuel, récurrent ou instance dédiée)</li>
-            <li><strong>Formation</strong> et cadrage méthodologique</li>
-            <li><strong>Calibrage</strong> de la plateforme selon votre dispositif de participation</li>
-          </ul>
-        </div>
-      </div>
-      <p class="incitta-synthesis">
-        L’ensemble forme une approche cohérente combinant <strong>outil numérique</strong> et <strong>expertise terrain</strong>.
-      </p>
-    </section>
-
     <div class="cta-row">
       <a href="https://inconcertta.fr/" class="btn-primary-ic" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt" aria-hidden="true"></i> Découvrir la plateforme</a>
       <a href="contact.html" class="btn-primary-ic"><i class="fas fa-envelope" aria-hidden="true"></i> Demander des informations</a>
-      <a href="https://www.incitta.eu/" class="btn-outline-ic" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe" aria-hidden="true"></i> Site incitta.eu</a>
     </div>
-
-    <a href="#top" class="btn retour-btn" aria-label="Haut de page">Haut de page</a>
   </div>
 </main>
+
+<aside class="main-read main-read--incitta-follow fade-in-up" aria-labelledby="incitta-title">
+  <p class="incitta-companion-kicker">Autre service — expertise terrain &amp; stratégie (InCitta)</p>
+  <h2 id="incitta-title" class="lux-block-reveal"><span class="incitta-title-mark"><span class="incitta-title-ic">I</span><span class="incitta-title-body">n</span><span class="incitta-title-ic">C</span><span class="incitta-title-body">itta</span></span> &amp; <span class="inconcertta-title-mark"><span class="inconcertta-title-ic">I</span><span class="inconcertta-title-body">n</span><span class="inconcertta-title-ic">C</span><span class="inconcertta-title-body">oncertta</span></span></h2>
+  <div class="incitta-intro-lead">
+    <p>
+      <strong>InCitta</strong> accompagne les territoires sur la <strong>programmation</strong>, la <strong>concertation</strong> et la <strong>stratégie</strong> de projet.
+    </p>
+    <p>
+      <strong class="inconcertta-brand inconcertta-brand--white"><span class="inconcertta-i">I</span><span class="inconcertta-n">n</span><span class="inconcertta-i">C</span><span class="inconcertta-core">oncertta</span></strong> en est le <strong>prolongement numérique</strong>.
+    </p>
+  </div>
+  <div class="incitta-paircols">
+    <div class="incitta-paircols__col">
+      <ul class="inconcertta-tight-list">
+        <li>Un <strong>support interactif</strong> pour présenter et faire évoluer les projets</li>
+        <li>Des <strong>échanges structurés</strong> entre acteurs et participants</li>
+        <li>Des <strong>analyses et restitutions</strong> directement exploitables</li>
+      </ul>
+    </div>
+    <div class="incitta-paircols__col">
+      <ul class="inconcertta-tight-list">
+        <li><strong>Mise en service</strong> selon la formule (ponctuel, récurrent ou instance dédiée)</li>
+        <li><strong>Formation</strong> et cadrage méthodologique</li>
+        <li><strong>Calibrage</strong> de la plateforme selon votre dispositif de participation</li>
+      </ul>
+    </div>
+  </div>
+  <p class="incitta-synthesis">
+    L’ensemble forme une approche cohérente combinant <strong>outil numérique</strong> et <strong>expertise terrain</strong>.
+  </p>
+  <div class="incitta-follow-footer">
+    <p class="incitta-follow-site-wrap">
+      <a href="https://www.incitta.eu/" class="btn-outline-ic" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe" aria-hidden="true"></i> Site incitta.eu</a>
+    </p>
+    <a href="#top" class="btn retour-btn" aria-label="Haut de page">Haut de page</a>
+  </div>
+</aside>
 
 <footer class="footer footer--presentation">
   <div class="container" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.25rem 1rem 1.1rem;">
