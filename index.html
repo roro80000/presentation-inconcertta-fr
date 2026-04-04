@@ -131,8 +131,8 @@
       grid-template-columns: minmax(0, 1fr) minmax(200px, min(32vw, 280px));
       gap: 1.5rem 2rem;
       align-items: start;
-      margin-bottom: 1.75rem;
-      padding-bottom: 1.5rem;
+      margin-bottom: 0.85rem;
+      padding-bottom: 1.1rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     }
     .page-hero-text {
@@ -169,11 +169,11 @@
       letter-spacing: -0.02em;
       max-width: min(100%, 46ch);
     }
-    /* InConcertta : même échelle que « Co-construisez… » */
+    /* InConcertta en chapô : ~2 crans au-dessus du titre principal */
     .page-hero-text .hero-brand-kicker {
       margin: 0 0 0.55rem;
-      font-size: clamp(1.2rem, 2.65vw, 2rem);
-      line-height: 1.18;
+      font-size: clamp(1.5rem, 3.2vw, 2.5rem);
+      line-height: 1.15;
       letter-spacing: -0.02em;
       font-weight: 800;
       text-transform: none;
@@ -257,11 +257,71 @@
     }
     .main-read .content-wrap > .inconcertta-demo-section {
       border-top: none;
-      padding-top: clamp(1.1rem, 2vw, 1.85rem);
+      padding-top: clamp(0.45rem, 1vw, 0.85rem);
     }
     .main-read h2.lux-split-chars {
       font-size: clamp(1.2rem, 2.75vw, 1.72rem) !important;
       color: #f7fcfd !important;
+    }
+    /* « Pour quels projets » : 4 cases accolées + pictos */
+    .cas-usage-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      margin: 1rem 0 0;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-sizing: border-box;
+    }
+    .cas-usage-cell {
+      margin: 0;
+      padding: clamp(0.85rem, 2vw, 1.15rem) clamp(0.5rem, 1.2vw, 0.75rem) 1rem;
+      background: rgba(0, 54, 74, 0.45);
+      text-align: center;
+      box-sizing: border-box;
+      min-width: 0;
+    }
+    .cas-usage-cell__icon {
+      width: 88px;
+      height: 88px;
+      margin: 0 auto 0.65rem;
+      border-radius: 18px;
+      background: rgba(191, 125, 64, 0.12);
+      border: 1px solid rgba(191, 125, 64, 0.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #bf7d40;
+      flex-shrink: 0;
+    }
+    .cas-usage-icon-svg {
+      width: 48px;
+      height: 48px;
+      display: block;
+    }
+    .cas-usage-cell__label {
+      margin: 0;
+      font-size: clamp(0.78rem, 1.35vw, 0.92rem);
+      font-weight: 700;
+      line-height: 1.32;
+      color: #e8f4f8;
+      letter-spacing: -0.01em;
+      text-align: center;
+    }
+    .main-read .cas-usage-strip .cas-usage-cell__label {
+      text-align: center;
+    }
+    @media (max-width: 820px) {
+      .cas-usage-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 420px) {
+      .cas-usage-strip {
+        grid-template-columns: 1fr;
+      }
     }
     .text-measure {
       max-width: 62ch;
@@ -273,11 +333,6 @@
       margin-top: 1.85rem;
       padding-top: 1.5rem;
       border-top: 1px solid rgba(255, 255, 255, 0.11);
-    }
-    .inconcertta-demo-section > .demo-interactive-split:first-child {
-      margin-top: 0;
-      padding-top: 0;
-      border-top: none;
     }
     .demo-interactive-split h3 {
       margin: 0 0 0.65rem;
@@ -512,6 +567,13 @@
       text-justify: inter-word;
       hyphens: auto;
       -webkit-hyphens: auto;
+    }
+    .main-read .solution-section p.gestion-page-cta {
+      text-align: center;
+      text-justify: auto;
+      hyphens: manual;
+      -webkit-hyphens: manual;
+      margin-top: 1.05rem;
     }
     .main-read .feature-card p {
       max-width: none;
@@ -981,8 +1043,8 @@
     }
     /* Visionneuse démo (Site_InCitta / inconcertta-demo.html — même logique) */
     .main-read .inconcertta-demo-section {
-      margin: 1.5rem 0 0;
-      padding-top: 1.35rem;
+      margin: 0.5rem 0 0;
+      padding-top: 0;
       border-top: none;
     }
     .main-read .demo-invite {
@@ -1016,8 +1078,6 @@
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
       border: 1px solid rgba(255, 255, 255, 0.12);
       background: #1a1a1a;
-      /* Scroll page (Lenis / tactile) au-dessus des zones .demo-hit — sans bloquer les taps */
-      touch-action: pan-y;
     }
     .main-read .demo-frame img.demo-bg {
       display: block;
@@ -1037,8 +1097,6 @@
       cursor: pointer;
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
-      touch-action: pan-y;
-      user-select: none;
     }
     .main-read .demo-hit:hover {
       background: rgba(191, 125, 64, 0.15);
@@ -1085,6 +1143,25 @@
   </style>
 </head>
 <body id="top">
+<script>
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.body.classList.add('lux-preloader-lock');
+})();
+</script>
+<div id="lux-preloader" aria-busy="true">
+  <div class="lux-preloader__veil" aria-hidden="true">
+    <span class="lux-preloader__panel lux-preloader__panel--left"></span>
+    <span class="lux-preloader__panel lux-preloader__panel--right"></span>
+  </div>
+  <div class="lux-preloader__inner">
+    <img class="lux-preloader__logo" src="/assets/images/logos/Logo InConcertta.png" alt="InConcertta" width="840" height="360" decoding="async">
+    <div class="lux-preloader__track" aria-hidden="true">
+      <div class="lux-preloader__bar"></div>
+    </div>
+    <p class="lux-preloader__pct"><span class="lux-preloader__value">0</span><span class="lux-preloader__unit">%</span></p>
+  </div>
+</div>
 
 <nav class="navbar" aria-label="Navigation principale">
   <div class="nav-container">
@@ -1110,7 +1187,7 @@
   <div class="content-wrap">
     <header class="page-hero">
       <div class="page-hero-text">
-        <p class="hero-brand-kicker lux-parallax-fast">
+        <p class="hero-brand-kicker">
           <span class="inconcertta-brand"><span class="inconcertta-i">I</span><span class="inconcertta-n">n</span><span class="inconcertta-i">C</span><span class="inconcertta-core">oncertta</span></span>
         </p>
         <h1 class="page-title lux-h1-animate hero-value-headline">
@@ -1132,7 +1209,7 @@
           Aucune installation requise <span aria-hidden="true">•</span> Accessible en ligne <span aria-hidden="true">•</span> Prise en main rapide
         </p>
         <p class="hero-footnote">
-          <span class="inconcertta-brand inconcertta-brand--white"><span class="inconcertta-i">I</span><span class="inconcertta-n">n</span><span class="inconcertta-i">C</span><span class="inconcertta-core">oncertta</span></span> — mobile, tablette et ordinateur. Accompagnements InCitta sur l’aménagement et la participation sur demande.
+          <span class="inconcertta-brand inconcertta-brand--white"><span class="inconcertta-i">I</span><span class="inconcertta-n">n</span><span class="inconcertta-i">C</span><span class="inconcertta-core">oncertta</span></span>&nbsp;est disponible sur mobile, tablette et ordinateur. Possibilité de solliciter les accompagnements InCitta sur l’aménagement, l'évaluation et la participation.
         </p>
       </div>
       <div class="page-hero-logo lux-parallax-slow">
@@ -1140,9 +1217,17 @@
       </div>
     </header>
 
-    <section class="inconcertta-demo-section" aria-labelledby="demo-interactive-title">
+    <section class="inconcertta-demo-section" aria-labelledby="demo-action-title">
+      <h2 id="demo-action-title" class="lux-split-chars">Découvrez InConcertta en action</h2>
+      <p class="inconcertta-lede text-measure">
+        Les participants interagissent directement sur une <strong>carte</strong> ou une <strong>grille</strong>&nbsp;: ils proposent des aménagements, réagissent et votent en temps réel.
+      </p>
+      <p class="gestion-page-cta" style="margin-top:0.85rem;margin-bottom:0.25rem;">
+        <a href="https://inconcertta.fr/" class="btn-primary-ic" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt" aria-hidden="true"></i> Accéder à la version d’essai</a>
+      </p>
+
       <div id="demo-inconcertta" class="demo-interactive-split" tabindex="-1">
-        <h3 id="demo-interactive-title" class="demo-interactive-heading">Démo interactive</h3>
+        <h3 class="demo-interactive-heading">Démo interactive</h3>
         <p class="demo-invite" style="margin:0 0 0.75rem;font-size:0.95rem;opacity:0.9;">
           Explorez les captures comme dans l’application&nbsp;: connexion simulée, menu et vues détaillées. L’interface ci-dessous <strong>défile automatiquement</strong> toutes les 3&nbsp;secondes jusqu’à votre premier clic ou toucher — puis vous pilotez la navigation.
         </p>
@@ -1156,45 +1241,45 @@
         </p>
         <div class="demo-frame">
           <img class="demo-bg" src="/assets/Inconcertta/login.png" width="2924" height="1671" alt="Écran de connexion InConcertta (illustration)" loading="lazy" decoding="async">
-          <span role="button" tabindex="0" class="demo-hit" id="hit-login"
+          <button type="button" class="demo-hit" id="hit-login"
             style="left:37.65%; top:72.75%; width:24.75%; height:5.6%;"
-            aria-label="Se connecter (démo)"></span>
+            aria-label="Se connecter (démo)"></button>
         </div>
       </div>
 
       <div id="view-main" class="demo-view">
         <div class="demo-frame" id="demo-viewport-frame">
           <img id="demo-viewport-img" class="demo-bg" src="/assets/Inconcertta/pageprincipale.png" width="1810" height="1420" alt="Interface InConcertta (démo)" loading="lazy" decoding="async">
-          <span role="button" tabindex="0" class="demo-hit" id="hit-logo"
+          <button type="button" class="demo-hit" id="hit-logo"
             style="left:0%; top:0%; width:9.6618%; height:7.389%;"
-            aria-label="Revenir à la vue carte (illustration principale)"></span>
-          <span role="button" tabindex="0" class="demo-hit" data-tool="forum" data-label="Forum — Venez échanger"
+            aria-label="Revenir à la vue carte (illustration principale)"></button>
+          <button type="button" class="demo-hit" data-tool="forum" data-label="Forum — Venez échanger"
             style="left:9.6618%; top:0%; width:11.5942%; height:7.389%;"
-            aria-label="Afficher : forum"></span>
-          <span role="button" tabindex="0" class="demo-hit" data-tool="sondages" data-label="Sondages"
+            aria-label="Afficher : forum"></button>
+          <button type="button" class="demo-hit" data-tool="sondages" data-label="Sondages"
             style="left:21.256%; top:0%; width:11.5942%; height:7.389%;"
-            aria-label="Afficher : sondages"></span>
-          <span role="button" tabindex="0" class="demo-hit" data-tool="idees" data-label="Boîte à idées"
+            aria-label="Afficher : sondages"></button>
+          <button type="button" class="demo-hit" data-tool="idees" data-label="Boîte à idées"
             style="left:32.8502%; top:0%; width:11.1111%; height:7.389%;"
-            aria-label="Afficher : boîte à idées"></span>
-          <span role="button" tabindex="0" class="demo-hit" data-tool="actualites" data-label="Actualités"
+            aria-label="Afficher : boîte à idées"></button>
+          <button type="button" class="demo-hit" data-tool="actualites" data-label="Actualités"
             style="left:43.9614%; top:0%; width:11.5942%; height:7.389%;"
-            aria-label="Afficher : actualités"></span>
-          <span role="button" tabindex="0" class="demo-hit" data-tool="carte" data-label="Carte"
+            aria-label="Afficher : actualités"></button>
+          <button type="button" class="demo-hit" data-tool="carte" data-label="Carte"
             style="left:55.5556%; top:0%; width:11.5942%; height:7.389%;"
-            aria-label="Afficher : carte"></span>
-          <span role="button" tabindex="0" class="demo-hit" data-tool="evolutions" data-label="Évolution — comparaison"
+            aria-label="Afficher : carte"></button>
+          <button type="button" class="demo-hit" data-tool="evolutions" data-label="Évolution — comparaison"
             style="left:67.1498%; top:0%; width:11.5942%; height:7.389%;"
-            aria-label="Afficher : évolution et comparaison"></span>
-          <span role="button" tabindex="0" class="demo-hit" data-tool="mon-compte" data-label="Mon compte"
+            aria-label="Afficher : évolution et comparaison"></button>
+          <button type="button" class="demo-hit" data-tool="mon-compte" data-label="Mon compte"
             style="left:78.744%; top:0%; width:11.1111%; height:7.389%;"
-            aria-label="Afficher : mon compte"></span>
-          <span role="button" tabindex="0" class="demo-hit" data-tool="theme" data-label="Thème interface"
+            aria-label="Afficher : mon compte"></button>
+          <button type="button" class="demo-hit" data-tool="theme" data-label="Thème interface"
             style="left:90.8203%; top:0%; width:3.3816%; height:7.389%;"
-            aria-label="Basculer entre captures clair et sombre"></span>
-          <span role="button" tabindex="0" class="demo-hit" id="hit-logout"
+            aria-label="Basculer entre captures clair et sombre"></button>
+          <button type="button" class="demo-hit" id="hit-logout"
             style="left:94.2019%; top:0%; width:7.7285%; height:7.389%;"
-            aria-label="Ouvrir la page de connexion (inconcertta.fr) — demande de confirmation"></span>
+            aria-label="Ouvrir la page de connexion (inconcertta.fr) — demande de confirmation"></button>
         </div>
         <p class="demo-viewport-caption" id="demo-viewport-caption" hidden aria-live="polite"></p>
       </div>
@@ -1251,12 +1336,48 @@
     <section class="cas-usage-section" id="cas-usage" aria-labelledby="cas-usage-title">
       <h2 id="cas-usage-title" class="lux-split-chars">Pour quels projets&nbsp;?</h2>
       <p>InConcertta s’adapte à de nombreux contextes&nbsp;:</p>
-      <ul class="inconcertta-tight-list" role="list">
-        <li>Aménagement d’espaces publics</li>
-        <li>Projets urbains et territoriaux</li>
-        <li>Mobilité et infrastructures</li>
-        <li>Concertations locales</li>
-      </ul>
+      <div class="cas-usage-strip" role="list">
+        <article class="cas-usage-cell" role="listitem">
+          <div class="cas-usage-cell__icon" aria-hidden="true">
+            <svg class="cas-usage-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 3.5c1.9 0 3.5 1.4 3.5 3.2 0 1.5-.9 2.7-2.2 3.2V11h-2.6V9.9C9.4 9.4 8.5 8.2 8.5 6.7 8.5 4.9 10.1 3.5 12 3.5z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+              <path d="M12 11v10" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+              <path d="M4 21h16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+              <path d="M8 21v-2h8v2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="cas-usage-cell__label">Aménagement d’espaces publics</p>
+        </article>
+        <article class="cas-usage-cell" role="listitem">
+          <div class="cas-usage-cell__icon" aria-hidden="true">
+            <svg class="cas-usage-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 21h20" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+              <path d="M5 21V9.5h5V21M14 21V5.5h5V21" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+              <path d="M7.5 13h1M7.5 16.5h1M7.5 20h1M16.5 9.5h1M16.5 13h1M16.5 16.5h1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p class="cas-usage-cell__label">Projets urbains et territoriaux</p>
+        </article>
+        <article class="cas-usage-cell" role="listitem">
+          <div class="cas-usage-cell__icon" aria-hidden="true">
+            <svg class="cas-usage-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 21L7.5 4M20 21L16.5 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M6 14.5h12" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2.5 3.5" stroke-linecap="round"/>
+              <path d="M12 16.5V21M12 9v3.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p class="cas-usage-cell__label">Mobilité et infrastructures</p>
+        </article>
+        <article class="cas-usage-cell" role="listitem">
+          <div class="cas-usage-cell__icon" aria-hidden="true">
+            <svg class="cas-usage-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.5 8.5h9v6H7.5l-2.8 2.8V14.5H4.5v-6z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+              <path d="M10.5 14.5h9v5.5h-3.2L15 21.5V20h-4.5v-5.5z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="cas-usage-cell__label">Concertations locales</p>
+        </article>
+      </div>
     </section>
 
     <section aria-labelledby="fonctions-title">

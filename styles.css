@@ -631,6 +631,13 @@ body.lux-preloader-lock{
   overflow: hidden;
 }
 
+@media (prefers-reduced-motion: reduce){
+  #lux-preloader{
+    display: none !important;
+    pointer-events: none !important;
+  }
+}
+
 #lux-preloader{
   position: fixed;
   inset: 0;

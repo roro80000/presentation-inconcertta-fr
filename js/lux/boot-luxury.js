@@ -141,6 +141,8 @@ export async function bootLuxuryStack() {
   document.documentElement.classList.add('lux-stack');
 
   if (prefersReducedLuxMotion()) {
+    document.body.classList.remove('lux-preloader-lock');
+    document.getElementById('lux-preloader')?.remove();
     window.__presentationLenis = null;
     return;
   }
@@ -201,8 +203,7 @@ export async function bootLuxuryStack() {
     syncTouchLerp: 0.034,
     touchInertiaExponent: 1.38,
     lerp: 0.034,
-    /* Un peu plus lisible sur trackpad / molette tout en restant « lourd » */
-    wheelMultiplier: 0.56,
+    wheelMultiplier: 0.42,
     touchMultiplier: 0.82,
     orientation: 'vertical',
     gestureOrientation: 'vertical',

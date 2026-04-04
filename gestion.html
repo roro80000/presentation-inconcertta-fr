@@ -705,6 +705,18 @@
   </style>
 </head>
 <body id="top">
+<script>
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.body.classList.add('lux-preloader-lock');
+})();
+</script>
+<div id="lux-preloader" class="lux-preloader--curtain-only" aria-busy="true">
+  <div class="lux-preloader__veil" aria-hidden="true">
+    <span class="lux-preloader__panel lux-preloader__panel--left"></span>
+    <span class="lux-preloader__panel lux-preloader__panel--right"></span>
+  </div>
+</div>
 
 <nav class="navbar" aria-label="Navigation principale">
   <div class="nav-container">

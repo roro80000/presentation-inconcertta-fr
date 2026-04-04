@@ -164,8 +164,27 @@
   </style>
 </head>
 <body id="top">
+<script>
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.body.classList.add('lux-preloader-lock');
+})();
+</script>
+<div id="lux-preloader" aria-busy="true">
+  <div class="lux-preloader__veil" aria-hidden="true">
+    <span class="lux-preloader__panel lux-preloader__panel--left"></span>
+    <span class="lux-preloader__panel lux-preloader__panel--right"></span>
+  </div>
+  <div class="lux-preloader__inner">
+    <img class="lux-preloader__logo" src="/assets/images/logos/Logo InConcertta.png" alt="InConcertta" width="840" height="360" decoding="async">
+    <div class="lux-preloader__track" aria-hidden="true">
+      <div class="lux-preloader__bar"></div>
+    </div>
+    <p class="lux-preloader__pct"><span class="lux-preloader__value">0</span><span class="lux-preloader__unit">%</span></p>
+  </div>
+</div>
 
-  <nav class="navbar" aria-label="Navigation principale">
+<nav class="navbar" aria-label="Navigation principale">
     <div class="nav-container">
       <div class="nav-logo">
         <a href="index.html" class="nav-brand" aria-label="InConcertta — accueil">
