@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>InConcertta — Co-construisez vos projets territoriaux avec les citoyens, en temps réel</title>
-  <meta name="description" content="Co-construisez vos projets territoriaux avec les citoyens, en temps réel. Carte interactive, données exploitables. Conçu pour les collectivités : RGPD, hébergement en Union européenne, sécurité des données (Supabase).">
+  <meta name="description" content="Plateforme interactive pour tester des scénarios, recueillir des contributions et décider. Concertation sur carte, résultats exploitables. Collectivités : RGPD, hébergement UE, sécurité.">
   <meta name="keywords" content="InConcertta, concertation, participation citoyenne, plateforme SaaS, territoire, collectivités, RGPD, InCitta">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://presentation.inconcertta.fr/">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://presentation.inconcertta.fr/">
   <meta property="og:title" content="InConcertta — Co-construisez avec les citoyens, en temps réel">
-  <meta property="og:description" content="Projets territoriaux et participation en temps réel. Exigences institutionnelles : RGPD, hébergement UE, sécurité — pour collectivités et acteurs publics.">
+  <meta property="og:description" content="Scénarios, contributions et décisions sur une carte interactive. RGPD, hébergement UE, sécurité — pour collectivités et acteurs publics.">
   <meta property="og:image" content="https://presentation.inconcertta.fr/assets/images/logos/Logo%20InConcertta.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -231,6 +231,19 @@
       border-color: rgba(255, 255, 255, 0.55);
       box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
     }
+    .final-pitch-section {
+      margin-top: 1.65rem;
+      padding-top: 0;
+      border-top: none;
+    }
+    .final-pitch-cta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 1.15rem;
+    }
     .page-hero .hero-footnote {
       margin-top: 1rem;
       font-size: 0.92rem;
@@ -420,6 +433,12 @@
       line-height: 1.72;
       margin: 0 0 0.9rem;
       max-width: none;
+    }
+    .main-read .solution-section p {
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
+      -webkit-hyphens: auto;
     }
     .main-read .feature-card p {
       max-width: none;
@@ -891,7 +910,7 @@
     .main-read .inconcertta-demo-section {
       margin: 1.5rem 0 0;
       padding-top: 1.35rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      border-top: none;
     }
     .main-read .demo-invite {
       font-size: 1rem;
@@ -1026,14 +1045,14 @@
           </span>
         </h1>
         <p class="page-lead hero-value-sub">
-          Faites participer citoyens, élus et experts sur une carte interactive, avec résultats exploitables immédiatement.
+          Une plateforme interactive pour tester des scénarios, recueillir des contributions et produire des décisions concrètes.
         </p>
         <div class="hero-cta-row">
-          <a href="contact.html" class="btn-primary">Demander des informations</a>
-          <a href="#demo-inconcertta" class="btn-hero-secondary">Voir la démo</a>
+          <a href="#demo-inconcertta" class="btn-primary">Découvrir la démo</a>
+          <a href="gestion.html" class="btn-hero-secondary">Explorer l’interface</a>
         </div>
         <p class="hero-footnote">
-          <span class="inconcertta-brand inconcertta-brand--white"><span class="inconcertta-i">I</span><span class="inconcertta-n">n</span><span class="inconcertta-i">C</span><span class="inconcertta-core">oncertta</span></span> — application web sans installation ; mobile, tablette et ordinateur. Vous pouvez également bénéficier des accompagnements InCitta sur l’aménagement et la participation.
+          <span class="inconcertta-brand inconcertta-brand--white"><span class="inconcertta-i">I</span><span class="inconcertta-n">n</span><span class="inconcertta-i">C</span><span class="inconcertta-core">oncertta</span></span> — <strong>Aucune installation requise</strong>, <strong>accessible en ligne</strong> (mobile, tablette, ordinateur). <strong>Prise en main rapide</strong>, <strong>adapté aux collectivités</strong>. Accompagnements InCitta sur l’aménagement et la participation sur demande.
         </p>
       </div>
       <div class="page-hero-logo lux-parallax-slow">
@@ -1041,34 +1060,18 @@
       </div>
     </header>
 
-    <section class="why-inconcertta-section" id="pourquoi-inconcertta" aria-labelledby="why-inconcertta-title">
-      <h2 id="why-inconcertta-title" class="lux-split-chars">Pourquoi utiliser InConcertta&nbsp;?</h2>
-      <ul class="why-inconcertta-list" role="list">
-        <li>Réduisez les oppositions à vos projets</li>
-        <li>Impliquez réellement les habitants</li>
-        <li>Générez des données exploitables</li>
-        <li>Accélérez vos décisions</li>
-      </ul>
-    </section>
+    <section class="inconcertta-demo-section" id="demo-inconcertta" aria-labelledby="demo-action-title">
+      <h2 id="demo-action-title" class="lux-split-chars">Découvrez InConcertta en action</h2>
+      <p class="inconcertta-lede">
+        Simulation d’un atelier de concertation sur une carte interactive&nbsp;: les participants proposent, modifient et votent directement sur le projet.
+      </p>
+      <p class="demo-invite" style="margin-top:0.5rem;font-size:0.95rem;opacity:0.88;">
+        Aperçu simplifié — accédez à l’interface complète pour une expérience réelle.
+      </p>
+      <p class="gestion-page-cta" style="margin-top:0.75rem;margin-bottom:1rem;">
+        <a href="https://inconcertta.fr/" class="btn-primary-ic" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt" aria-hidden="true"></i> Accéder à la version d’essai</a>
+      </p>
 
-    <section class="institution-trust-below-section" aria-label="RGPD, hébergement et sécurité">
-      <ul class="institution-trust-grid" role="list">
-        <li>
-          <span class="institution-trust-kicker"><i class="fas fa-user-shield" aria-hidden="true"></i> RGPD</span>
-          <p class="institution-trust-desc">Traitement des données personnelles dans le respect du règlement européen : base légale, information des personnes, exercice des droits, sous-traitance encadrée et documentation adaptée aux responsables de traitement publics.</p>
-        </li>
-        <li>
-          <span class="institution-trust-kicker"><i class="fas fa-server" aria-hidden="true"></i> Hébergement</span>
-          <p class="institution-trust-desc">Données hébergées en Union européenne, sur une infrastructure reconnue (Supabase : base, authentification, fichiers) — critère souvent imposé par les marchés publics et les DSI territoriales.</p>
-        </li>
-        <li>
-          <span class="institution-trust-kicker"><i class="fas fa-lock" aria-hidden="true"></i> Sécurité</span>
-          <p class="institution-trust-desc">Architecture conçue pour la confidentialité et l’intégrité des échanges : accès authentifiés, bonnes pratiques de stockage ; le détail opérationnel et juridique complète vos documents (mentions légales, politique de confidentialité de l’application).</p>
-        </li>
-      </ul>
-    </section>
-
-    <section class="inconcertta-demo-section" id="demo-inconcertta" aria-label="Démonstration interface InConcertta">
       <div id="view-login" class="demo-view" hidden>
         <p class="demo-invite">Écran de connexion (illustration)&nbsp;: cliquez sur <strong>Se connecter</strong> pour afficher l’interface dans la vue ci-dessous.</p>
         <p class="demo-invite" style="margin-top:0.4rem;font-size:0.95rem;opacity:0.9;">Il s’agit d’un <strong>aperçu statique</strong>, pas de l’application réelle.</p>
@@ -1085,9 +1088,6 @@
       </div>
 
       <p class="demo-invite">L’interface ci-dessous <strong>défile automatiquement</strong> toutes les 3&nbsp;secondes (aperçu statique). <strong>Cliquez ou touchez la capture</strong> pour arrêter le défilement, revenir à la page principale et utiliser vous-même le menu et les zones cliquables.</p>
-      <p class="demo-invite" style="margin-top:0.4rem;font-size:0.95rem;opacity:0.9;">Ce n’est pas l’application réelle — pour la plateforme&nbsp;:
-        <a href="https://inconcertta.fr/" class="btn-primary-ic" style="margin-left:0.35rem;vertical-align:middle;" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt" aria-hidden="true"></i> inconcertta.fr</a>
-      </p>
 
       <div id="view-main" class="demo-view">
         <div class="demo-frame" id="demo-viewport-frame">
@@ -1127,14 +1127,61 @@
       </div>
     </section>
 
+    <section class="solution-section" id="nouvelle-facon-concerter" aria-labelledby="solution-title">
+      <h2 id="solution-title" class="lux-split-chars">Une nouvelle façon de concerter</h2>
+      <p>
+        InConcertta transforme la concertation en une <strong>expérience interactive et visuelle</strong>, où chaque participant peut s’exprimer concrètement sur le projet.
+      </p>
+      <p>
+        Grâce à une interface intuitive, les utilisateurs interagissent directement sur une carte ou une grille&nbsp;: ils proposent des aménagements, réagissent aux idées, et participent activement à la construction de scénarios.
+      </p>
+      <p>
+        Côté gestion, la plateforme est entièrement paramétrable&nbsp;: vous adaptez les modalités de participation selon vos objectifs, du simple recueil d’avis jusqu’à une véritable démarche de co-construction.
+      </p>
+      <p>
+        Niveaux d’interaction, types de contributions, règles de participation&nbsp;: chaque projet dispose d’un cadre sur mesure, permettant de structurer la concertation tout en laissant place à l’expression collective.
+      </p>
+    </section>
+
+    <section class="concretement-section" id="concretement-inconcertta" aria-labelledby="concretement-title">
+      <h2 id="concretement-title" class="lux-split-chars">Concrètement, avec InConcertta</h2>
+      <ul class="inconcertta-tight-list" role="list">
+        <li>Les participants interagissent directement sur une <strong>carte ou une grille</strong></li>
+        <li>Ils proposent des aménagements, <strong>réagissent et votent</strong></li>
+        <li>Les scénarios sont <strong>comparés en temps réel</strong></li>
+        <li>Les résultats sont <strong>immédiatement exploitables</strong></li>
+      </ul>
+    </section>
+
+    <section class="benefits-section why-inconcertta-section" id="resultats-concrets" aria-labelledby="benefits-title">
+      <h2 id="benefits-title" class="lux-split-chars">Des résultats concrets</h2>
+      <ul class="why-inconcertta-list" role="list">
+        <li>Plus de participation</li>
+        <li>Moins de conflits</li>
+        <li>Des décisions plus rapides</li>
+        <li>Des données directement exploitables</li>
+      </ul>
+    </section>
+
+    <section class="cas-usage-section" id="cas-usage" aria-labelledby="cas-usage-title">
+      <h2 id="cas-usage-title" class="lux-split-chars">Pour quels projets&nbsp;?</h2>
+      <p>InConcertta s’adapte à de nombreux contextes&nbsp;:</p>
+      <ul class="inconcertta-tight-list" role="list">
+        <li>Aménagement d’espaces publics</li>
+        <li>Projets urbains et territoriaux</li>
+        <li>Mobilité et infrastructures</li>
+        <li>Concertations locales</li>
+      </ul>
+    </section>
+
     <p class="gestion-page-cta">
       <a href="gestion.html" class="btn-primary-ic"><i class="fas fa-sliders" aria-hidden="true"></i> Voir l’interface de gestion</a>
     </p>
 
     <section aria-labelledby="fonctions-title">
-      <h2 id="fonctions-title" class="lux-split-chars">Ce que permet l’application</h2>
+      <h2 id="fonctions-title" class="lux-split-chars">Aller plus loin dans les fonctionnalités</h2>
       <p class="inconcertta-lede">
-        Un <strong>projet</strong> = un espace dédié.
+        Un <strong>projet</strong> = un espace dédié — pour structurer, animer et décider.
       </p>
       <ul class="inconcertta-tight-list">
         <li>Déployer un dispositif <strong>adapté au contexte local</strong>, sans mélanger les publics ni les contenus.</li>
@@ -1186,62 +1233,76 @@
       </div>
     </section>
 
-    <section class="inconcertta-offer-section" aria-labelledby="offre-inconcertta-title">
-      <h2 id="offre-inconcertta-title" class="lux-split-chars">Offre et mise à disposition</h2>
-      <p class="inconcertta-lede">
-        L’outil est conçu pour se <strong>déployer par projet</strong> : vous ouvrez un espace dédié, vous le paramétrez et vous y ajoutez vos contenus — sans chantier informatique lourd. Vous pouvez <strong>ne demander un accompagnement que pour un seul dispositif</strong> ; lorsque le cadrage est clair, la <strong>mise en place peut être très rapide, en quelques jours</strong>, pour ouvrir la concertation sans traîner.
+    <section class="institution-trust-below-section" id="fiabilite-collectivites" aria-labelledby="trust-title">
+      <h2 id="trust-title" class="lux-split-chars">Une solution fiable et adaptée aux collectivités</h2>
+      <p class="inconcertta-lede" style="margin-bottom:1rem;">
+        Hébergement sécurisé, respect du RGPD, et outils pensés pour les acteurs publics.
       </p>
-      <div class="inconcertta-offer-cols">
+      <ul class="institution-trust-grid" role="list">
+        <li>
+          <span class="institution-trust-kicker"><i class="fas fa-user-shield" aria-hidden="true"></i> RGPD</span>
+          <p class="institution-trust-desc">Traitement des données personnelles dans le respect du règlement européen : base légale, information des personnes, exercice des droits, sous-traitance encadrée et documentation adaptée aux responsables de traitement publics.</p>
+        </li>
+        <li>
+          <span class="institution-trust-kicker"><i class="fas fa-server" aria-hidden="true"></i> Hébergement</span>
+          <p class="institution-trust-desc">Données hébergées en Union européenne, sur une infrastructure reconnue (Supabase : base, authentification, fichiers) — critère souvent imposé par les marchés publics et les DSI territoriales.</p>
+        </li>
+        <li>
+          <span class="institution-trust-kicker"><i class="fas fa-lock" aria-hidden="true"></i> Sécurité</span>
+          <p class="institution-trust-desc">Architecture conçue pour la confidentialité et l’intégrité des échanges : accès authentifiés, bonnes pratiques de stockage ; le détail opérationnel et juridique complète vos documents (mentions légales, politique de confidentialité de l’application).</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="inconcertta-offer-section" aria-labelledby="offre-inconcertta-title">
+      <h2 id="offre-inconcertta-title" class="lux-split-chars">Comment utiliser InConcertta</h2>
+      <p class="inconcertta-lede">
+        Une solution adaptée à <strong>vos besoins</strong> et à <strong>votre niveau d’autonomie</strong>.
+      </p>
+      <ul class="inconcertta-tight-list">
+        <li><strong>Atelier de concertation ponctuel</strong> — mise en place ciblée pour un dispositif ou une phase du projet.</li>
+        <li><strong>Accompagnement sur un projet</strong> — méthode, animation et calibrage de la plateforme avec l’équipe.</li>
+        <li><strong>Accès à la plateforme en licence</strong> — service d’accès pour vos concertations, en usage ponctuel ou récurrent.</li>
+      </ul>
+      <div class="inconcertta-offer-cols" style="margin-top:1.35rem;">
         <div class="inconcertta-offer-cols__col">
-          <p class="inconcertta-lede">
-            <strong class="inconcertta-brand inconcertta-brand--white"><span class="inconcertta-i">I</span><span class="inconcertta-n">n</span><span class="inconcertta-i">C</span><span class="inconcertta-core">oncertta</span></strong> est une <strong>solution clé en main</strong>&nbsp;: plateforme numérique et <strong>expertise</strong> en aménagement et participation. Elle aide à structurer et animer la participation, et à éclairer la décision.
-          </p>
           <p>
-            Au-delà des fonctionnalités, l’objectif est d’<strong>accompagner le projet</strong>.
+            <strong class="inconcertta-brand inconcertta-brand--white"><span class="inconcertta-i">I</span><span class="inconcertta-n">n</span><span class="inconcertta-i">C</span><span class="inconcertta-core">oncertta</span></strong> se déploie <strong>par projet</strong> : espace dédié, paramétrage et contenus — sans chantier informatique lourd. Cadrage clair&nbsp;: une <strong>mise en place rapide</strong> (souvent en quelques jours) est possible.
           </p>
-          <ul class="inconcertta-tight-list">
-            <li>Structurer la démarche de concertation</li>
-            <li>Mobiliser les publics concernés</li>
-            <li>Valoriser et exploiter les contributions</li>
-          </ul>
         </div>
         <div class="inconcertta-offer-cols__col">
-          <h3 class="inconcertta-offer-subtitle">Une offre adaptée aux acteurs publics</h3>
-          <p>La solution s’adresse notamment à&nbsp;:</p>
+          <h3 class="inconcertta-offer-subtitle">Acteurs concernés</h3>
           <ul>
-            <li>les <strong>collectivités</strong> (communes, intercommunalités, régions) ;</li>
-            <li>les <strong>cabinets</strong> d’urbanisme et de concertation ;</li>
-            <li>les <strong>porteurs</strong> de projets territoriaux.</li>
+            <li><strong>Collectivités</strong> (communes, intercommunalités, régions)</li>
+            <li><strong>Cabinets</strong> d’urbanisme et de concertation</li>
+            <li><strong>Porteurs</strong> de projets territoriaux</li>
           </ul>
         </div>
       </div>
 
       <hr class="inconcertta-offer-divider" />
 
-      <h3 class="inconcertta-offer-subtitle">Un modèle flexible et évolutif</h3>
-      <p>Plusieurs <strong>modalités commerciales</strong> sont possibles&nbsp;:</p>
-      <ul>
-        <li><strong>Service — accès à la plateforme</strong> pour vos concertations, en <strong>ponctuel</strong> (durée d’un dispositif) ou en usage <strong>récurrent</strong> sur la durée.</li>
-        <li><strong>Offre personnalisée</strong> — charte graphique, paramétrage et accompagnement au montage.</li>
-        <li><strong>Instance dédiée (white-label)</strong> — identité propre, base isolée, services associés.</li>
-      </ul>
+      <h3 class="inconcertta-offer-subtitle">Modalités complémentaires</h3>
+      <p>Offre personnalisée (charte, paramétrage, montage), <strong>instance dédiée (white-label)</strong> avec identité propre et base isolée.</p>
       <p class="inconcertta-offer-formule-inclut">Chaque formule peut inclure :</p>
       <ul class="inconcertta-tight-list">
-        <li>le déploiement technique de la plateforme</li>
-        <li>la prise en main et la formation des équipes</li>
-        <li>l’accompagnement à l’animation des démarches</li>
+        <li>déploiement technique et mise en service</li>
+        <li>formation et prise en main des équipes</li>
+        <li>accompagnement à l’animation des démarches</li>
       </ul>
     </section>
 
-    <div class="cta-row">
-      <a href="https://inconcertta.fr/" class="btn-primary-ic" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt" aria-hidden="true"></i> Découvrir la plateforme</a>
-      <a href="contact.html" class="btn-primary-ic"><i class="fas fa-envelope" aria-hidden="true"></i> Demander des informations</a>
-    </div>
+    <section class="final-pitch-section" aria-labelledby="final-pitch-title">
+      <h2 id="final-pitch-title" class="lux-split-chars">Prêt à transformer vos concertations&nbsp;?</h2>
+      <div class="final-pitch-cta">
+        <a href="https://inconcertta.fr/" class="btn-primary-ic" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt" aria-hidden="true"></i> Découvrir la plateforme</a>
+        <a href="contact.html" class="btn-primary-ic"><i class="fas fa-envelope" aria-hidden="true"></i> Nous contacter</a>
+      </div>
+    </section>
   </div>
 </main>
 
 <aside class="main-read main-read--incitta-follow fade-in-up" aria-labelledby="incitta-title">
-  <p class="incitta-companion-kicker">Autre service — expertise terrain &amp; stratégie (InCitta)</p>
   <h2 id="incitta-title" class="lux-block-reveal"><span class="incitta-title-mark"><span class="incitta-title-ic">I</span><span class="incitta-title-body">n</span><span class="incitta-title-ic">C</span><span class="incitta-title-body">itta</span></span> &amp; <span class="inconcertta-title-mark"><span class="inconcertta-title-ic">I</span><span class="inconcertta-title-body">n</span><span class="inconcertta-title-ic">C</span><span class="inconcertta-title-body">oncertta</span></span></h2>
   <div class="incitta-intro-lead">
     <p>
@@ -1272,7 +1333,7 @@
   </p>
   <div class="incitta-follow-footer">
     <p class="incitta-follow-site-wrap">
-      <a href="https://www.incitta.eu/" class="btn-outline-ic" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe" aria-hidden="true"></i> Site incitta.eu</a>
+      <a href="https://www.incitta.eu/" class="btn-outline-ic" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe" aria-hidden="true"></i> Site de InCitta.eu</a>
     </p>
     <a href="#top" class="btn retour-btn" aria-label="Haut de page">Haut de page</a>
   </div>

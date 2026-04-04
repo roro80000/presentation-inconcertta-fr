@@ -1,0 +1,9 @@
+{
+  "name": "presentation-inconcertta-fr",
+  "private": true,
+  "description": "Site statique — Lenis et GSAP sont chargés en ESM (CDN) ; les deps npm servent de référence de version et pour `npm install` local.",
+  "dependencies": {
+    "gsap": "3.12.5",
+    "lenis": "1.3.21"
+  }
+}

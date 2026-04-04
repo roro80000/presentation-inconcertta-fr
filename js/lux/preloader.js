@@ -1,7 +1,14 @@
 /**
- * Préchargeur : logo + barre + pourcentage, puis disparition en « rideau » (clip-path vers le haut).
- * Mode `curtainOnly` : voile plein écran puis uniquement l’ouverture rideau (pas de % ni barre).
+ * Préchargeur : logo + barre + pourcentage, puis disparition en rideau vertical
+ * (deux volets qui s’écartent) après 100 %.
+ * Mode `curtainOnly` : voile plein écran puis même ouverture (pas de % ni barre).
  */
+
+const VEIL_MARKUP = `
+  <div class="lux-preloader__veil" aria-hidden="true">
+    <span class="lux-preloader__panel lux-preloader__panel--left"></span>
+    <span class="lux-preloader__panel lux-preloader__panel--right"></span>
+  </div>`;
 
 /**
  * @param {{ curtainOnly?: boolean }} opts
@@ -14,8 +21,9 @@ export function createPreloaderMarkup(opts = {}) {
   el.setAttribute('aria-busy', 'true');
   if (opts.curtainOnly) {
     el.classList.add('lux-preloader--curtain-only');
+    el.innerHTML = VEIL_MARKUP;
   } else {
-    el.innerHTML = `
+    el.innerHTML = `${VEIL_MARKUP}
     <div class="lux-preloader__inner">
       <img class="lux-preloader__logo" src="/assets/images/logos/Logo InConcertta.png" alt="InConcertta" width="840" height="360" decoding="async">
       <div class="lux-preloader__track" aria-hidden="true">
@@ -35,6 +43,7 @@ function playCurtainOut(root) {
       root.setAttribute('aria-busy', 'false');
       root.classList.add('lux-preloader--curtain');
       let finished = false;
+      let panelEnds = 0;
       const done = () => {
         if (finished) return;
         finished = true;
@@ -44,10 +53,14 @@ function playCurtainOut(root) {
         resolve();
       };
       const onTransitionEnd = (e) => {
-        if (e.propertyName === 'clip-path' || e.propertyName === '-webkit-clip-path') done();
+        if (e.propertyName !== 'transform') return;
+        const t = e.target;
+        if (!(t instanceof Element) || !t.classList.contains('lux-preloader__panel')) return;
+        panelEnds += 1;
+        if (panelEnds >= 2) done();
       };
       root.addEventListener('transitionend', onTransitionEnd);
-      setTimeout(done, 1200);
+      setTimeout(done, 1400);
     });
   });
 }

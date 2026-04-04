@@ -1,6 +1,13 @@
 /**
  * Stack « luxe » : Lenis + GSAP + ScrollTrigger + SplitType,
  * préchargeur, grain, parallaxe, curseur, distorsion scroll (approx. WebGL).
+ *
+ * Lenis + ScrollTrigger (recommandé darkroom / GSAP) :
+ * - `scrollerProxy(document.documentElement)` : ScrollTrigger lit la position lissée via Lenis.
+ * - `lenis.on('scroll', ScrollTrigger.update)` : recalcul des triggers à chaque tick Lenis.
+ * - `gsap.ticker` + `lenis.raf(time * 1000)` + `lagSmoothing(0)` : même horloge que GSAP, pas de décalage.
+ * - Ancres : `anchors: false` sur Lenis pour éviter le double traitement ; défilement via
+ *   `anchor-smooth-scroll.js` → `lenis.scrollTo(...)` avec offset navbar.
  */
 
 import { ESM_LENIS, ESM_GSAP, ESM_SCROLL_TRIGGER, ESM_SPLIT_TYPE } from './constants.js';
@@ -24,11 +31,21 @@ function shouldRunCurtainOnlyPreloader() {
   return /gestion\.html$/i.test(window.location.pathname);
 }
 
+/** Révélation titre : SplitType + blur → net, montée 10px, rythme très lent */
+const HERO_CHAR_FROM = {
+  y: 10,
+  opacity: 0,
+  filter: 'blur(14px)',
+  stagger: 0.088,
+  duration: 1.62,
+  ease: 'power2.out',
+};
+
 function initHeroReveal(gsap, SplitType) {
   const h1 = document.querySelector('.lux-h1-animate');
   if (!h1) return;
 
-  const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
+  const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
   const lines = h1.querySelectorAll('.lux-line--mask');
   let first = true;
 
@@ -36,51 +53,52 @@ function initHeroReveal(gsap, SplitType) {
     const brand = line.querySelector('.inconcertta-brand');
     const tail = line.querySelector('.lux-h1-tail');
     const sub = line.querySelector('.lux-h1-sub');
-    const insert = first ? 0 : '>-0.34';
+    const insert = first ? 0 : '>-0.28';
     first = false;
 
     if (brand) {
-      const spans = brand.querySelectorAll(':scope > span');
-      if (spans.length) {
-        tl.from(
-          spans,
-          {
-            y: 28,
-            opacity: 0,
-            filter: 'blur(10px)',
-            stagger: 0.055,
-            duration: 0.78,
-          },
-          insert
-        );
-      }
+      const spans = [...brand.querySelectorAll(':scope > span')].filter((s) => s.textContent.trim());
+      let brandPos = insert;
+      spans.forEach((span) => {
+        const st = new SplitType(span, { types: 'chars', tagName: 'span' });
+        tl.from(st.chars, { ...HERO_CHAR_FROM }, brandPos);
+        brandPos = '>';
+      });
     } else if (tail && tail.textContent.trim()) {
       const st = new SplitType(tail, { types: 'chars', tagName: 'span' });
-      tl.from(
-        st.chars,
-        {
-          y: 20,
-          opacity: 0,
-          filter: 'blur(8px)',
-          stagger: 0.016,
-          duration: 0.72,
-        },
-        insert
-      );
+      tl.from(st.chars, { ...HERO_CHAR_FROM }, insert);
     } else if (sub && sub.textContent.trim()) {
       const st = new SplitType(sub, { types: 'chars', tagName: 'span' });
-      tl.from(
-        st.chars,
-        {
-          y: 20,
-          opacity: 0,
-          filter: 'blur(8px)',
-          stagger: 0.014,
-          duration: 0.68,
-        },
-        insert
-      );
+      tl.from(st.chars, { ...HERO_CHAR_FROM }, insert);
     }
+  });
+}
+
+/**
+ * Parallaxe inverse sur le h1 : souris vers le haut → le bloc titre descend légèrement (profondeur).
+ */
+function initHeroH1MouseParallax(gsap, h1) {
+  if (!h1 || window.matchMedia('(pointer: coarse)').matches) return;
+  const hero = h1.closest('.page-hero');
+  if (!hero) return;
+
+  const maxX = 7;
+  const maxY = 6;
+  gsap.set(h1, { x: 0, y: 0 });
+
+  const quickX = gsap.quickTo(h1, 'x', { duration: 0.65, ease: 'power3.out' });
+  const quickY = gsap.quickTo(h1, 'y', { duration: 0.65, ease: 'power3.out' });
+
+  hero.addEventListener('pointermove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    quickX(-px * 2 * maxX);
+    quickY(-py * 2 * maxY);
+  });
+  hero.addEventListener('pointerleave', () => {
+    quickX(0);
+    quickY(0);
   });
 }
 
@@ -176,13 +194,44 @@ export async function bootLuxuryStack() {
     }
   }
 
+  /* Très fluide, presque aérien : lerp bas + moindre amplitude molette / touch */
   const lenis = new Lenis({
     smoothWheel: true,
-    wheelMultiplier: 0.88,
-    touchMultiplier: 1.75,
     syncTouch: true,
+    syncTouchLerp: 0.034,
+    touchInertiaExponent: 1.38,
+    lerp: 0.034,
+    wheelMultiplier: 0.42,
+    touchMultiplier: 0.82,
+    orientation: 'vertical',
+    gestureOrientation: 'vertical',
+    autoRaf: false,
+    anchors: false,
+    stopInertiaOnNavigate: true,
+    overscroll: true,
   });
   window.__presentationLenis = lenis;
+
+  ScrollTrigger.scrollerProxy(document.documentElement, {
+    scrollTop(value) {
+      if (arguments.length && lenis) {
+        lenis.scrollTo(value, { immediate: true });
+      }
+      return lenis ? lenis.scroll : window.scrollY || document.documentElement.scrollTop;
+    },
+    getBoundingClientRect() {
+      return {
+        top: 0,
+        left: 0,
+        width: window.innerWidth,
+        height: window.innerHeight,
+      };
+    },
+    pinType: 'transform',
+  });
+
+  ScrollTrigger.defaults({ scroller: document.documentElement });
+  ScrollTrigger.refresh();
 
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((time) => {
@@ -190,7 +239,17 @@ export async function bootLuxuryStack() {
   });
   gsap.ticker.lagSmoothing(0);
 
+  const refreshLenisAndST = () => {
+    lenis.resize();
+    ScrollTrigger.refresh();
+  };
+  window.addEventListener('resize', refreshLenisAndST);
+
   initHeroReveal(gsap, SplitType);
+  const heroH1 = document.querySelector('.lux-h1-animate');
+  if (heroH1?.closest('.page-hero')) {
+    initHeroH1MouseParallax(gsap, heroH1);
+  }
   initSplitHeadings(gsap, ScrollTrigger, SplitType);
   initParallaxLux(gsap);
   initLuxCursor();

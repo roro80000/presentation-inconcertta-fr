@@ -3,10 +3,10 @@
  */
 
 import { bootLuxuryStack } from './lux/boot-luxury.js';
-import { initNavbarScroll } from './hooks/navbar-scroll.js';
+import { initNavbarScroll, attachNavbarToLenis } from './hooks/navbar-scroll.js';
 import { initMobileEnv } from './hooks/mobile-env.js';
 import { initNavMobile } from './hooks/nav-mobile.js';
-import { initAnchorSmoothScroll } from './hooks/anchor-smooth-scroll.js';
+import { initAnchorSmoothScroll, scrollToHashIfPresent } from './hooks/anchor-smooth-scroll.js';
 import { initFormInputs } from './hooks/form-inputs.js';
 import { initLazyImages } from './hooks/lazy-images.js';
 import { initHeroParallax } from './hooks/hero-parallax.js';
@@ -20,8 +20,10 @@ initMobileEnv();
 
 async function boot() {
   await bootLuxuryStack();
+  attachNavbarToLenis();
   initNavMobile();
   initAnchorSmoothScroll();
+  scrollToHashIfPresent();
   initFormInputs();
   initLazyImages();
   initHeroParallax();
