@@ -13,7 +13,7 @@ export function initScrollDistortLux() {
   function tick() {
     const now = performance.now();
     const dt = Math.max(1, now - lastT);
-    const y = window.scrollY;
+    const y = window.__presentationLenis?.scroll ?? window.scrollY;
     const instant = ((y - lastY) / dt) * 16;
     vy = vy * 0.86 + instant * 0.14;
     lastY = y;

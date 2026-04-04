@@ -132,8 +132,8 @@ export function initInconcerttaDemo() {
       goMainMap();
     } else {
       const slug = CAROUSEL_TOOL_ORDER[carouselNextIndex - 1];
-      const btn = viewportFrame.querySelector(`button.demo-hit[data-tool="${slug}"]`);
-      openTool(slug, btn?.getAttribute('data-label') || slug);
+      const hit = viewportFrame.querySelector(`.demo-hit[data-tool="${slug}"]`);
+      openTool(slug, hit?.getAttribute('data-label') || slug);
     }
     carouselNextIndex = (carouselNextIndex + 1) % carouselSlideCount();
   }
@@ -149,46 +149,76 @@ export function initInconcerttaDemo() {
     carouselTimer = window.setInterval(runCarouselTick, CAROUSEL_INTERVAL_MS);
   }
 
-  function onViewportUserIntent(e) {
+  function dismissCarouselFromViewport() {
     if (userDismissedCarousel) return;
-
     userDismissedCarousel = true;
     stopAutoCarousel();
     goMainMap();
-
-    e.preventDefault();
-    e.stopPropagation();
-    if (typeof e.stopImmediatePropagation === 'function') {
-      e.stopImmediatePropagation();
-    }
   }
 
-  hitLogin.addEventListener('click', showMain);
-
-  viewportFrame.addEventListener('pointerdown', onViewportUserIntent, { capture: true });
-
-  viewportFrame.addEventListener('click', (e) => {
-    const btn = e.target.closest('button');
-    if (!btn || !viewportFrame.contains(btn)) return;
-
-    if (btn.id === 'hit-logo') {
+  function handleViewportHit(hit) {
+    if (hit.id === 'hit-logo') {
       goMainMap();
       return;
     }
-    if (btn.id === 'hit-logout') {
+    if (hit.id === 'hit-logout') {
       triggerLogoutConfirm();
       return;
     }
-
-    const slug = btn.getAttribute('data-tool');
+    const slug = hit.getAttribute('data-tool');
     if (slug === 'theme') {
       toggleThemeDemo();
       return;
     }
     if (slug) {
-      openTool(slug, btn.getAttribute('data-label'));
+      openTool(slug, hit.getAttribute('data-label'));
     }
+  }
+
+  hitLogin.addEventListener('click', showMain);
+  hitLogin.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    e.preventDefault();
+    showMain();
   });
+
+  /* Aucun pointerdown ici : avec trackpad, pointerType reste souvent « mouse » et preventDefault cassait scroll / Lenis. */
+  viewportFrame.addEventListener('wheel', dismissCarouselFromViewport, { capture: true, passive: true });
+  viewportFrame.addEventListener('touchmove', dismissCarouselFromViewport, { capture: true, passive: true });
+
+  viewportFrame.addEventListener(
+    'click',
+    (e) => {
+      if (!userDismissedCarousel) {
+        dismissCarouselFromViewport();
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        return;
+      }
+
+      const hit = e.target.closest('.demo-hit');
+      if (!hit || !viewportFrame.contains(hit)) return;
+      handleViewportHit(hit);
+    },
+    true
+  );
+
+  viewportFrame.addEventListener(
+    'keydown',
+    (e) => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const hit = e.target.closest('.demo-hit');
+      if (!hit || !viewportFrame.contains(hit)) return;
+      e.preventDefault();
+      if (!userDismissedCarousel) {
+        dismissCarouselFromViewport();
+        return;
+      }
+      handleViewportHit(hit);
+    },
+    true
+  );
 
   function applyDemoHash() {
     const h = window.location.hash;

@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>InConcertta — Co-construisez vos projets territoriaux avec les citoyens, en temps réel</title>
-  <meta name="description" content="Plateforme interactive pour tester des scénarios, recueillir des contributions et décider. Concertation sur carte, résultats exploitables. Collectivités : RGPD, hébergement UE, sécurité.">
+  <title>InConcertta — De la communication à la co-construction, transformez la participation citoyenne en décisions concrètes</title>
+  <meta name="description" content="Plateforme de simulation participative : co-construire des projets territoriaux de façon visuelle, interactive et exploitable. Sans installation, en ligne. RGPD, hébergement UE.">
   <meta name="keywords" content="InConcertta, concertation, participation citoyenne, plateforme SaaS, territoire, collectivités, RGPD, InCitta">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://presentation.inconcertta.fr/">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://presentation.inconcertta.fr/">
-  <meta property="og:title" content="InConcertta — Co-construisez avec les citoyens, en temps réel">
-  <meta property="og:description" content="Scénarios, contributions et décisions sur une carte interactive. RGPD, hébergement UE, sécurité — pour collectivités et acteurs publics.">
+  <meta property="og:title" content="InConcertta — De la communication à la co-construction, vers des décisions concrètes">
+  <meta property="og:description" content="Simulation participative sur carte et grille. Données exploitables. Collectivités : RGPD, hébergement sécurisé UE.">
   <meta property="og:image" content="https://presentation.inconcertta.fr/assets/images/logos/Logo%20InConcertta.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -19,7 +19,7 @@
   <meta property="og:site_name" content="InConcertta">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://presentation.inconcertta.fr/">
-  <meta name="twitter:title" content="InConcertta — Co-construisez avec les citoyens">
+  <meta name="twitter:title" content="InConcertta — Communication, co-construction, décisions concrètes">
   <meta name="twitter:description" content="Temps réel, carte interactive. RGPD, hébergement européen, sécurité — pensé pour les collectivités.">
   <meta name="twitter:image" content="https://presentation.inconcertta.fr/assets/images/logos/Logo%20InConcertta.png">
   <meta name="twitter:image:alt" content="Logo InConcertta — plateforme de concertation">
@@ -45,7 +45,7 @@
         "@type": "WebPage",
         "@id": "https://presentation.inconcertta.fr/#webpage",
         "url": "https://presentation.inconcertta.fr/",
-        "name": "InConcertta — Co-construisez vos projets territoriaux avec les citoyens",
+        "name": "InConcertta — De la communication à la co-construction, participation citoyenne et décisions concrètes",
         "description": "Participation en temps réel sur carte interactive. Cadre RGPD, hébergement en Union européenne et sécurité des données pour les collectivités.",
         "isPartOf": { "@id": "https://presentation.inconcertta.fr/#website" },
         "about": { "@id": "https://presentation.inconcertta.fr/#product" },
@@ -167,7 +167,7 @@
       font-size: clamp(1.2rem, 2.65vw, 2rem);
       line-height: 1.18;
       letter-spacing: -0.02em;
-      max-width: min(100%, 46ch);
+      max-width: min(100%, 58ch);
     }
     /* InConcertta : même échelle que « Co-construisez… » */
     .page-hero-text .hero-brand-kicker {
@@ -237,12 +237,245 @@
       border-top: none;
     }
     .final-pitch-cta {
+      justify-content: center;
+      margin-top: 1.25rem;
+    }
+    .hero-trust-pills {
+      margin: 1.05rem 0 0;
+      font-size: 0.9rem;
+      letter-spacing: 0.03em;
+      color: rgba(232, 241, 244, 0.62);
+      line-height: 1.55;
+      max-width: 42ch;
+    }
+    .main-read .content-wrap > section {
+      padding-top: clamp(1.45rem, 2.6vw, 2.4rem);
+      padding-bottom: clamp(0.9rem, 1.8vw, 1.55rem);
+    }
+    .main-read .content-wrap > section + section {
+      border-top: 1px solid rgba(255, 255, 255, 0.09);
+    }
+    .main-read .content-wrap > .inconcertta-demo-section {
+      border-top: none;
+      padding-top: clamp(1.1rem, 2vw, 1.85rem);
+    }
+    .main-read h2.lux-split-chars {
+      font-size: clamp(1.2rem, 2.75vw, 1.72rem) !important;
+      color: #f7fcfd !important;
+    }
+    .passive-demo-wrap {
+      margin: 0.85rem auto 0;
+      max-width: 920px;
+    }
+    .passive-demo-frame {
+      position: relative;
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.22);
+      aspect-ratio: 1810 / 1420;
+      max-height: min(50vh, 460px);
+    }
+    .passive-demo-carousel {
+      position: absolute;
+      inset: 0;
+    }
+    .passive-demo-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      opacity: 0;
+      transition: opacity 0.7s ease-in-out;
+      pointer-events: none;
+    }
+    .passive-demo-slide.is-active {
+      opacity: 1;
+      z-index: 1;
+    }
+    .text-measure {
+      max-width: 62ch;
+    }
+    .problem-section ul.inconcertta-tight-list {
+      margin-top: 0.65rem;
+    }
+    .demo-interactive-split {
+      margin-top: 1.85rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.11);
+    }
+    .demo-interactive-split h3 {
+      margin: 0 0 0.65rem;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #f0f7fa;
+    }
+    /* Offre : trois bulles rondes sur une ligne */
+    .offer-circles-row {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      align-items: flex-start;
+      gap: clamp(0.85rem, 2.5vw, 1.35rem);
+      margin: 1.1rem 0 0.35rem;
+      list-style: none;
+      padding: 0;
+    }
+    .main-read ul.offer-circles-row {
+      padding-left: 0;
+      margin-left: 0;
+    }
+    .inconcertta-offer-section .offer-post-circles {
+      margin-top: 1.35rem;
+    }
+    .inconcertta-offer-section .offer-post-circles .inconcertta-tight-list {
+      margin-bottom: 0;
+    }
+    .offer-circle {
+      flex: 1 1 260px;
+      max-width: 330px;
+      min-width: 0;
+      aspect-ratio: 1;
+      margin: 0;
+      padding: clamp(1rem, 2.2vw, 1.35rem) clamp(1.05rem, 2.4vw, 1.35rem);
+      box-sizing: border-box;
+      display: flex;
       align-items: center;
-      gap: 0.75rem;
-      margin-top: 1.15rem;
+      justify-content: center;
+      text-align: center;
+      border-radius: 50%;
+      background: rgba(0, 54, 74, 0.38);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.22);
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease,
+        background-color 0.3s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .offer-circle:hover {
+        transform: translateY(-3px);
+        border-color: rgba(255, 255, 255, 0.22);
+        background: rgba(0, 54, 74, 0.5);
+        box-shadow:
+          0 14px 38px rgba(0, 0, 0, 0.28),
+          0 0 0 1px rgba(255, 255, 255, 0.06);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .offer-circle {
+        transition:
+          box-shadow 0.28s ease,
+          border-color 0.28s ease,
+          background-color 0.28s ease;
+      }
+      .offer-circle:hover {
+        transform: none;
+      }
+    }
+    .offer-circle__text {
+      margin: 0;
+      font-size: clamp(0.92rem, 1.95vw, 1.08rem);
+      line-height: 1.48;
+      color: rgba(232, 241, 244, 0.94);
+      font-weight: 400;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+    }
+    /* Plus spécifique que .main-read p { text-align: left } */
+    .main-read .offer-circle .offer-circle__text {
+      text-align: center;
+      text-justify: auto;
+      hyphens: manual;
+      -webkit-hyphens: manual;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .offer-circle__text strong {
+      display: block;
+      font-weight: 800;
+      font-size: clamp(0.98rem, 2.1vw, 1.14rem);
+      color: #f0f7fa;
+      margin-bottom: 0.4rem;
+      line-height: 1.28;
+      text-align: center;
+      hyphens: manual;
+      -webkit-hyphens: manual;
+    }
+    @media (max-width: 900px) {
+      .offer-circles-row {
+        flex-direction: column;
+        align-items: center;
+      }
+      .offer-circle {
+        flex: 0 0 auto;
+        width: min(100%, 340px);
+        max-width: 340px;
+      }
+    }
+    /* « Pour quels projets » : 4 cases accolées + pictos */
+    .cas-usage-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      margin: 1rem 0 0;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-sizing: border-box;
+    }
+    .cas-usage-cell {
+      margin: 0;
+      padding: clamp(0.85rem, 2vw, 1.15rem) clamp(0.5rem, 1.2vw, 0.75rem) 1rem;
+      background: rgba(0, 54, 74, 0.45);
+      text-align: center;
+      box-sizing: border-box;
+      min-width: 0;
+    }
+    .cas-usage-cell__icon {
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 0.55rem;
+      border-radius: 12px;
+      background: rgba(191, 125, 64, 0.12);
+      border: 1px solid rgba(191, 125, 64, 0.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #bf7d40;
+      flex-shrink: 0;
+    }
+    .cas-usage-icon-svg {
+      width: 24px;
+      height: 24px;
+      display: block;
+    }
+    .cas-usage-cell__label {
+      margin: 0;
+      font-size: clamp(0.78rem, 1.35vw, 0.92rem);
+      font-weight: 700;
+      line-height: 1.32;
+      color: #e8f4f8;
+      letter-spacing: -0.01em;
+      text-align: center;
+    }
+    .main-read .cas-usage-strip .cas-usage-cell__label {
+      text-align: center;
+    }
+    @media (max-width: 820px) {
+      .cas-usage-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 420px) {
+      .cas-usage-strip {
+        grid-template-columns: 1fr;
+      }
     }
     .page-hero .hero-footnote {
       margin-top: 1rem;
@@ -943,6 +1176,8 @@
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
       border: 1px solid rgba(255, 255, 255, 0.12);
       background: #1a1a1a;
+      /* Scroll page (Lenis / tactile) au-dessus des zones .demo-hit — sans bloquer les taps */
+      touch-action: pan-y;
     }
     .main-read .demo-frame img.demo-bg {
       display: block;
@@ -962,6 +1197,8 @@
       cursor: pointer;
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
+      touch-action: pan-y;
+      user-select: none;
     }
     .main-read .demo-hit:hover {
       background: rgba(191, 125, 64, 0.15);
@@ -1038,21 +1275,24 @@
         </p>
         <h1 class="page-title lux-h1-animate hero-value-headline">
           <span class="lux-line lux-line--mask">
-            <span class="lux-h1-tail">Co-construisez vos projets territoriaux</span>
+            <span class="lux-h1-tail">De la communication à la co-construction, transformez la participation citoyenne</span>
           </span>
           <span class="lux-line lux-line--mask">
-            <span class="lux-h1-tail">avec les citoyens, en temps réel</span>
+            <span class="lux-h1-tail">en décisions concrètes.</span>
           </span>
         </h1>
         <p class="page-lead hero-value-sub">
-          Une plateforme interactive pour tester des scénarios, recueillir des contributions et produire des décisions concrètes.
+          InConcertta est une plateforme de <strong>simulation participative</strong> qui permet de co-construire des projets territoriaux de manière <strong>visuelle</strong>, <strong>interactive</strong> et <strong>exploitable</strong>.
         </p>
         <div class="hero-cta-row">
-          <a href="#demo-inconcertta" class="btn-primary">Découvrir la démo</a>
-          <a href="gestion.html" class="btn-hero-secondary">Explorer l’interface</a>
+          <a href="contact.html" class="btn-primary">Demander une démo</a>
+          <a href="https://inconcertta.fr/" class="btn-hero-secondary" target="_blank" rel="noopener noreferrer">Tester la plateforme</a>
         </div>
+        <p class="hero-trust-pills" aria-label="Avantages pratiques">
+          Aucune installation requise <span aria-hidden="true">•</span> Accessible en ligne <span aria-hidden="true">•</span> Prise en main rapide
+        </p>
         <p class="hero-footnote">
-          <span class="inconcertta-brand inconcertta-brand--white"><span class="inconcertta-i">I</span><span class="inconcertta-n">n</span><span class="inconcertta-i">C</span><span class="inconcertta-core">oncertta</span></span> — <strong>Aucune installation requise</strong>, <strong>accessible en ligne</strong> (mobile, tablette, ordinateur). <strong>Prise en main rapide</strong>, <strong>adapté aux collectivités</strong>. Accompagnements InCitta sur l’aménagement et la participation sur demande.
+          <span class="inconcertta-brand inconcertta-brand--white"><span class="inconcertta-i">I</span><span class="inconcertta-n">n</span><span class="inconcertta-i">C</span><span class="inconcertta-core">oncertta</span></span> — mobile, tablette et ordinateur. Accompagnements InCitta sur l’aménagement et la participation sur demande.
         </p>
       </div>
       <div class="page-hero-logo lux-parallax-slow">
@@ -1060,17 +1300,31 @@
       </div>
     </header>
 
-    <section class="inconcertta-demo-section" id="demo-inconcertta" aria-labelledby="demo-action-title">
+    <section class="inconcertta-demo-section" aria-labelledby="demo-action-title">
       <h2 id="demo-action-title" class="lux-split-chars">Découvrez InConcertta en action</h2>
-      <p class="inconcertta-lede">
-        Simulation d’un atelier de concertation sur une carte interactive&nbsp;: les participants proposent, modifient et votent directement sur le projet.
+      <div class="passive-demo-wrap">
+        <div class="passive-demo-frame" aria-label="Aperçu automatique de l’interface InConcertta">
+          <div class="passive-demo-carousel" id="passive-demo-carousel">
+            <img class="passive-demo-slide is-active" src="/assets/Inconcertta/pageprincipale.png" alt="Interface principale InConcertta" width="1810" height="1420" decoding="async" fetchpriority="high">
+            <img class="passive-demo-slide" src="/assets/Inconcertta/captures/carte.png" alt="Carte interactive — propositions et aménagements" width="1810" height="1420" loading="lazy" decoding="async">
+            <img class="passive-demo-slide" src="/assets/Inconcertta/captures/forum.png" alt="Forum et échanges entre participants" width="1810" height="1420" loading="lazy" decoding="async">
+            <img class="passive-demo-slide" src="/assets/Inconcertta/captures/sondages.png" alt="Sondages et contributions structurées" width="1810" height="1420" loading="lazy" decoding="async">
+            <img class="passive-demo-slide" src="/assets/Inconcertta/captures/evolutions.png" alt="Comparaison de scénarios" width="1810" height="1420" loading="lazy" decoding="async">
+          </div>
+        </div>
+      </div>
+      <p class="inconcertta-lede text-measure">
+        Les participants interagissent directement sur une <strong>carte</strong> ou une <strong>grille</strong>&nbsp;: ils proposent des aménagements, réagissent et votent en temps réel.
       </p>
-      <p class="demo-invite" style="margin-top:0.5rem;font-size:0.95rem;opacity:0.88;">
-        Aperçu simplifié — accédez à l’interface complète pour une expérience réelle.
-      </p>
-      <p class="gestion-page-cta" style="margin-top:0.75rem;margin-bottom:1rem;">
+      <p class="gestion-page-cta" style="margin-top:0.85rem;margin-bottom:0.25rem;">
         <a href="https://inconcertta.fr/" class="btn-primary-ic" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt" aria-hidden="true"></i> Accéder à la version d’essai</a>
       </p>
+
+      <div id="demo-inconcertta" class="demo-interactive-split" tabindex="-1">
+        <h3 class="demo-interactive-heading">Démo interactive</h3>
+        <p class="demo-invite" style="margin:0 0 0.75rem;font-size:0.95rem;opacity:0.9;">
+          Explorez les captures comme dans l’application&nbsp;: connexion simulée, menu et vues détaillées. L’interface ci-dessous <strong>défile automatiquement</strong> toutes les 3&nbsp;secondes jusqu’à votre premier clic ou toucher — puis vous pilotez la navigation.
+        </p>
 
       <div id="view-login" class="demo-view" hidden>
         <p class="demo-invite">Écran de connexion (illustration)&nbsp;: cliquez sur <strong>Se connecter</strong> pour afficher l’interface dans la vue ci-dessous.</p>
@@ -1081,75 +1335,82 @@
         </p>
         <div class="demo-frame">
           <img class="demo-bg" src="/assets/Inconcertta/login.png" width="2924" height="1671" alt="Écran de connexion InConcertta (illustration)" loading="lazy" decoding="async">
-          <button type="button" class="demo-hit" id="hit-login"
+          <span role="button" tabindex="0" class="demo-hit" id="hit-login"
             style="left:37.65%; top:72.75%; width:24.75%; height:5.6%;"
-            aria-label="Se connecter (démo)"></button>
+            aria-label="Se connecter (démo)"></span>
         </div>
       </div>
-
-      <p class="demo-invite">L’interface ci-dessous <strong>défile automatiquement</strong> toutes les 3&nbsp;secondes (aperçu statique). <strong>Cliquez ou touchez la capture</strong> pour arrêter le défilement, revenir à la page principale et utiliser vous-même le menu et les zones cliquables.</p>
 
       <div id="view-main" class="demo-view">
         <div class="demo-frame" id="demo-viewport-frame">
           <img id="demo-viewport-img" class="demo-bg" src="/assets/Inconcertta/pageprincipale.png" width="1810" height="1420" alt="Interface InConcertta (démo)" loading="lazy" decoding="async">
-          <button type="button" class="demo-hit" id="hit-logo"
+          <span role="button" tabindex="0" class="demo-hit" id="hit-logo"
             style="left:0%; top:0%; width:9.6618%; height:7.389%;"
-            aria-label="Revenir à la vue carte (illustration principale)"></button>
-          <button type="button" class="demo-hit" data-tool="forum" data-label="Forum — Venez échanger"
+            aria-label="Revenir à la vue carte (illustration principale)"></span>
+          <span role="button" tabindex="0" class="demo-hit" data-tool="forum" data-label="Forum — Venez échanger"
             style="left:9.6618%; top:0%; width:11.5942%; height:7.389%;"
-            aria-label="Afficher : forum"></button>
-          <button type="button" class="demo-hit" data-tool="sondages" data-label="Sondages"
+            aria-label="Afficher : forum"></span>
+          <span role="button" tabindex="0" class="demo-hit" data-tool="sondages" data-label="Sondages"
             style="left:21.256%; top:0%; width:11.5942%; height:7.389%;"
-            aria-label="Afficher : sondages"></button>
-          <button type="button" class="demo-hit" data-tool="idees" data-label="Boîte à idées"
+            aria-label="Afficher : sondages"></span>
+          <span role="button" tabindex="0" class="demo-hit" data-tool="idees" data-label="Boîte à idées"
             style="left:32.8502%; top:0%; width:11.1111%; height:7.389%;"
-            aria-label="Afficher : boîte à idées"></button>
-          <button type="button" class="demo-hit" data-tool="actualites" data-label="Actualités"
+            aria-label="Afficher : boîte à idées"></span>
+          <span role="button" tabindex="0" class="demo-hit" data-tool="actualites" data-label="Actualités"
             style="left:43.9614%; top:0%; width:11.5942%; height:7.389%;"
-            aria-label="Afficher : actualités"></button>
-          <button type="button" class="demo-hit" data-tool="carte" data-label="Carte"
+            aria-label="Afficher : actualités"></span>
+          <span role="button" tabindex="0" class="demo-hit" data-tool="carte" data-label="Carte"
             style="left:55.5556%; top:0%; width:11.5942%; height:7.389%;"
-            aria-label="Afficher : carte"></button>
-          <button type="button" class="demo-hit" data-tool="evolutions" data-label="Évolution — comparaison"
+            aria-label="Afficher : carte"></span>
+          <span role="button" tabindex="0" class="demo-hit" data-tool="evolutions" data-label="Évolution — comparaison"
             style="left:67.1498%; top:0%; width:11.5942%; height:7.389%;"
-            aria-label="Afficher : évolution et comparaison"></button>
-          <button type="button" class="demo-hit" data-tool="mon-compte" data-label="Mon compte"
+            aria-label="Afficher : évolution et comparaison"></span>
+          <span role="button" tabindex="0" class="demo-hit" data-tool="mon-compte" data-label="Mon compte"
             style="left:78.744%; top:0%; width:11.1111%; height:7.389%;"
-            aria-label="Afficher : mon compte"></button>
-          <button type="button" class="demo-hit" data-tool="theme" data-label="Thème interface"
+            aria-label="Afficher : mon compte"></span>
+          <span role="button" tabindex="0" class="demo-hit" data-tool="theme" data-label="Thème interface"
             style="left:90.8203%; top:0%; width:3.3816%; height:7.389%;"
-            aria-label="Basculer entre captures clair et sombre"></button>
-          <button type="button" class="demo-hit" id="hit-logout"
+            aria-label="Basculer entre captures clair et sombre"></span>
+          <span role="button" tabindex="0" class="demo-hit" id="hit-logout"
             style="left:94.2019%; top:0%; width:7.7285%; height:7.389%;"
-            aria-label="Ouvrir la page de connexion (inconcertta.fr) — demande de confirmation"></button>
+            aria-label="Ouvrir la page de connexion (inconcertta.fr) — demande de confirmation"></span>
         </div>
         <p class="demo-viewport-caption" id="demo-viewport-caption" hidden aria-live="polite"></p>
       </div>
+      </div>
+    </section>
+
+    <section class="problem-section" id="limites-concertation-classique" aria-labelledby="problem-title">
+      <h2 id="problem-title" class="lux-split-chars">Les limites des concertations classiques</h2>
+      <ul class="inconcertta-tight-list" role="list">
+        <li>Participation faible ou peu engageante</li>
+        <li>Contributions difficiles à exploiter</li>
+        <li>Manque de visualisation des projets</li>
+        <li>Décisions longues et complexes</li>
+      </ul>
+      <p class="inconcertta-lede text-measure" style="margin-top:1rem;">
+        La concertation est souvent perçue comme une obligation, alors qu’elle peut devenir un véritable <strong>outil d’aide à la décision</strong>.
+      </p>
     </section>
 
     <section class="solution-section" id="nouvelle-facon-concerter" aria-labelledby="solution-title">
       <h2 id="solution-title" class="lux-split-chars">Une nouvelle façon de concerter</h2>
-      <p>
+      <p class="text-measure">
         InConcertta transforme la concertation en une <strong>expérience interactive et visuelle</strong>, où chaque participant peut s’exprimer concrètement sur le projet.
       </p>
-      <p>
-        Grâce à une interface intuitive, les utilisateurs interagissent directement sur une carte ou une grille&nbsp;: ils proposent des aménagements, réagissent aux idées, et participent activement à la construction de scénarios.
-      </p>
-      <p>
-        Côté gestion, la plateforme est entièrement paramétrable&nbsp;: vous adaptez les modalités de participation selon vos objectifs, du simple recueil d’avis jusqu’à une véritable démarche de co-construction.
-      </p>
-      <p>
-        Niveaux d’interaction, types de contributions, règles de participation&nbsp;: chaque projet dispose d’un cadre sur mesure, permettant de structurer la concertation tout en laissant place à l’expression collective.
+      <p class="text-measure" style="margin-top:0.85rem;">
+        Depuis l’<strong>espace de gestion</strong>, la plateforme est entièrement paramétrable&nbsp;: vous adaptez les modalités de participation selon vos objectifs, du simple recueil d’avis jusqu’à une démarche de <strong>co-construction</strong>.
       </p>
     </section>
 
     <section class="concretement-section" id="concretement-inconcertta" aria-labelledby="concretement-title">
       <h2 id="concretement-title" class="lux-split-chars">Concrètement, avec InConcertta</h2>
       <ul class="inconcertta-tight-list" role="list">
-        <li>Les participants interagissent directement sur une <strong>carte ou une grille</strong></li>
-        <li>Ils proposent des aménagements, <strong>réagissent et votent</strong></li>
-        <li>Les scénarios sont <strong>comparés en temps réel</strong></li>
-        <li>Les résultats sont <strong>immédiatement exploitables</strong></li>
+        <li>Interaction directe sur <strong>carte ou grille</strong></li>
+        <li><strong>Proposition</strong> d’aménagements</li>
+        <li><strong>Réactions</strong> et <strong>votes</strong></li>
+        <li><strong>Comparaison</strong> de scénarios</li>
+        <li>Résultats <strong>immédiatement exploitables</strong></li>
       </ul>
     </section>
 
@@ -1158,7 +1419,7 @@
       <ul class="why-inconcertta-list" role="list">
         <li>Plus de participation</li>
         <li>Moins de conflits</li>
-        <li>Des décisions plus rapides</li>
+        <li>Décisions accélérées</li>
         <li>Des données directement exploitables</li>
       </ul>
     </section>
@@ -1166,12 +1427,48 @@
     <section class="cas-usage-section" id="cas-usage" aria-labelledby="cas-usage-title">
       <h2 id="cas-usage-title" class="lux-split-chars">Pour quels projets&nbsp;?</h2>
       <p>InConcertta s’adapte à de nombreux contextes&nbsp;:</p>
-      <ul class="inconcertta-tight-list" role="list">
-        <li>Aménagement d’espaces publics</li>
-        <li>Projets urbains et territoriaux</li>
-        <li>Mobilité et infrastructures</li>
-        <li>Concertations locales</li>
-      </ul>
+      <div class="cas-usage-strip" role="list">
+        <article class="cas-usage-cell" role="listitem">
+          <div class="cas-usage-cell__icon" aria-hidden="true">
+            <svg class="cas-usage-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 3.5c1.9 0 3.5 1.4 3.5 3.2 0 1.5-.9 2.7-2.2 3.2V11h-2.6V9.9C9.4 9.4 8.5 8.2 8.5 6.7 8.5 4.9 10.1 3.5 12 3.5z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+              <path d="M12 11v10" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+              <path d="M4 21h16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+              <path d="M8 21v-2h8v2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="cas-usage-cell__label">Aménagement d’espaces publics</p>
+        </article>
+        <article class="cas-usage-cell" role="listitem">
+          <div class="cas-usage-cell__icon" aria-hidden="true">
+            <svg class="cas-usage-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 21h20" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+              <path d="M5 21V9.5h5V21M14 21V5.5h5V21" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+              <path d="M7.5 13h1M7.5 16.5h1M7.5 20h1M16.5 9.5h1M16.5 13h1M16.5 16.5h1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p class="cas-usage-cell__label">Projets urbains et territoriaux</p>
+        </article>
+        <article class="cas-usage-cell" role="listitem">
+          <div class="cas-usage-cell__icon" aria-hidden="true">
+            <svg class="cas-usage-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 21L7.5 4M20 21L16.5 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M6 14.5h12" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2.5 3.5" stroke-linecap="round"/>
+              <path d="M12 16.5V21M12 9v3.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p class="cas-usage-cell__label">Mobilité et infrastructures</p>
+        </article>
+        <article class="cas-usage-cell" role="listitem">
+          <div class="cas-usage-cell__icon" aria-hidden="true">
+            <svg class="cas-usage-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.5 8.5h9v6H7.5l-2.8 2.8V14.5H4.5v-6z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+              <path d="M10.5 14.5h9v5.5h-3.2L15 21.5V20h-4.5v-5.5z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="cas-usage-cell__label">Concertations locales</p>
+        </article>
+      </div>
     </section>
 
     <p class="gestion-page-cta">
@@ -1234,9 +1531,9 @@
     </section>
 
     <section class="institution-trust-below-section" id="fiabilite-collectivites" aria-labelledby="trust-title">
-      <h2 id="trust-title" class="lux-split-chars">Une solution fiable et adaptée aux collectivités</h2>
-      <p class="inconcertta-lede" style="margin-bottom:1rem;">
-        Hébergement sécurisé, respect du RGPD, et outils pensés pour les acteurs publics.
+      <h2 id="trust-title" class="lux-split-chars">Une solution adaptée aux acteurs publics</h2>
+      <p class="inconcertta-lede text-measure" style="margin-bottom:1rem;">
+        Hébergement sécurisé, respect du RGPD, et outils conçus pour les collectivités.
       </p>
       <ul class="institution-trust-grid" role="list">
         <li>
@@ -1256,47 +1553,37 @@
 
     <section class="inconcertta-offer-section" aria-labelledby="offre-inconcertta-title">
       <h2 id="offre-inconcertta-title" class="lux-split-chars">Comment utiliser InConcertta</h2>
-      <p class="inconcertta-lede">
-        Une solution adaptée à <strong>vos besoins</strong> et à <strong>votre niveau d’autonomie</strong>.
-      </p>
-      <ul class="inconcertta-tight-list">
-        <li><strong>Atelier de concertation ponctuel</strong> — mise en place ciblée pour un dispositif ou une phase du projet.</li>
-        <li><strong>Accompagnement sur un projet</strong> — méthode, animation et calibrage de la plateforme avec l’équipe.</li>
-        <li><strong>Accès à la plateforme en licence</strong> — service d’accès pour vos concertations, en usage ponctuel ou récurrent.</li>
+      <ul class="offer-circles-row" role="list">
+        <li class="offer-circle">
+          <p class="offer-circle__text"><strong>Atelier de concertation ponctuel</strong> Mise en place ciblée pour un dispositif ou une phase du projet.</p>
+        </li>
+        <li class="offer-circle">
+          <p class="offer-circle__text"><strong>Accompagnement sur un projet</strong> Méthode, animation et calibrage de la plateforme avec l’équipe.</p>
+        </li>
+        <li class="offer-circle">
+          <p class="offer-circle__text"><strong>Accès à la plateforme en licence</strong> Service d’accès pour vos concertations, en usage ponctuel ou récurrent.</p>
+        </li>
       </ul>
-      <div class="inconcertta-offer-cols" style="margin-top:1.35rem;">
-        <div class="inconcertta-offer-cols__col">
-          <p>
-            <strong class="inconcertta-brand inconcertta-brand--white"><span class="inconcertta-i">I</span><span class="inconcertta-n">n</span><span class="inconcertta-i">C</span><span class="inconcertta-core">oncertta</span></strong> se déploie <strong>par projet</strong> : espace dédié, paramétrage et contenus — sans chantier informatique lourd. Cadrage clair&nbsp;: une <strong>mise en place rapide</strong> (souvent en quelques jours) est possible.
-          </p>
-        </div>
-        <div class="inconcertta-offer-cols__col">
-          <h3 class="inconcertta-offer-subtitle">Acteurs concernés</h3>
-          <ul>
-            <li><strong>Collectivités</strong> (communes, intercommunalités, régions)</li>
-            <li><strong>Cabinets</strong> d’urbanisme et de concertation</li>
-            <li><strong>Porteurs</strong> de projets territoriaux</li>
-          </ul>
-        </div>
+      <div class="offer-post-circles text-measure">
+        <p>
+          InConcertta peut se déployer <strong>par projet</strong>&nbsp;: espace dédié pour la gestion, paramétrage et contenus — sans installation lourde. Une adresse mail pour se connecter et moduler sa concertation. En seulement quelques heures, une concertation peut être lancée.
+        </p>
+        <p>
+          Cet outil peut accompagner différents acteurs dont&nbsp;:
+        </p>
+        <ul class="inconcertta-tight-list" role="list">
+          <li>Collectivités (communes, intercommunalités, régions)</li>
+          <li>Cabinets d’urbanisme et de concertation</li>
+          <li>Porteurs de projets territoriaux</li>
+        </ul>
       </div>
-
-      <hr class="inconcertta-offer-divider" />
-
-      <h3 class="inconcertta-offer-subtitle">Modalités complémentaires</h3>
-      <p>Offre personnalisée (charte, paramétrage, montage), <strong>instance dédiée (white-label)</strong> avec identité propre et base isolée.</p>
-      <p class="inconcertta-offer-formule-inclut">Chaque formule peut inclure :</p>
-      <ul class="inconcertta-tight-list">
-        <li>déploiement technique et mise en service</li>
-        <li>formation et prise en main des équipes</li>
-        <li>accompagnement à l’animation des démarches</li>
-      </ul>
     </section>
 
     <section class="final-pitch-section" aria-labelledby="final-pitch-title">
       <h2 id="final-pitch-title" class="lux-split-chars">Prêt à transformer vos concertations&nbsp;?</h2>
-      <div class="final-pitch-cta">
-        <a href="https://inconcertta.fr/" class="btn-primary-ic" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt" aria-hidden="true"></i> Découvrir la plateforme</a>
-        <a href="contact.html" class="btn-primary-ic"><i class="fas fa-envelope" aria-hidden="true"></i> Nous contacter</a>
+      <div class="hero-cta-row final-pitch-cta">
+        <a href="contact.html" class="btn-primary">Demander une démo</a>
+        <a href="https://inconcertta.fr/" class="btn-hero-secondary" target="_blank" rel="noopener noreferrer">Tester la plateforme</a>
       </div>
     </section>
   </div>

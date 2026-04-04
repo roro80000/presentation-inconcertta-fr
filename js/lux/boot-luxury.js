@@ -201,7 +201,8 @@ export async function bootLuxuryStack() {
     syncTouchLerp: 0.034,
     touchInertiaExponent: 1.38,
     lerp: 0.034,
-    wheelMultiplier: 0.42,
+    /* Un peu plus lisible sur trackpad / molette tout en restant « lourd » */
+    wheelMultiplier: 0.56,
     touchMultiplier: 0.82,
     orientation: 'vertical',
     gestureOrientation: 'vertical',
