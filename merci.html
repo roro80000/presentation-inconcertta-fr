@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Merci — message envoyé</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="/assets/Logo/Logo InConcertta.png">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .main-read {
+      width: min(100% - 40px, 900px);
+      margin: 1.2rem auto 2rem;
+      padding: 1.6rem;
+      box-sizing: border-box;
+      background: #002532;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+    }
+    .thanks-card {
+      background: #00364A;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      padding: 1.35rem 1.25rem;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+    }
+    .thanks-title {
+      color: #f0f7fa;
+      margin: 0 0 0.6rem;
+      font-weight: 850;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+    }
+    .thanks-text {
+      color: rgba(232, 241, 244, 0.92);
+      margin: 0;
+      line-height: 1.7;
+      font-size: 1.02rem;
+    }
+    .thanks-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.1rem;
+    }
+    .thanks-actions a { text-decoration: none; }
+  </style>
+</head>
+<body id="top">
+  <nav class="navbar" aria-label="Navigation principale">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <a href="index.html" class="nav-brand" aria-label="InConcertta — accueil">
+          <img src="/assets/images/logos/Logo InConcertta.png" alt="InConcertta" class="logo-img">
+        </a>
+      </div>
+      <ul class="nav-menu" role="list">
+        <li class="nav-item"><a href="index.html" class="nav-link">Présentation</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="hamburger" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="main-read fade-in-up">
+    <div class="thanks-card">
+      <h1 class="thanks-title">Merci, votre message a bien été envoyé.</h1>
+      <p class="thanks-text">
+        Nous vous répondrons sur votre adresse courriel dès que possible.
+      </p>
+      <div class="thanks-actions">
+        <a class="btn btn-primary btn-large" href="index.html">Retour à la présentation</a>
+        <a class="btn btn-outline btn-large" href="contact.html">Envoyer un autre message</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer footer--presentation">
+    <div class="container" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.25rem 1rem 1.1rem;">
+      <a href="https://www.incitta.eu/" target="_blank" rel="noopener noreferrer" style="display:inline-block;line-height:0;border-radius:10px;" aria-label="Site InCitta — incitta.eu">
+        <img src="/assets/Logo/LogoPied.png" alt="" class="footer-logo" style="height:120px;width:auto;display:block;margin:0 auto;">
+      </a>
+      <p style="margin:0.85rem 0 0;font-size:0.95rem;max-width:none;width:100%;text-align:center;">
+        &copy; 2026 InConcertta · <a href="mentions-legales.html">Mentions légales</a> · <a href="index.html">Présentation</a>
+      </p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
