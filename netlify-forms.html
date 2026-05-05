@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Netlify forms stubs</title>
+  </head>
+  <body>
+    <!--
+      Page “stub” pour garantir la détection Netlify Forms au build.
+      Ne pas lier publiquement.
+    -->
+    <form
+      name="contact-inconcertta-presentation"
+      method="POST"
+      action="/"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+    >
+      <input type="hidden" name="form-name" value="contact-inconcertta-presentation" />
+      <p style="display:none;">
+        <label>Ne remplissez pas ce champ : <input name="bot-field" /></label>
+      </p>
+      <input type="text" name="firstName" />
+      <input type="text" name="lastName" />
+      <input type="email" name="email" />
+      <select name="subject">
+        <option value="demo-commerciale">Démo</option>
+      </select>
+      <textarea name="message"></textarea>
+    </form>
+  </body>
+</html>
+
