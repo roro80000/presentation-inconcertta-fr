@@ -3,25 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>Interface de gestion — InConcertta</title>
-  <meta name="description" content="Espace de gestion : paramétrage du projet, sondages, carte, idées, exports. Aperçus de l’interface.">
-  <meta name="keywords" content="InConcertta, interface administration, gestion projet, sondages, carte participative, back-office, InCitta">
+  <title>Interface de Gestion InConcertta — Paramétrage Concertation</title>
+  <meta name="description" content="Espace de gestion d’InConcertta : paramétrage du projet, sondages, carte participative, idées, exports. Pour toutes les collectivités françaises.">
+  <meta name="keywords" content="interface de gestion InConcertta, paramétrage concertation, back-office budget participatif, sondages collectivités, carte participative, plateforme de concertation, consultation citoyenne, communes, intercommunalités, métropoles, France, InCitta">
+  <meta name="geo.region" content="FR-HDF">
+  <meta name="geo.placename" content="Amiens">
+  <meta name="geo.position" content="49.8941;2.2958">
+  <meta name="ICBM" content="49.8941, 2.2958">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://presentation.inconcertta.fr/gestion.html">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://presentation.inconcertta.fr/gestion.html">
-  <meta property="og:title" content="Interface de gestion — InConcertta">
-  <meta property="og:description" content="Aperçu des fonctions de gestion de projet : sondages, carte participative, idées, exports.">
+  <meta property="og:title" content="Interface de Gestion InConcertta — Paramétrage Concertation">
+  <meta property="og:description" content="Aperçu des fonctions de gestion : sondages, carte participative, idées, exports — pour toutes les collectivités françaises.">
   <meta property="og:image" content="https://presentation.inconcertta.fr/assets/images/logos/Logo%20InConcertta.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="InConcertta — espace de gestion et paramétrage">
+  <meta property="og:image:alt" content="InConcertta — interface de gestion (paramétrage, carte, sondages, budget participatif)">
   <meta property="og:locale" content="fr_FR">
   <meta property="og:site_name" content="InConcertta">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://presentation.inconcertta.fr/gestion.html">
-  <meta name="twitter:title" content="Interface de gestion — InConcertta">
-  <meta name="twitter:description" content="Paramétrage projet, sondages, carte, idées, exports — aperçus interface.">
+  <meta name="twitter:title" content="Interface de Gestion InConcertta — Paramétrage Concertation">
+  <meta name="twitter:description" content="Paramétrage projet, sondages, carte, idées, exports — pour toutes les collectivités françaises.">
   <meta name="twitter:image" content="https://presentation.inconcertta.fr/assets/images/logos/Logo%20InConcertta.png">
   <meta name="twitter:image:alt" content="Logo InConcertta">
   <meta name="author" content="InCitta">
@@ -54,16 +58,41 @@
         "@type": "SoftwareApplication",
         "@id": "https://presentation.inconcertta.fr/#product",
         "name": "InConcertta",
+        "applicationCategory": "BusinessApplication",
+        "applicationSubCategory": "CivicTech",
+        "operatingSystem": "Web",
+        "description": "Logiciel de concertation, consultation citoyenne et budget participatif pour les collectivités : paramétrage projet, sondages, carte interactive, idées, exports.",
         "url": "https://inconcertta.fr/",
         "provider": { "@id": "https://presentation.inconcertta.fr/#org" }
       },
       {
-        "@type": "Organization",
+        "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
         "@id": "https://presentation.inconcertta.fr/#org",
         "name": "InCitta",
+        "legalName": "InCitta SASU",
         "url": "https://www.incitta.eu/",
         "logo": "https://presentation.inconcertta.fr/assets/images/logos/Logo%20InConcertta.png",
-        "email": "contact@incitta.eu"
+        "image": "https://presentation.inconcertta.fr/assets/images/logos/Logo%20InConcertta.png",
+        "email": "contact@incitta.eu",
+        "priceRange": "€€",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "26 rue Jean-Baptiste Trannoy",
+          "postalCode": "80000",
+          "addressLocality": "Amiens",
+          "addressRegion": "Hauts-de-France",
+          "addressCountry": "FR"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 49.8941,
+          "longitude": 2.2958
+        },
+        "areaServed": { "@type": "Country", "name": "France" },
+        "sameAs": [
+          "https://www.incitta.eu/",
+          "https://inconcertta.fr/"
+        ]
       },
       {
         "@type": "BreadcrumbList",
@@ -866,7 +895,7 @@
 <footer class="footer footer--presentation">
   <div class="container" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.25rem 1rem 1.1rem;">
     <a href="https://www.incitta.eu/" target="_blank" rel="noopener noreferrer" style="display:inline-block;line-height:0;border-radius:10px;" aria-label="Site InCitta — incitta.eu">
-      <img src="/assets/Logo/LogoPied.png" alt="" class="footer-logo" style="height:120px;width:auto;display:block;margin:0 auto;">
+      <img src="/assets/Logo/LogoPied.png" alt="Logo InCitta — éditeur d’InConcertta" class="footer-logo" style="height:120px;width:auto;display:block;margin:0 auto;">
     </a>
     <p style="margin:0.85rem 0 0;font-size:0.95rem;max-width:none;width:100%;text-align:center;">&copy; 2026 InConcertta · <a href="mentions-legales.html">Mentions légales</a></p>
   </div>
