@@ -246,8 +246,14 @@
   }
   </script>
   <link rel="icon" type="image/png" href="/assets/Logo/Logo InConcertta.png">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://esm.sh" crossorigin>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="https://esm.sh">
+  <link rel="preload" as="image" href="/assets/images/logos/Logo%20InConcertta.png" fetchpriority="high" imagesrcset="/assets/images/logos/Logo%20InConcertta.png 1x">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
   <style>
     .main-read {
       width: min(100% - 40px, 1100px);
@@ -318,7 +324,7 @@
       letter-spacing: -0.02em;
       font-weight: 800;
       text-transform: none;
-      color: rgba(232, 241, 244, 0.55);
+      color: rgba(232, 241, 244, 0.78);
       text-align: left;
       text-justify: auto;
       hyphens: none;
@@ -385,7 +391,7 @@
       margin: 1.05rem 0 0;
       font-size: 0.9rem;
       letter-spacing: 0.03em;
-      color: rgba(232, 241, 244, 0.62);
+      color: rgba(232, 241, 244, 0.78);
       line-height: 1.55;
       max-width: 42ch;
     }
@@ -519,7 +525,7 @@
       font-weight: 800;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(232, 241, 244, 0.6);
+      color: rgba(232, 241, 244, 0.78);
     }
     .expert-bubble .expert-bubble__kicker i {
       color: rgba(77, 227, 193, 0.95);
@@ -576,7 +582,7 @@
       margin-top: 1rem;
       font-size: 0.92rem;
       line-height: 1.6;
-      color: rgba(232, 241, 244, 0.72);
+      color: rgba(232, 241, 244, 0.82);
       max-width: 48ch;
     }
     /* Alignement horizontal des blocs RGPD (sous-section) sur le cadre « Pourquoi » */
@@ -947,7 +953,7 @@
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(232, 241, 244, 0.52);
+      color: rgba(232, 241, 244, 0.78);
       text-align: left;
     }
     .main-read--incitta-follow h2#incitta-title {
@@ -1291,6 +1297,8 @@
       cursor: pointer;
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
+      min-width: 24px;
+      min-height: 24px;
     }
     .main-read .demo-hit:hover {
       background: rgba(191, 125, 64, 0.15);
@@ -1339,7 +1347,12 @@
 <body id="top">
 <script>
 (function () {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var smallViewport = window.matchMedia('(max-width: 720px)').matches;
+  if (reduced || smallViewport) {
+    document.documentElement.classList.add('lux-no-preloader');
+    return;
+  }
   document.body.classList.add('lux-preloader-lock');
 })();
 </script>
@@ -1401,7 +1414,7 @@
         </p>
       </div>
       <div class="page-hero-logo lux-parallax-slow">
-        <img class="lux-distort" src="/assets/images/logos/Logo InConcertta.png" alt="InConcertta by InCitta" width="280" height="120" loading="eager">
+        <img class="lux-distort" src="/assets/images/logos/Logo InConcertta.png" alt="InConcertta by InCitta" width="280" height="120" loading="eager" fetchpriority="high" decoding="async">
       </div>
     </header>
 
@@ -1428,7 +1441,7 @@
           <a href="https://inconcertta.fr/" class="btn-primary-ic" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt" aria-hidden="true"></i> inconcertta.fr</a>
         </p>
         <div class="demo-frame">
-          <img class="demo-bg" src="/assets/Inconcertta/login.png" width="2924" height="1671" alt="Écran de connexion InConcertta (illustration)" loading="lazy" decoding="async">
+          <img class="demo-bg" src="/assets/Inconcertta/login.webp" width="2924" height="1671" alt="Écran de connexion InConcertta (illustration)" loading="lazy" decoding="async">
           <button type="button" class="demo-hit" id="hit-login"
             style="left:37.65%; top:72.75%; width:24.75%; height:5.6%;"
             aria-label="Se connecter (aperçu)"></button>
@@ -1437,7 +1450,7 @@
 
       <div id="view-main" class="demo-view">
         <div class="demo-frame" id="demo-viewport-frame">
-          <img id="demo-viewport-img" class="demo-bg" src="/assets/Inconcertta/pageprincipale.png" width="1810" height="1420" alt="Interface InConcertta (aperçu)" loading="lazy" decoding="async">
+          <img id="demo-viewport-img" class="demo-bg" src="/assets/Inconcertta/pageprincipale.webp" width="1810" height="1420" alt="Interface InConcertta (aperçu)" loading="lazy" decoding="async">
           <button type="button" class="demo-hit" id="hit-logo"
             style="left:0%; top:0%; width:9.6618%; height:7.389%;"
             aria-label="Revenir à la vue carte (illustration principale)"></button>
@@ -1749,7 +1762,7 @@
 <footer class="footer footer--presentation">
   <div class="container" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.25rem 1rem 1.1rem;">
     <a href="https://www.incitta.eu/" target="_blank" rel="noopener noreferrer" style="display:inline-block;line-height:0;border-radius:10px;" aria-label="Site InCitta — incitta.eu">
-      <img src="/assets/Logo/LogoPied.png" alt="Logo InCitta — éditeur d’InConcertta" class="footer-logo" style="height:120px;width:auto;display:block;margin:0 auto;">
+      <img src="/assets/Logo/LogoPied.png" alt="Logo InCitta — éditeur d’InConcertta" class="footer-logo" width="600" height="447" loading="lazy" decoding="async" style="height:120px;width:auto;display:block;margin:0 auto;">
     </a>
     <p style="margin:0.85rem 0 0;font-size:0.95rem;max-width:none;width:100%;text-align:center;">&copy; 2026 InConcertta · <a href="mentions-legales.html">Mentions légales</a></p>
   </div>

@@ -106,8 +106,14 @@
   }
   </script>
   <link rel="icon" type="image/png" href="/assets/Logo/Logo InConcertta.png">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://esm.sh" crossorigin>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="https://esm.sh">
+  <link rel="preload" as="image" href="/assets/images/logos/Logo%20InConcertta.png" fetchpriority="high">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
   <style>
     .main-read {
       width: min(100% - 40px, 1100px);
@@ -736,7 +742,12 @@
 <body id="top">
 <script>
 (function () {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var smallViewport = window.matchMedia('(max-width: 720px)').matches;
+  if (reduced || smallViewport) {
+    document.documentElement.classList.add('lux-no-preloader');
+    return;
+  }
   document.body.classList.add('lux-preloader-lock');
 })();
 </script>
@@ -771,7 +782,7 @@
   <div class="content-wrap">
     <header class="page-hero">
       <div class="page-hero-logo lux-parallax-slow">
-        <img class="lux-distort" src="/assets/images/logos/Logo InConcertta.png" alt="InConcertta by InCitta" width="280" height="120" loading="eager">
+        <img class="lux-distort" src="/assets/images/logos/Logo InConcertta.png" alt="InConcertta by InCitta" width="280" height="120" loading="eager" fetchpriority="high" decoding="async">
       </div>
       <div class="page-hero-text">
         <h1 class="page-title lux-h1-animate">
@@ -802,7 +813,7 @@
         <li>
           <figure class="admin-screen-card">
             <div class="admin-screen-thumb lux-parallax-slow">
-              <img class="lux-distort" src="/assets/Inconcertta/admin/galerie/01-tableau-de-bord.png" width="2934" height="1846" loading="lazy" decoding="async" alt="InConcertta — tableau de bord, espace de gestion">
+              <img class="lux-distort" src="/assets/Inconcertta/admin/galerie/01-tableau-de-bord.webp" width="2934" height="1846" loading="lazy" decoding="async" alt="InConcertta — tableau de bord, espace de gestion">
             </div>
             <figcaption class="lux-parallax-fast">
               1. Tableau de bord
@@ -813,7 +824,7 @@
         <li>
           <figure class="admin-screen-card">
             <div class="admin-screen-thumb lux-parallax-slow">
-              <img class="lux-distort" src="/assets/Inconcertta/admin/galerie/02-parametres-projet.png" width="2940" height="1912" loading="lazy" decoding="async" alt="InConcertta — paramètres du projet et du dispositif">
+              <img class="lux-distort" src="/assets/Inconcertta/admin/galerie/02-parametres-projet.webp" width="2940" height="1912" loading="lazy" decoding="async" alt="InConcertta — paramètres du projet et du dispositif">
             </div>
             <figcaption class="lux-parallax-fast">
               2. Paramètres du projet
@@ -824,7 +835,7 @@
         <li>
           <figure class="admin-screen-card">
             <div class="admin-screen-thumb lux-parallax-slow">
-              <img class="lux-distort" src="/assets/Inconcertta/admin/galerie/03-grille-admin.png" width="2940" height="1912" loading="lazy" decoding="async" alt="InConcertta — grille et carte, paramétrage côté administration">
+              <img class="lux-distort" src="/assets/Inconcertta/admin/galerie/03-grille-admin.webp" width="2940" height="1912" loading="lazy" decoding="async" alt="InConcertta — grille et carte, paramétrage côté administration">
             </div>
             <figcaption class="lux-parallax-fast">
               3. Grille et carte
@@ -835,7 +846,7 @@
         <li>
           <figure class="admin-screen-card">
             <div class="admin-screen-thumb lux-parallax-slow">
-              <img class="lux-distort" src="/assets/Inconcertta/admin/galerie/04-creation-sondage.png" width="2938" height="1846" loading="lazy" decoding="async" alt="InConcertta — création et paramétrage d’un sondage">
+              <img class="lux-distort" src="/assets/Inconcertta/admin/galerie/04-creation-sondage.webp" width="2938" height="1846" loading="lazy" decoding="async" alt="InConcertta — création et paramétrage d’un sondage">
             </div>
             <figcaption class="lux-parallax-fast">
               4. Création de sondage
@@ -846,7 +857,7 @@
         <li>
           <figure class="admin-screen-card">
             <div class="admin-screen-thumb lux-parallax-slow">
-              <img class="lux-distort" src="/assets/Inconcertta/admin/galerie/05-outil-analyse-sondages.png" width="2940" height="1843" loading="lazy" decoding="async" alt="InConcertta — outil d’analyse des sondages">
+              <img class="lux-distort" src="/assets/Inconcertta/admin/galerie/05-outil-analyse-sondages.webp" width="2940" height="1843" loading="lazy" decoding="async" alt="InConcertta — outil d’analyse des sondages">
             </div>
             <figcaption class="lux-parallax-fast">
               5. Analyse des sondages
@@ -895,7 +906,7 @@
 <footer class="footer footer--presentation">
   <div class="container" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.25rem 1rem 1.1rem;">
     <a href="https://www.incitta.eu/" target="_blank" rel="noopener noreferrer" style="display:inline-block;line-height:0;border-radius:10px;" aria-label="Site InCitta — incitta.eu">
-      <img src="/assets/Logo/LogoPied.png" alt="Logo InCitta — éditeur d’InConcertta" class="footer-logo" style="height:120px;width:auto;display:block;margin:0 auto;">
+      <img src="/assets/Logo/LogoPied.png" alt="Logo InCitta — éditeur d’InConcertta" class="footer-logo" width="600" height="447" loading="lazy" decoding="async" style="height:120px;width:auto;display:block;margin:0 auto;">
     </a>
     <p style="margin:0.85rem 0 0;font-size:0.95rem;max-width:none;width:100%;text-align:center;">&copy; 2026 InConcertta · <a href="mentions-legales.html">Mentions légales</a></p>
   </div>

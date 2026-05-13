@@ -3,19 +3,55 @@
 [build]
   publish = "."
 
+# HTML : toujours frais (revalidation systématique, ETag négocié)
 [[headers]]
   for = "/*.html"
   [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
+# Pages racine sans extension (servies en HTML)
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# PDF (plaquette) : revalidation systématique pour servir la dernière version
 [[headers]]
   for = "/assets/*.pdf"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
+# Images (logos, captures WebP / PNG) : cache long, immutable (changement = nouveau nom)
 [[headers]]
   for = "/assets/*"
   [headers.values]
-    Cache-Control = "public, max-age=2592000, immutable"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# CSS principal : cache court avec revalidation (ETag), pour ne pas servir une version périmée
+[[headers]]
+  for = "/styles.css"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, must-revalidate"
+
+# JavaScript principal et modules : cache court avec revalidation
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, must-revalidate"
+
+# Fichiers SEO / référencement (mise à jour rare mais doit être frais)
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, must-revalidate"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, must-revalidate"

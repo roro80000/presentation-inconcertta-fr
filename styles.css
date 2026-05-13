@@ -295,8 +295,8 @@ section + section{
 
 .hamburger{
   display: none;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.4);
   background: rgba(255, 255, 255, 0.9);
@@ -430,8 +430,8 @@ section + section{
 
   /* Burger flottant — orange marque #BF7D40, traits blancs */
   .hamburger{
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     border-radius: 14px;
     position: fixed;
     top: calc(0.5rem + env(safe-area-inset-top, 0px));
@@ -488,7 +488,8 @@ section + section{
 
   /* Boutons pastille : contenu calé à droite dans le panneau */
   .nav-menu .nav-link{
-    padding: .55rem .9rem;
+    padding: .75rem 1rem;
+    min-height: 44px;
     justify-content: flex-end;
     text-align: right;
     width: max-content;
@@ -638,6 +639,18 @@ body.lux-preloader-lock{
   }
 }
 
+/* Mobile (≤720px) : preloader désactivé pour préserver le LCP. */
+html.lux-no-preloader #lux-preloader{
+  display: none !important;
+  pointer-events: none !important;
+}
+@media (max-width: 720px){
+  #lux-preloader{
+    display: none !important;
+    pointer-events: none !important;
+  }
+}
+
 #lux-preloader{
   position: fixed;
   inset: 0;
@@ -721,7 +734,7 @@ body.lux-preloader-lock{
   font-size: 0.72rem;
   letter-spacing: 0.35em;
   font-weight: 600;
-  color: rgba(232, 241, 244, 0.45);
+  color: rgba(232, 241, 244, 0.72);
   text-transform: uppercase;
 }
 .lux-preloader__unit{

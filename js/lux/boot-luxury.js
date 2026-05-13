@@ -21,9 +21,23 @@ export function prefersReducedLuxMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
+/** Mobile (viewport ≤720px ou pointeur grossier) : mode allégé (pas de Lenis ni preloader). */
+function isMobileLite() {
+  return window.matchMedia('(max-width: 720px)').matches
+    || window.matchMedia('(pointer: coarse)').matches;
+}
+
 /** Page contact : pas d’écran de chargement (accès direct au formulaire). */
 function shouldSkipLuxPreloader() {
-  return /contact\.html$/i.test(window.location.pathname);
+  if (/contact\.html$/i.test(window.location.pathname)) return true;
+  // Mobile : on saute le préchargeur pour préserver le LCP.
+  if (isMobileLite()) return true;
+  return false;
+}
+
+/** Mobile : on saute Lenis (scroll natif) pour alléger le thread principal. */
+function shouldSkipLenis() {
+  return isMobileLite();
 }
 
 /** Page gestion : uniquement le rideau (pas de barre / pourcentage). */
@@ -196,56 +210,66 @@ export async function bootLuxuryStack() {
     }
   }
 
-  /* Très fluide, presque aérien : lerp bas + moindre amplitude molette / touch */
-  const lenis = new Lenis({
-    smoothWheel: true,
-    syncTouch: true,
-    syncTouchLerp: 0.034,
-    touchInertiaExponent: 1.38,
-    lerp: 0.034,
-    wheelMultiplier: 0.42,
-    touchMultiplier: 0.82,
-    orientation: 'vertical',
-    gestureOrientation: 'vertical',
-    autoRaf: false,
-    anchors: false,
-    stopInertiaOnNavigate: true,
-    overscroll: true,
-  });
+  const skipLenis = shouldSkipLenis();
+  let lenis = null;
+
+  if (!skipLenis) {
+    /* Très fluide, presque aérien : lerp bas + moindre amplitude molette / touch */
+    lenis = new Lenis({
+      smoothWheel: true,
+      syncTouch: true,
+      syncTouchLerp: 0.034,
+      touchInertiaExponent: 1.38,
+      lerp: 0.034,
+      wheelMultiplier: 0.42,
+      touchMultiplier: 0.82,
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      autoRaf: false,
+      anchors: false,
+      stopInertiaOnNavigate: true,
+      overscroll: true,
+    });
+
+    ScrollTrigger.scrollerProxy(document.documentElement, {
+      scrollTop(value) {
+        if (arguments.length && lenis) {
+          lenis.scrollTo(value, { immediate: true });
+        }
+        return lenis ? lenis.scroll : window.scrollY || document.documentElement.scrollTop;
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        };
+      },
+      pinType: 'transform',
+    });
+
+    ScrollTrigger.defaults({ scroller: document.documentElement });
+
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+
+    const refreshLenisAndST = () => {
+      lenis.resize();
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener('resize', refreshLenisAndST);
+  } else {
+    /* Mobile : scroll natif. Activation simple du lissage CSS et refresh ScrollTrigger sur resize. */
+    document.documentElement.style.scrollBehavior = 'smooth';
+    window.addEventListener('resize', () => ScrollTrigger.refresh(), { passive: true });
+  }
+
   window.__presentationLenis = lenis;
-
-  ScrollTrigger.scrollerProxy(document.documentElement, {
-    scrollTop(value) {
-      if (arguments.length && lenis) {
-        lenis.scrollTo(value, { immediate: true });
-      }
-      return lenis ? lenis.scroll : window.scrollY || document.documentElement.scrollTop;
-    },
-    getBoundingClientRect() {
-      return {
-        top: 0,
-        left: 0,
-        width: window.innerWidth,
-        height: window.innerHeight,
-      };
-    },
-    pinType: 'transform',
-  });
-
-  ScrollTrigger.defaults({ scroller: document.documentElement });
   ScrollTrigger.refresh();
-
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-  });
-  gsap.ticker.lagSmoothing(0);
-
-  const refreshLenisAndST = () => {
-    lenis.resize();
-    ScrollTrigger.refresh();
-  };
-  window.addEventListener('resize', refreshLenisAndST);
 
   initHeroReveal(gsap, SplitType);
   const heroH1 = document.querySelector('.lux-h1-animate');
@@ -255,7 +279,10 @@ export async function bootLuxuryStack() {
   initSplitHeadings(gsap, ScrollTrigger, SplitType);
   initParallaxLux(gsap);
   initLuxCursor();
-  initScrollDistortLux();
+  // Scroll distort : effet visuel WebGL coûteux, désactivé sur mobile.
+  if (!skipLenis) {
+    initScrollDistortLux();
+  }
 
   window.addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
   requestAnimationFrame(() => ScrollTrigger.refresh());

@@ -5,8 +5,8 @@
  */
 
 const CAPTURE_BASE = '/assets/Inconcertta/captures/';
-const MAIN_BG_LIGHT = '/assets/Inconcertta/pageprincipale.png';
-const MAIN_BG_DARK = '/assets/Inconcertta/pageprincipale-dark.png';
+const MAIN_BG_LIGHT = '/assets/Inconcertta/pageprincipale.webp';
+const MAIN_BG_DARK = '/assets/Inconcertta/pageprincipale-dark.webp';
 const INCONCERTTA_LOGIN_URL = 'https://inconcertta.fr/login';
 
 const CAROUSEL_INTERVAL_MS = 3000;
@@ -17,13 +17,13 @@ const LOGOUT_CONFIRM_MSG =
   'Quitter la démonstration et ouvrir la page de connexion InConcertta (inconcertta.fr) dans cet onglet ?';
 
 const captureFile = {
-  forum: 'forum.png',
-  sondages: 'sondages.png',
-  idees: 'idees.png',
-  actualites: 'actualites.png',
-  carte: 'carte.png',
-  evolutions: 'evolutions.png',
-  'mon-compte': 'mon-compte.png',
+  forum: 'forum.webp',
+  sondages: 'sondages.webp',
+  idees: 'idees.webp',
+  actualites: 'actualites.webp',
+  carte: 'carte.webp',
+  evolutions: 'evolutions.webp',
+  'mon-compte': 'mon-compte.webp',
 };
 
 export function initInconcerttaDemo() {
