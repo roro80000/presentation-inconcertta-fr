@@ -3,6 +3,10 @@
    - This file est le point d'entrée CSS unique du site.
    ========================================================== */
 
+@import url('styles/a11y/a11y-effects.css');
+@import url('styles/a11y/presentation-a11y-ui.css');
+@import url('styles/a11y/display-settings-panel.css');
+
 /* Lenis — aligné sur lenis@1.3.x (paquet officiel / README) */
 html.lenis,
 html.lenis body {
@@ -426,6 +430,15 @@ section + section{
     top: calc(0.5rem + env(safe-area-inset-top, 0px));
     left: calc(var(--container-mobile-pad) + env(safe-area-inset-left, 0px));
     z-index: 2600;
+    transition: opacity 0.22s ease, visibility 0.22s ease, transform 0.22s ease;
+  }
+
+  /* Logo masqué dès le défilement — libère l’espace visuel en haut à gauche */
+  .navbar.scrolled .nav-logo{
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-4px) scale(0.97);
   }
 
   /* Burger flottant — orange marque #BF7D40, traits blancs */
@@ -456,28 +469,29 @@ section + section{
     background: #ffffff;
   }
 
-  /* Menu mobile : panneau sous le logo, fond #00364A, liens alignés à droite */
+  /* Menu mobile : pas de panneau — boutons flottants alignés à droite sous le burger */
   .nav-menu{
     display: none;
     position: fixed;
-    top: calc(0.5rem + var(--nav-logo-max-h) + 0.55rem + env(safe-area-inset-top, 0px));
+    top: calc(0.5rem + 48px + 0.45rem + env(safe-area-inset-top, 0px));
     right: calc(var(--container-mobile-pad) + env(safe-area-inset-right, 0px));
-    width: min(212px, calc((100vw - (var(--container-mobile-pad) * 2)) * 0.6));
-    border-radius: 18px;
-    background: #00364A;
+    left: auto;
+    width: auto;
+    max-width: calc(100vw - (var(--container-mobile-pad) * 2));
+    z-index: 2604;
+    background: transparent;
+    border: none;
+    box-shadow: none;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.4);
-    padding: 0.65rem 0.7rem;
+    padding: 0;
     align-items: flex-end;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.5rem;
   }
 
   .nav-menu .nav-item{
-    width: auto;
-    max-width: 100%;
+    width: 100%;
     display: flex;
     justify-content: flex-end;
   }
@@ -486,22 +500,36 @@ section + section{
     display: flex;
   }
 
-  /* Boutons pastille : contenu calé à droite dans le panneau */
+  /* Boutons flottants : même taille, calés à droite */
   .nav-menu .nav-link{
-    padding: .75rem 1rem;
-    min-height: 44px;
-    justify-content: flex-end;
-    text-align: right;
-    width: max-content;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 13.25rem;
     max-width: 100%;
+    min-height: 48px;
+    padding: 0.6rem 0.85rem;
     box-sizing: border-box;
+    text-align: center;
+    font-size: 0.84rem;
+    line-height: 1.25;
+    background: var(--brand-orange);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 26px rgba(191, 125, 64, 0.35);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
-  .nav-link::after{
-    left: auto;
-    right: 14px;
-    width: 42%;
-    transform-origin: right;
+  .nav-menu .nav-link:hover,
+  .nav-menu .nav-link.active,
+  .nav-menu .nav-link[aria-current="page"]{
+    background: var(--brand-orange-hover);
+    box-shadow: 0 12px 32px rgba(191, 125, 64, 0.42);
+    transform: translateY(-1px);
+  }
+
+  .nav-menu .nav-link::after{
+    display: none;
   }
 }
 
@@ -606,6 +634,50 @@ textarea{ min-height: 140px; resize: vertical; }
 .footer.footer--presentation a:hover{
   opacity: 0.92;
   text-decoration: underline;
+}
+
+/* LinkedIn — coin bas-droit du pied de page */
+.footer.footer--site,
+.footer.footer--presentation {
+  position: relative;
+}
+
+.footer-linkedin {
+  position: absolute;
+  right: 4.5mm;
+  bottom: 4.5mm;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 66px;
+  height: 66px;
+  line-height: 0;
+  text-decoration: none;
+}
+
+.footer-linkedin:hover {
+  opacity: 0.88;
+  text-decoration: none;
+}
+
+.footer-linkedin__icon {
+  display: block;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  .footer-linkedin {
+    width: 54px;
+    height: 54px;
+  }
+
+  .footer-linkedin__icon {
+    width: 42px;
+    height: 42px;
+  }
 }
 
 /* Footer layout: logo à droite */
@@ -910,4 +982,122 @@ html.lux-cursor-on select{
 
 @media (max-width: 420px){
   .container{ width: min(100% - 32px, var(--container)); }
+}
+
+/* ----------------------------------------------------------
+   Maillage sémantique footer (js/seo/footer-maillage.js)
+   ---------------------------------------------------------- */
+.footer-semantic {
+  width: 100%;
+  max-width: 52rem;
+  margin: 0 auto 0.85rem;
+  padding: 0 0.25rem;
+  box-sizing: border-box;
+}
+
+.footer-semantic--soft .footer-semantic-soft__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem 0.45rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.footer-semantic-soft__sep {
+  opacity: 0.65;
+  user-select: none;
+}
+
+.footer-semantic--full {
+  text-align: left;
+  max-width: 36rem;
+}
+
+.footer-semantic__title {
+  margin: 0 0 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #ffffff;
+  text-align: center;
+}
+
+.footer-semantic__panels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.footer-semantic__panel {
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.footer-semantic__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.95);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.footer-semantic__summary::-webkit-details-marker {
+  display: none;
+}
+
+.footer-semantic__summary::after {
+  content: '';
+  flex-shrink: 0;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-right: 2px solid rgba(255, 255, 255, 0.85);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.85);
+  transform: rotate(-45deg);
+  transition: transform 0.15s ease;
+  margin-top: -0.15rem;
+}
+
+.footer-semantic__panel[open] .footer-semantic__summary::after {
+  transform: rotate(45deg);
+  margin-top: 0.1rem;
+}
+
+.footer-semantic__panel-body {
+  padding: 0 0.65rem 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.footer-semantic__links {
+  list-style: none;
+  margin: 0;
+  padding: 0.35rem 0 0.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.22rem;
+}
+
+.footer-semantic__links a {
+  font-size: 0.74rem;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+}
+
+.footer-semantic__links a:hover {
+  text-decoration: underline;
+  color: #ffffff;
 }

@@ -5,8 +5,10 @@
 import { isMobile } from '../utils/device.js';
 
 export function initFormInputs() {
+  const isContactPage = window.location.pathname.replace(/\/$/, '') === '/contact';
+
   document.querySelectorAll('input, textarea, select').forEach((input) => {
-    if (isMobile) {
+    if (isMobile && !isContactPage) {
       input.addEventListener('focus', () => {
         setTimeout(() => {
           input.scrollIntoView({ behavior: 'smooth', block: 'center' });

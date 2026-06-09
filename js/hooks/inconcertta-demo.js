@@ -4,6 +4,9 @@
  * alors arrêt, retour à la vue principale, navigation manuelle.
  */
 
+import { siteT } from '../i18n/site-i18n.js';
+import { getLocale } from '../accessibility/strings.js';
+
 const CAPTURE_BASE = '/assets/Inconcertta/captures/';
 const MAIN_BG_LIGHT = '/assets/Inconcertta/pageprincipale.webp';
 const MAIN_BG_DARK = '/assets/Inconcertta/pageprincipale-dark.webp';
@@ -13,8 +16,16 @@ const CAROUSEL_INTERVAL_MS = 3000;
 /** Ordre de défilement : vue principale (index 0) puis les outils. */
 const CAROUSEL_TOOL_ORDER = ['forum', 'sondages', 'idees', 'actualites', 'carte', 'evolutions', 'mon-compte'];
 
-const LOGOUT_CONFIRM_MSG =
-  'Quitter la démonstration et ouvrir la page de connexion InConcertta (inconcertta.fr) dans cet onglet ?';
+const TOOL_LABEL_KEYS = {
+  forum: 'demo.tool.forum',
+  sondages: 'demo.tool.sondages',
+  idees: 'demo.tool.idees',
+  actualites: 'demo.tool.actualites',
+  carte: 'demo.tool.carte',
+  evolutions: 'demo.tool.evolutions',
+  'mon-compte': 'demo.tool.monCompte',
+  theme: 'demo.tool.theme',
+};
 
 const captureFile = {
   forum: 'forum.webp',
@@ -25,6 +36,40 @@ const captureFile = {
   evolutions: 'evolutions.webp',
   'mon-compte': 'mon-compte.webp',
 };
+
+function logoutConfirmMsg() {
+  const loc = getLocale();
+  if (loc === 'fr') {
+    return 'Quitter la démonstration et ouvrir la page de connexion InConcertta (inconcertta.fr) dans cet onglet ?';
+  }
+  return siteT('demo.logoutConfirm', loc);
+}
+
+function captionPrefix() {
+  const loc = getLocale();
+  if (loc === 'fr') return 'Affichage : ';
+  return siteT('demo.captionPrefix', loc) || 'Display: ';
+}
+
+function resolveToolLabel(slug, frFallback) {
+  const loc = getLocale();
+  if (loc === 'fr') return frFallback || slug;
+  const key = TOOL_LABEL_KEYS[slug];
+  return (key && siteT(key, loc)) || frFallback || slug;
+}
+
+function mainAltText() {
+  const loc = getLocale();
+  if (loc === 'fr') return 'Interface principale InConcertta (illustration)';
+  return siteT('demo.alt.main', loc);
+}
+
+function toolAltText(label) {
+  const loc = getLocale();
+  if (loc === 'fr') return 'InConcertta — ' + (label || '');
+  const template = siteT('demo.alt.tool', loc) || 'InConcertta — {label}';
+  return template.replace('{label}', label || '');
+}
 
 export function initInconcerttaDemo() {
   const viewLogin = document.getElementById('view-login');
@@ -59,16 +104,16 @@ export function initInconcerttaDemo() {
   function applyViewport() {
     if (openToolSlug && captureFile[openToolSlug]) {
       viewportImg.src = capturePath(openToolSlug);
-      viewportImg.alt = 'InConcertta — ' + (openToolLabel || openToolSlug);
+      viewportImg.alt = toolAltText(openToolLabel);
       if (captionEl) {
         captionEl.hidden = false;
-        captionEl.textContent = openToolLabel ? 'Affichage : ' + openToolLabel : '';
+        captionEl.textContent = openToolLabel ? captionPrefix() + openToolLabel : '';
       }
     } else {
       openToolSlug = null;
       openToolLabel = null;
       viewportImg.src = useDarkAssets() ? MAIN_BG_DARK : MAIN_BG_LIGHT;
-      viewportImg.alt = 'Interface principale InConcertta (illustration)';
+      viewportImg.alt = mainAltText();
       if (captionEl) {
         captionEl.hidden = true;
         captionEl.textContent = '';
@@ -82,10 +127,10 @@ export function initInconcerttaDemo() {
     applyViewport();
   }
 
-  function openTool(slug, label) {
+  function openTool(slug, frLabel) {
     if (!captureFile[slug]) return;
     openToolSlug = slug;
-    openToolLabel = label;
+    openToolLabel = resolveToolLabel(slug, frLabel);
     applyViewport();
   }
 
@@ -95,7 +140,7 @@ export function initInconcerttaDemo() {
   }
 
   function triggerLogoutConfirm() {
-    if (window.confirm(LOGOUT_CONFIRM_MSG)) {
+    if (window.confirm(logoutConfirmMsg())) {
       window.location.assign(INCONCERTTA_LOGIN_URL);
     }
   }
@@ -182,7 +227,6 @@ export function initInconcerttaDemo() {
     showMain();
   });
 
-  /* Aucun pointerdown ici : avec trackpad, pointerType reste souvent « mouse » et preventDefault cassait scroll / Lenis. */
   viewportFrame.addEventListener('wheel', dismissCarouselFromViewport, { capture: true, passive: true });
   viewportFrame.addEventListener('touchmove', dismissCarouselFromViewport, { capture: true, passive: true });
 
@@ -201,7 +245,7 @@ export function initInconcerttaDemo() {
       if (!hit || !viewportFrame.contains(hit)) return;
       handleViewportHit(hit);
     },
-    true
+    true,
   );
 
   viewportFrame.addEventListener(
@@ -217,7 +261,7 @@ export function initInconcerttaDemo() {
       }
       handleViewportHit(hit);
     },
-    true
+    true,
   );
 
   function applyDemoHash() {
@@ -226,6 +270,14 @@ export function initInconcerttaDemo() {
   }
   applyDemoHash();
   window.addEventListener('hashchange', applyDemoHash);
+
+  document.addEventListener('inconcertta:localechange', () => {
+    if (openToolSlug) {
+      const hit = viewportFrame.querySelector(`.demo-hit[data-tool="${openToolSlug}"]`);
+      openToolLabel = resolveToolLabel(openToolSlug, hit?.getAttribute('data-label'));
+    }
+    applyViewport();
+  });
 
   showMain();
   startAutoCarousel();

@@ -1,0 +1,131 @@
+/* Effets visuels appliqués via classes body.a11y-scope */
+
+body.a11y-scope {
+  font-size: calc(1rem * var(--a11y-font-scale, 1));
+}
+
+body.a11y-scope.a11y-font-large {
+  --a11y-font-scale: 1.25;
+}
+
+body.a11y-scope.a11y-font-xlarge {
+  --a11y-font-scale: 1.5;
+}
+
+.incitta-a11y-content-wrap.a11y-smart-invert {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+.incitta-a11y-content-wrap.a11y-smart-invert img,
+.incitta-a11y-content-wrap.a11y-smart-invert video,
+.incitta-a11y-content-wrap.a11y-smart-invert picture {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+body.a11y-scope.a11y-high-contrast {
+  --text: #ffffff;
+  --muted: rgba(255, 255, 255, 0.92);
+  --bg: #000000;
+  --accent: #ffd166;
+}
+
+body.a11y-scope.a11y-high-contrast,
+body.a11y-scope.a11y-high-contrast .navbar,
+body.a11y-scope.a11y-high-contrast .main-read,
+body.a11y-scope.a11y-high-contrast footer {
+  background: var(--bg) !important;
+  color: var(--text) !important;
+}
+
+body.a11y-scope.a11y-high-contrast a {
+  color: var(--accent) !important;
+}
+
+body.a11y-scope.a11y-link-highlight a {
+  text-decoration: underline !important;
+  text-underline-offset: 0.15em;
+}
+
+/* Curseur agrandi — visible sur fonds clairs et sombres */
+body.a11y-scope.a11y-large-cursor,
+body.a11y-scope.a11y-large-cursor *:not(.incitta-a11y-root):not(.incitta-a11y-root *) {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24'%3E%3Cpath fill='%23bf7d40' stroke='%23ffffff' stroke-width='1.5' d='M5 3l14 9-6 .5 4 7-3 1.5-4-7-5 5z'/%3E%3Cpath fill='%23002532' stroke='none' d='M5 3l14 9-6 .5 4 7-3 1.5-4-7-5 5z' opacity='0.35'/%3E%3C/svg%3E") 4 4, auto !important;
+}
+
+body.a11y-scope.a11y-large-cursor .incitta-a11y-root,
+body.a11y-scope.a11y-large-cursor .incitta-a11y-root button,
+body.a11y-scope.a11y-large-cursor .incitta-a11y-root select {
+  cursor: pointer !important;
+}
+
+/* Désactive le curseur lux (souvent invisible) quand l'a11y impose un curseur natif */
+html.a11y-disable-lux-cursor #lux-cursor {
+  display: none !important;
+}
+
+html.a11y-disable-lux-cursor.lux-cursor-on body,
+html.a11y-disable-lux-cursor.lux-cursor-on body *:not(.incitta-a11y-root):not(.incitta-a11y-root *) {
+  cursor: auto !important;
+}
+
+html.a11y-disable-lux-cursor.lux-cursor-on body.a11y-large-cursor,
+html.a11y-disable-lux-cursor.lux-cursor-on body.a11y-large-cursor *:not(.incitta-a11y-root):not(.incitta-a11y-root *) {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24'%3E%3Cpath fill='%23bf7d40' stroke='%23ffffff' stroke-width='1.5' d='M5 3l14 9-6 .5 4 7-3 1.5-4-7-5 5z'/%3E%3Cpath fill='%23002532' stroke='none' d='M5 3l14 9-6 .5 4 7-3 1.5-4-7-5 5z' opacity='0.35'/%3E%3C/svg%3E") 4 4, auto !important;
+}
+
+/* Panneau a11y : curseur natif (le curseur lux masque le pointeur) */
+html.lux-cursor-on .incitta-a11y-root,
+html.lux-cursor-on .incitta-a11y-root * {
+  cursor: auto !important;
+}
+
+html.lux-cursor-on .incitta-a11y-root button,
+html.lux-cursor-on .incitta-a11y-root select,
+html.lux-cursor-on .incitta-a11y-root .incitta-a11y-fab {
+  cursor: pointer !important;
+}
+
+body.a11y-scope.a11y-dyslexia p,
+body.a11y-scope.a11y-dyslexia li,
+body.a11y-scope.a11y-dyslexia td,
+body.a11y-scope.a11y-dyslexia label,
+body.a11y-scope.a11y-dyslexia blockquote,
+body.a11y-scope.a11y-dyslexia .incitta-a11y-panel__body {
+  font-family: "OpenDyslexic", "Comic Sans MS", "Segoe UI", sans-serif !important;
+  letter-spacing: 0.04em;
+  word-spacing: 0.12em;
+}
+
+body.a11y-scope.a11y-reduce-motion *,
+body.a11y-scope.a11y-reduce-motion *::before,
+body.a11y-scope.a11y-reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+body.a11y-scope.a11y-reduce-motion #lux-grain,
+body.a11y-scope.a11y-reduce-motion #lux-cursor {
+  display: none !important;
+}
+
+body.a11y-scope.a11y-motor-assist a,
+body.a11y-scope.a11y-motor-assist button,
+body.a11y-scope.a11y-motor-assist .nav-link,
+body.a11y-scope.a11y-motor-assist .btn,
+body.a11y-scope.a11y-motor-assist .incitta-a11y-fab {
+  min-height: 48px;
+  min-width: 48px;
+}
+
+body.a11y-scope.a11y-focus-mode .main-read > *:not(:focus-within),
+body.a11y-scope.a11y-focus-mode section:not(:focus-within) {
+  opacity: 0.35;
+  transition: opacity 0.2s ease;
+}
+
+body.a11y-scope.a11y-focus-mode .main-read > *:focus-within,
+body.a11y-scope.a11y-focus-mode section:focus-within {
+  opacity: 1;
+}

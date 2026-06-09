@@ -25,7 +25,7 @@ export function createPreloaderMarkup(opts = {}) {
   } else {
     el.innerHTML = `${VEIL_MARKUP}
     <div class="lux-preloader__inner">
-      <img class="lux-preloader__logo" src="/assets/images/logos/Logo InConcertta.png" alt="InConcertta" width="840" height="360" decoding="async">
+      <img class="lux-preloader__logo" src="/assets/images/logos/logo-inconcertta-og.webp" alt="InConcertta" width="420" height="399" decoding="async">
       <div class="lux-preloader__track" aria-hidden="true">
         <div class="lux-preloader__bar"></div>
       </div>

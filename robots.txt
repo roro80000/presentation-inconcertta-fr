@@ -1,4 +1,4 @@
-# Présentation InConcertta — https://presentation.inconcertta.fr
+# InConcertta — https://presentation.inconcertta.fr
 User-agent: *
 Allow: /
 

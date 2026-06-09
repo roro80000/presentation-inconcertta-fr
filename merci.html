@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Merci — message envoyé</title>
   <meta name="robots" content="noindex, nofollow">
-  <link rel="icon" type="image/png" href="/assets/Logo/Logo InConcertta.png">
+  <link rel="icon" type="image/webp" href="/assets/Logo/favicon-32.webp" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/Logo/logo-inconcertta-icon.webp">
   <link rel="stylesheet" href="styles.css">
   <style>
     .main-read {
@@ -49,48 +50,48 @@
   </style>
 </head>
 <body id="top">
-  <nav class="navbar" aria-label="Navigation principale">
-    <div class="nav-container">
-      <div class="nav-logo">
-        <a href="index.html" class="nav-brand" aria-label="InConcertta — accueil">
-          <img src="/assets/images/logos/Logo InConcertta.png" alt="InConcertta" class="logo-img">
-        </a>
-      </div>
-      <ul class="nav-menu" role="list">
-        <li class="nav-item"><a href="index.html" class="nav-link">Présentation</a></li>
-        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-      </ul>
-      <button class="hamburger" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
+  <nav class="navbar" data-i18n-attr='{"aria-label":"shared.nav.aria"}' aria-label="Navigation principale">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <a data-i18n-attr='{"aria-label":"shared.nav.home"}' aria-label='InConcertta — accueil' class='nav-brand' href='/'>
+        <img src="/assets/images/logos/logo-inconcertta-nav.webp" alt="InConcertta" class="logo-img" width="210" height="200" decoding="async">
+      </a>
     </div>
-  </nav>
+    <ul class="nav-menu" role="list">
+      <li class="nav-item"><a class='nav-link' href='/' data-i18n="shared.nav.presentation">Présentation</a></li>
+      <li class="nav-item"><a class='nav-link' href='/contact' data-i18n="shared.nav.contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" type="button" data-i18n-attr='{"aria-label":"shared.nav.menuOpen"}' aria-label="Ouvrir le menu" aria-expanded="false">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </div>
+</nav>
 
   <main class="main-read fade-in-up">
     <div class="thanks-card">
-      <h1 class="thanks-title">Merci, votre message a bien été envoyé.</h1>
-      <p class="thanks-text">
+      <h1 class="thanks-title" data-i18n="merci.title">Merci, votre message a bien été envoyé.</h1>
+      <p class="thanks-text" data-i18n="merci.text">
         Nous vous répondrons sur votre adresse courriel dès que possible.
       </p>
       <div class="thanks-actions">
-        <a class="btn btn-primary btn-large" href="index.html">Retour à la présentation</a>
-        <a class="btn btn-outline btn-large" href="contact.html">Envoyer un autre message</a>
+        <a class='btn btn-primary btn-large' href='/' data-i18n="merci.backHome">Retour à la présentation</a>
+        <a class='btn btn-outline btn-large' href='/contact' data-i18n="merci.sendAnother">Envoyer un autre message</a>
       </div>
     </div>
   </main>
 
-  <footer class="footer footer--presentation">
-    <div class="container" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.25rem 1rem 1.1rem;">
-      <a href="https://www.incitta.eu/" target="_blank" rel="noopener noreferrer" style="display:inline-block;line-height:0;border-radius:10px;" aria-label="Site InCitta — incitta.eu">
-        <img src="/assets/Logo/LogoPied.png" alt="Logo InCitta — éditeur d’InConcertta" class="footer-logo" width="600" height="447" loading="lazy" decoding="async" style="height:120px;width:auto;display:block;margin:0 auto;">
-      </a>
-      <p style="margin:0.85rem 0 0;font-size:0.95rem;max-width:none;width:100%;text-align:center;">
-        &copy; 2026 InConcertta · <a href="mentions-legales.html">Mentions légales</a> · <a href="index.html">Présentation</a>
-      </p>
-    </div>
-  </footer>
+    <footer class="footer footer--presentation">
+  <div class="container" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.25rem 1rem 1.1rem;">
+    <a href="https://www.incitta.eu/" target="_blank" rel="noopener noreferrer" style="display:inline-block;line-height:0;border-radius:10px;" data-i18n-attr='{"aria-label":"shared.footer.incittaAria"}' aria-label="Site InCitta — incitta.eu">
+      <img src="/assets/Logo/LogoPied.png" data-i18n-attr='{"alt":"shared.footer.logoAlt"}' alt="Logo InCitta — éditeur d’InConcertta" class="footer-logo" width="600" height="447" loading="lazy" decoding="async" style="height:120px;width:auto;display:block;margin:0 auto;">
+    </a>
+    <p style="margin:0.85rem 0 0;font-size:0.95rem;max-width:none;width:100%;text-align:center;" data-i18n-html="shared.footer.copyrightWithHome">
+      &copy; 2026 InConcertta · <a href='/mentions-legales'>Mentions légales</a> · <a href='/'>Présentation</a>
+    </p>
+  </div>
+</footer>
 
   <script type="module" src="js/main.js"></script>
 </body>

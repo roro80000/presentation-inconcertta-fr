@@ -17,6 +17,7 @@
       netlify
       data-netlify="true"
       netlify-honeypot="bot-field"
+      data-netlify-honeypot="bot-field"
     >
       <input type="hidden" name="form-name" value="contact-inconcertta-presentation" />
       <p style="display:none;">
@@ -25,10 +26,12 @@
       <input type="text" name="firstName" />
       <input type="text" name="lastName" />
       <input type="email" name="email" />
-      <select name="subject">
+      <select name="requestSubject">
         <option value="demo-commerciale">Présentation ou prise de contact commercial</option>
       </select>
       <textarea name="message"></textarea>
+      <input type="checkbox" name="consentData" value="accepted" />
+      <input type="hidden" name="origine" value="stub" />
     </form>
   </body>
 </html>

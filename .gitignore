@@ -5,3 +5,6 @@ node_modules/
 # Artefacts de déploiement manuel Netlify Drop
 dist/
 *.zip
+
+# Local Netlify folder
+.netlify

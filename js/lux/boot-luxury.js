@@ -28,8 +28,12 @@ function isMobileLite() {
 }
 
 /** Page contact : pas d’écran de chargement (accès direct au formulaire). */
+function isContactPage() {
+  return /^\/contact(?:\.html)?\/?$/i.test(window.location.pathname || '');
+}
+
 function shouldSkipLuxPreloader() {
-  if (/contact\.html$/i.test(window.location.pathname)) return true;
+  if (isContactPage()) return true;
   // Mobile : on saute le préchargeur pour préserver le LCP.
   if (isMobileLite()) return true;
   return false;
@@ -154,10 +158,14 @@ function initSplitHeadings(gsap, ScrollTrigger, SplitType) {
 export async function bootLuxuryStack() {
   document.documentElement.classList.add('lux-stack');
 
-  if (prefersReducedLuxMotion()) {
+  /* Contact : pas d’animations lourdes (Lenis, GSAP, curseur, distorsion) — formulaire prioritaire. */
+  if (prefersReducedLuxMotion() || isContactPage()) {
     document.body.classList.remove('lux-preloader-lock');
     document.getElementById('lux-preloader')?.remove();
     window.__presentationLenis = null;
+    if (isContactPage()) {
+      document.documentElement.classList.add('lux-contact-lite');
+    }
     return;
   }
 

@@ -55,11 +55,13 @@ export function initNavMobile() {
   });
 
   document.addEventListener('click', (e) => {
+    const a11yRoot = document.getElementById('incitta-a11y-root');
     if (
       hamburger &&
       navMenu &&
       !hamburger.contains(e.target) &&
-      !navMenu.contains(e.target)
+      !navMenu.contains(e.target) &&
+      !a11yRoot?.contains(e.target)
     ) {
       hamburger.classList.remove('active');
       navMenu.classList.remove('active');
@@ -86,6 +88,8 @@ export function initNavMobile() {
 
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;
+    const a11yDrawer = document.querySelector('.incitta-a11y-drawer--open');
+    if (a11yDrawer) return;
     if (navMenu && hamburger && navMenu.classList.contains('active')) {
       hamburger.classList.remove('active');
       navMenu.classList.remove('active');

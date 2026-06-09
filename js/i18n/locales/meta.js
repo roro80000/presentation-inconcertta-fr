@@ -1,0 +1,40 @@
+/** Titres et meta descriptions par page. */
+
+export const meta = {
+  en: {
+    'meta.index.title': 'InConcertta | Consultation Software & Participatory Budgeting',
+    'meta.index.description': 'Consultation software, citizen consultation and participatory budgeting for local authorities. GDPR-compliant, EU hosting. Published in Amiens, deployed across France.',
+    'meta.contact.title': 'Contact InConcertta — Citizen Consultation Software',
+    'meta.contact.description': 'Request information about InConcertta consultation software and participatory budgeting. InCitta (Amiens) supports local authorities throughout France.',
+    'meta.gestion.title': 'InConcertta Management Interface — Consultation Setup',
+    'meta.gestion.description': 'InConcertta management space: project setup, surveys, participatory map, ideas, exports. For all French local authorities.',
+    'meta.mentions.title': 'Legal notice — InConcertta presentation site',
+    'meta.mentions.description': 'Legal notice for the InConcertta presentation site (presentation.inconcertta.fr). Publisher: InCitta.',
+    'meta.merci.title': 'Thank you — message sent',
+    'meta.merci.description': 'Your message has been sent. We will reply to your email address as soon as possible.',
+  },
+  es: {
+    'meta.index.title': 'InConcertta | Software de consulta y presupuesto participativo',
+    'meta.index.description': 'Software de consulta, consulta ciudadana y presupuesto participativo para administraciones locales. RGPD, alojamiento en la UE. Editado en Amiens, desplegado en Francia.',
+    'meta.contact.title': 'Contacto InConcertta — Software de consulta ciudadana',
+    'meta.contact.description': 'Solicite información sobre el software de consulta y presupuesto participativo InConcertta. InCitta (Amiens) acompaña a las administraciones en toda Francia.',
+    'meta.gestion.title': 'Interfaz de gestión InConcertta — Parametrización de consulta',
+    'meta.gestion.description': 'Espacio de gestión de InConcertta: parametrización del proyecto, encuestas, mapa participativo, ideas, exportaciones. Para todas las administraciones francesas.',
+    'meta.mentions.title': 'Aviso legal — Presentación InConcertta',
+    'meta.mentions.description': 'Aviso legal del sitio de presentación InConcertta (presentation.inconcertta.fr). Editor: InCitta.',
+    'meta.merci.title': 'Gracias — mensaje enviado',
+    'meta.merci.description': 'Su mensaje ha sido enviado. Le responderemos a su dirección de correo lo antes posible.',
+  },
+  it: {
+    'meta.index.title': 'InConcertta | Software di consultazione e bilancio partecipativo',
+    'meta.index.description': 'Software di consultazione, consultazione cittadina e bilancio partecipativo per enti locali. RGPD, hosting UE. Editato ad Amiens, distribuito in Francia.',
+    'meta.contact.title': 'Contatto InConcertta — Software di consultazione cittadina',
+    'meta.contact.description': 'Richiedi informazioni sul software di consultazione e bilancio partecipativo InConcertta. InCitta (Amiens) accompagna gli enti in tutta la Francia.',
+    'meta.gestion.title': 'Interfaccia di gestione InConcertta — Parametrizzazione consultazione',
+    'meta.gestion.description': 'Spazio di gestione InConcertta: parametrizzazione del progetto, sondaggi, mappa partecipativa, idee, export. Per tutti gli enti locali francesi.',
+    'meta.mentions.title': 'Note legali — Presentazione InConcertta',
+    'meta.mentions.description': 'Note legali del sito di presentazione InConcertta (presentation.inconcertta.fr). Editore: InCitta.',
+    'meta.merci.title': 'Grazie — messaggio inviato',
+    'meta.merci.description': 'Il tuo messaggio è stato inviato. Ti risponderemo al tuo indirizzo e-mail il prima possibile.',
+  },
+};

@@ -5,11 +5,15 @@
 
 import { throttle } from '../utils/perf.js';
 
+function scrollThreshold() {
+  return window.matchMedia('(max-width: 600px)').matches ? 8 : 100;
+}
+
 function applyNavbarScrolledState() {
   const navbar = document.querySelector('.navbar');
   if (!navbar) return;
   const y = window.__presentationLenis?.scroll ?? window.scrollY;
-  if (y > 100) navbar.classList.add('scrolled');
+  if (y > scrollThreshold()) navbar.classList.add('scrolled');
   else navbar.classList.remove('scrolled');
 }
 
