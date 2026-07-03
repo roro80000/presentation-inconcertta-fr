@@ -7,6 +7,15 @@ const FILTER_DEFS_ID = 'inconcerta-a11y-svg-filters';
 export const CONTENT_WRAP_ID = 'incitta-a11y-content-wrap';
 const A11Y_ROOT_ID = 'incitta-a11y-root';
 
+/** Calques fixes — ne pas les inclure dans le wrap a11y (filtres / empilement). */
+const A11Y_WRAP_SKIP_IDS = new Set([
+  A11Y_ROOT_ID,
+  'site-diapo-backdrop',
+  'lux-diapo-glow',
+  'lux-grain',
+  'lux-preloader',
+]);
+
 export const A11Y_BODY_CLASSES = [
   'a11y-high-contrast',
   'a11y-link-highlight',
@@ -118,7 +127,7 @@ export function ensureA11yContentWrapper() {
       return;
     }
     const el = /** @type {HTMLElement} */ (node);
-    if (el.id === A11Y_ROOT_ID) return;
+    if (A11Y_WRAP_SKIP_IDS.has(el.id)) return;
     wrap.appendChild(node);
   });
 

@@ -42,6 +42,7 @@
   <link rel="dns-prefetch" href="https://esm.sh">
   <link rel="preload" as="image" href="/assets/images/logos/logo-inconcertta-hero.webp" fetchpriority="high" type="image/webp">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles/inconcertta-embed.css">
   <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
   <style>
@@ -50,7 +51,6 @@
       margin: 1.2rem auto 2rem;
       padding: 1.6rem;
       box-sizing: border-box;
-      background: #002532;
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 18px;
       box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
@@ -144,6 +144,11 @@
     .hero-cta-row .btn-primary:hover {
       box-shadow: none;
       filter: none;
+    }
+    .btn-primary--interactive {
+      padding-left: 1.85rem;
+      padding-right: 1.85rem;
+      min-width: min(100%, 20.5rem);
     }
     .hero-cta-row .btn-hero-secondary {
       display: inline-flex;
@@ -324,17 +329,6 @@
       margin: 0;
       padding-left: 0.95rem;
       border-left: 3px solid rgba(191, 125, 64, 0.75);
-    }
-    .demo-interactive-split {
-      margin-top: 1.85rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.11);
-    }
-    .demo-interactive-split h3 {
-      margin: 0 0 0.65rem;
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #f0f7fa;
     }
     .offer-three-cols {
       display: grid;
@@ -1038,88 +1032,11 @@
     @media (max-width: 900px) {
       .content-wrap { padding-bottom: 1rem; }
     }
-    /* Visionneuse démo (Site_InCitta / inconcertta-demo.html — même logique) */
+    /* Section démo live (embed) */
     .main-read .inconcertta-demo-section {
       margin: 0.5rem 0 0;
       padding-top: 0;
       border-top: none;
-    }
-    .main-read .demo-invite {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: rgba(232, 241, 244, 0.92);
-      font-weight: 400;
-      margin: 0 0 1rem;
-      text-align: center;
-    }
-    .main-read .demo-invite strong {
-      font-weight: 600;
-      color: #f0f7fa;
-    }
-    .main-read .demo-invite-platform {
-      margin-top: 0.85rem;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem 0.65rem;
-    }
-    .main-read .demo-frame {
-      position: relative;
-      display: block;
-      width: 100%;
-      max-width: 100%;
-      margin: 0 auto;
-      border-radius: 14px;
-      overflow: visible;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: #1a1a1a;
-    }
-    .main-read .demo-frame img.demo-bg {
-      display: block;
-      width: 100%;
-      height: auto;
-      vertical-align: top;
-      pointer-events: none;
-      user-select: none;
-      border-radius: 14px;
-    }
-    .main-read .demo-hit {
-      position: absolute;
-      margin: 0;
-      padding: 0;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-      min-width: 24px;
-      min-height: 24px;
-    }
-    .main-read .demo-hit:hover {
-      background: rgba(191, 125, 64, 0.15);
-    }
-    .main-read .demo-hit:focus {
-      outline: none;
-    }
-    .main-read .demo-hit:focus-visible {
-      outline: 3px solid #bf7d40;
-      outline-offset: 2px;
-      background: rgba(191, 125, 64, 0.2);
-    }
-    .main-read .demo-view[hidden] {
-      display: none !important;
-    }
-    .main-read .demo-viewport-caption {
-      font-size: 0.88rem;
-      color: rgba(232, 241, 244, 0.88);
-      font-weight: 400;
-      margin: 0.75rem 0 0;
-      text-align: center;
-    }
-    .main-read .demo-viewport-caption[hidden] {
-      display: none !important;
     }
     .gestion-page-cta {
       margin: 1.5rem 0 0.85rem;
@@ -1199,9 +1116,8 @@
           InConcertta est une plateforme de <strong>simulation participative</strong> qui permet de co-construire des projets territoriaux de manière <strong>visuelle</strong>, <strong>interactive</strong> et <strong>exploitable</strong>.
         </p>
         <div class="hero-cta-row">
-          <a class='btn-primary' href='/contact' data-i18n="shared.cta.requestInfo">Demander des informations</a>
-          <a href="https://inconcertta.fr/" class="btn-hero-secondary" target="_blank" rel="noopener noreferrer" data-i18n="shared.cta.tryPlatform">Tester la plateforme</a>
-          <a href="/assets/Flyer-InConcertta_VF.pdf" class="btn-hero-secondary" download="Flyer-InConcertta_VF.pdf" data-i18n-attr='{"aria-label":"shared.cta.downloadBrochureAria"}' aria-label="Télécharger la plaquette de présentation InConcertta (PDF)"><i class="fas fa-file-pdf" aria-hidden="true"></i> <span data-i18n="shared.cta.downloadBrochure">Télécharger la plaquette</span></a>
+          <a class="btn-primary btn-primary--interactive" href="/Diapo_InConcertta_interactif/presentation.html" target="_blank" rel="noopener noreferrer" data-i18n="shared.cta.interactivePresentation" data-i18n-attr='{"aria-label":"shared.cta.interactivePresentationAria"}' aria-label="Voir la présentation interactive InConcertta (nouvel onglet)">Voir la présentation interactive</a>
+          <a href="#demo-live" class="btn-hero-secondary" data-i18n="shared.cta.tryPlatform">Tester la plateforme</a>
         </div>
         <p class="hero-trust-pills" data-i18n-html="index.hero.trustPills" data-i18n-attr='{"aria-label":"index.hero.trustPillsAria"}' aria-label="Avantages pratiques">
           Aucune installation requise <span aria-hidden="true">•</span> Accessible en ligne <span aria-hidden="true">•</span> Prise en main rapide
@@ -1215,77 +1131,43 @@
       </div>
     </header>
 
-    <section class="inconcertta-demo-section" aria-labelledby="demo-action-title">
+    <section class="inconcertta-demo-section" id="demo-inconcertta" aria-labelledby="demo-action-title">
       <h2 id="demo-action-title" class="lux-split-chars" data-i18n="index.demo.title">Découvrez InConcertta en action</h2>
       <p class="inconcertta-lede text-measure" data-i18n-html="index.demo.lede">
         Les participants interagissent directement sur une <strong>carte</strong> ou une <strong>grille</strong>&nbsp;: ils proposent des aménagements, réagissent et votent en temps réel.
       </p>
-      <p class="gestion-page-cta" style="margin-top:0.85rem;margin-bottom:0.25rem;">
-        <a href="https://inconcertta.fr/" class="btn-primary-ic" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt" aria-hidden="true"></i> <span data-i18n="shared.cta.trialVersion">Accéder à la version d’essai</span></a>
-      </p>
 
-      <div id="demo-inconcertta" class="demo-interactive-split" tabindex="-1">
-        <h3 class="demo-interactive-heading" data-i18n="index.demo.heading">Aperçu interactif</h3>
-        <p class="demo-invite" style="margin:0 0 0.75rem;font-size:0.95rem;opacity:0.9;" data-i18n-html="index.demo.invite">
-          Explorez les captures comme dans l’application&nbsp;: connexion simulée, menu et vues détaillées. L’interface ci-dessous <strong>défile automatiquement</strong> toutes les 3&nbsp;secondes jusqu’à votre premier clic ou toucher — puis vous pilotez la navigation.
+      <div id="demo-live" class="demo-block demo-block--live">
+        <h3 class="demo-live-heading" data-i18n="index.demo.liveHeading">Essayez la plateforme en direct</h3>
+        <p class="demo-invite demo-invite--live" data-i18n-html="index.demo.liveInvite">
+          Connectez-vous, explorez la carte, les sondages et les outils de concertation — <strong>sans quitter ce site</strong>. L’intégration ci-dessous montre qu’InConcertta peut être embarqué sur le site de votre collectivité.
         </p>
-
-      <div id="view-login" class="demo-view" hidden>
-        <p class="demo-invite" data-i18n-html="index.demo.loginInvite">Écran de connexion (illustration)&nbsp;: cliquez sur <strong>Se connecter</strong> pour afficher l’interface dans la vue ci-dessous.</p>
-        <p class="demo-invite" style="margin-top:0.4rem;font-size:0.95rem;opacity:0.9;" data-i18n-html="index.demo.staticNote">Il s’agit d’un <strong>aperçu statique</strong>, pas de l’application réelle.</p>
-        <p class="demo-invite demo-invite-platform">
-          <span data-i18n="index.demo.platformInvite">Pour découvrir la plateforme</span>, rendez-vous sur
-          <a href="https://inconcertta.fr/" class="btn-primary-ic" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt" aria-hidden="true"></i> inconcertta.fr</a>
-        </p>
-        <div class="demo-frame">
-          <img class="demo-bg" src="/assets/Inconcertta/login.webp" width="2924" height="1671" data-i18n-attr='{"alt":"index.demo.loginAlt"}' alt="Écran de connexion InConcertta (illustration)" loading="lazy" decoding="async">
-          <button type="button" class="demo-hit" id="hit-login"
-            style="left:37.65%; top:72.75%; width:24.75%; height:5.6%;"
-            data-i18n-attr='{"aria-label":"demo.aria.login"}' aria-label="Se connecter (aperçu)"></button>
+        <div
+          class="demo-frame demo-frame--live"
+          id="inconcertta-live-embed"
+          data-project="54ffa893-05f3-415d-b382-016d4f57469f">
+          <button
+            type="button"
+            class="demo-embed-expand"
+            id="inconcertta-embed-expand"
+            data-i18n-attr='{"data-label-expand":"demo.embed.expand","data-label-close":"demo.embed.close","data-aria-expand":"demo.embed.ariaExpand","data-aria-close":"demo.embed.ariaClose","aria-label":"demo.embed.ariaExpand"}'
+            data-label-expand="Agrandir"
+            data-label-close="Fermer"
+            data-aria-expand="Agrandir InConcertta en plein écran"
+            data-aria-close="Fermer le plein écran"
+            aria-pressed="false"
+            aria-label="Agrandir InConcertta en plein écran"
+            data-i18n="demo.embed.expand">Agrandir</button>
+          <iframe
+            title="InConcertta — espace de participation"
+            allow="clipboard-write"
+            loading="lazy"></iframe>
         </div>
-      </div>
-
-      <div id="view-main" class="demo-view">
-        <div class="demo-frame" id="demo-viewport-frame">
-          <img id="demo-viewport-img" class="demo-bg" src="/assets/Inconcertta/pageprincipale.webp" width="1810" height="1420" data-i18n-attr='{"alt":"index.demo.viewportAlt"}' alt="Interface InConcertta (aperçu)" loading="lazy" decoding="async">
-          <button type="button" class="demo-hit" id="hit-logo"
-            style="left:0%; top:0%; width:9.6618%; height:7.389%;"
-            data-i18n-attr='{"aria-label":"demo.aria.logo"}' aria-label="Revenir à la vue carte (illustration principale)"></button>
-          <button type="button" class="demo-hit" data-tool="forum" data-label="Forum — Venez échanger"
-            style="left:9.6618%; top:0%; width:11.5942%; height:7.389%;"
-            data-i18n-attr='{"aria-label":"demo.aria.forum"}' aria-label="Afficher : forum"></button>
-          <button type="button" class="demo-hit" data-tool="sondages" data-label="Sondages"
-            style="left:21.256%; top:0%; width:11.5942%; height:7.389%;"
-            data-i18n-attr='{"aria-label":"demo.aria.sondages"}' aria-label="Afficher : sondages"></button>
-          <button type="button" class="demo-hit" data-tool="idees" data-label="Boîte à idées"
-            style="left:32.8502%; top:0%; width:11.1111%; height:7.389%;"
-            data-i18n-attr='{"aria-label":"demo.aria.idees"}' aria-label="Afficher : boîte à idées"></button>
-          <button type="button" class="demo-hit" data-tool="actualites" data-label="Actualités"
-            style="left:43.9614%; top:0%; width:11.5942%; height:7.389%;"
-            data-i18n-attr='{"aria-label":"demo.aria.actualites"}' aria-label="Afficher : actualités"></button>
-          <button type="button" class="demo-hit" data-tool="carte" data-label="Carte"
-            style="left:55.5556%; top:0%; width:11.5942%; height:7.389%;"
-            data-i18n-attr='{"aria-label":"demo.aria.carte"}' aria-label="Afficher : carte"></button>
-          <button type="button" class="demo-hit" data-tool="evolutions" data-label="Évolution — comparaison"
-            style="left:67.1498%; top:0%; width:11.5942%; height:7.389%;"
-            data-i18n-attr='{"aria-label":"demo.aria.evolutions"}' aria-label="Afficher : évolution et comparaison"></button>
-          <button type="button" class="demo-hit" data-tool="mon-compte" data-label="Mon compte"
-            style="left:78.744%; top:0%; width:11.1111%; height:7.389%;"
-            data-i18n-attr='{"aria-label":"demo.aria.monCompte"}' aria-label="Afficher : mon compte"></button>
-          <button type="button" class="demo-hit" data-tool="theme" data-label="Thème interface"
-            style="left:90.8203%; top:0%; width:3.3816%; height:7.389%;"
-            data-i18n-attr='{"aria-label":"demo.aria.theme"}' aria-label="Basculer entre captures clair et sombre"></button>
-          <button type="button" class="demo-hit" id="hit-logout"
-            style="left:94.2019%; top:0%; width:7.7285%; height:7.389%;"
-            data-i18n-attr='{"aria-label":"demo.aria.logout"}' aria-label="Ouvrir la page de connexion (inconcertta.fr) — demande de confirmation"></button>
-        </div>
-        <p class="demo-viewport-caption" id="demo-viewport-caption" hidden aria-live="polite"></p>
-      </div>
       </div>
     </section>
 
     <section class="problem-section" id="limites-concertation-classique" aria-labelledby="problem-title">
-      <h2 id="problem-title" class="lux-split-chars" data-i18n="index.demo.problem.title">Les limites des concertations classiques</h2>
+      <h2 id="problem-title" class="lux-split-chars" data-i18n="index.demo.problem.title">Dépassez les limites des concertations classiques</h2>
       <ul class="inconcertta-tight-list" role="list">
         <li data-i18n="index.demo.problem.1">Participation faible ou peu engageante</li>
         <li data-i18n="index.demo.problem.2">Contributions difficiles à exploiter</li>
@@ -1534,8 +1416,9 @@
         Solution entièrement numérique, déployable <strong>partout en France</strong>&nbsp;: échangeons sur votre projet de <strong>concertation</strong> ou de <strong>budget participatif</strong>, où que se trouve votre collectivité.
       </p>
       <div class="hero-cta-row final-pitch-cta">
-        <a class='btn-primary' href='/contact' data-i18n="shared.cta.requestInfo">Demander des informations</a>
-        <a href="https://inconcertta.fr/" class="btn-hero-secondary" target="_blank" rel="noopener noreferrer" data-i18n="shared.cta.tryPlatform">Tester la plateforme</a>
+        <a href="/assets/Flyer-InConcertta_VF.pdf" class="btn-hero-secondary" download="Flyer-InConcertta_VF.pdf" data-i18n-attr='{"aria-label":"shared.cta.downloadBrochureAria"}' aria-label="Télécharger la plaquette de présentation InConcertta (PDF)"><i class="fas fa-file-pdf" aria-hidden="true"></i> <span data-i18n="shared.cta.downloadBrochure">Télécharger la plaquette</span></a>
+        <a class="btn-primary" href="/contact" data-i18n="shared.cta.requestInfo">Demander des informations</a>
+        <a href="#demo-live" class="btn-hero-secondary" data-i18n="shared.cta.tryPlatform">Tester la plateforme</a>
       </div>
     </section>
   </div>

@@ -1,0 +1,32 @@
+Diaporama InConcertta — version autonome
+=========================================
+
+Ce dossier fonctionne indépendamment du site web.
+Vous pouvez le copier, l'envoyer par e-mail ou le héberger ailleurs.
+
+Utilisation
+-----------
+1. Ouvrir presentation.html dans un navigateur (double-clic).
+2. Ou lancer un petit serveur local dans ce dossier, par exemple :
+   npx serve .
+   puis ouvrir l'URL affichée.
+
+Navigation
+----------
+- Flèches / barre du bas : diapo précédente / suivante
+- Points en haut : accès direct à une diapo
+- Vue d'ensemble (en haut à droite) : carte Prezi des diapos
+- Plein écran : bouton dans la barre de navigation
+- Diffusion auto : 1 minute par diapo (réinitialisée à chaque interaction)
+
+Images
+------
+Remplacez les fichiers dans images/ en gardant les mêmes noms.
+Guide détaillé : images/GUIDE-IMAGES.txt (diapos, renommage, checklist).
+Résumé : images/LISEZ-MOI.txt
+
+Contenu du dossier
+------------------
+  presentation.html — présentation complète (HTML, CSS, JS intégrés)
+  images/             — captures et logo
+  LISEZ-MOI.txt       — ce fichier

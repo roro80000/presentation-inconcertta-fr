@@ -1,0 +1,20 @@
+<!-- Ancres hero / CTA vers les deux blocs -->
+<a href="#demo-live" class="btn-primary">Essayez la plateforme</a>
+<a href="#demo-apercu" class="btn-secondary">Parcourir la démo</a>
+
+<!-- Section complète : live + démo statique (voir inconcertta.html sur incitta.eu) -->
+<section id="demo-inconcertta" aria-label="Essayer et découvrir InConcertta">
+  <!-- … snippet-live-embed.html … -->
+
+  <div id="demo-apercu" class="demo-block demo-block--static">
+    <h2 class="demo-block-title">Parcourir l’interface en images</h2>
+    <!-- view-login + view-main : copier depuis html/snippet-static-demo.html -->
+  </div>
+</section>
+
+<script type="module">
+  import { initInconcerttaEmbed } from '/chemin/vers/inconcertta-embed.js';
+  import { initInconcerttaDemo } from '/chemin/vers/inconcertta-demo-static.js';
+  initInconcerttaEmbed();
+  initInconcerttaDemo();
+</script>

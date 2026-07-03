@@ -1,0 +1,2029 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InConcertta — Présentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   INCONCERTTA PRESENTATION — Design System
+   Palette : #002532 teal-dark | #003640 teal-mid | #BF7D40 orange
+             #053b3b primary | #11b6b6 accent | #E8F1F4 light
+   ============================================================ */
+:root {
+  --teal-dark:   #002532;
+  --teal-mid:    #003640;
+  --teal-light:  #0b5060;
+  --orange:      #BF7D40;
+  --orange-h:    #a66a35;
+  --orange-lt:   #d4956a;
+  --accent:      #11b6b6;
+  --accent-dim:  rgba(17,182,182,0.18);
+  --primary:     #053b3b;
+  --light:       #E8F1F4;
+  --white:       #ffffff;
+  --text-dim:    rgba(232,241,244,0.85);
+  --text-mid:    rgba(232,241,244,0.95);
+  --border:      rgba(255,255,255,0.08);
+  --border-o:    rgba(191,125,64,0.28);
+  --radius:      16px;
+  --radius-lg:   24px;
+  --shadow-soft: 0 18px 48px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+  --shadow-glow: 0 10px 40px rgba(17, 182, 182, 0.12), 0 16px 60px rgba(191, 125, 64, 0.12);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; height: 100%; overflow: hidden;
+  font-family: 'Inter', system-ui, sans-serif;
+  background:
+    radial-gradient(1200px 600px at 10% 0%, rgba(17,182,182,0.08), transparent 45%),
+    radial-gradient(900px 500px at 100% 10%, rgba(191,125,64,0.12), transparent 35%),
+    linear-gradient(135deg, #000 0%, #00161e 45%, #001b22 100%);
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: "";
+  position: fixed; inset: -20%;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(17,182,182,0.08), transparent 22%),
+    radial-gradient(circle at 80% 30%, rgba(191,125,64,0.10), transparent 18%),
+    radial-gradient(circle at 50% 70%, rgba(255,255,255,0.04), transparent 18%);
+  filter: blur(18px);
+  animation: drift 20s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── VIEWPORT / SCENE ── */
+#scene {
+  position: fixed; inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(135deg, rgba(0,37,50,0.96) 0%, rgba(0,54,64,0.92) 45%, rgba(0,20,28,0.98) 100%);
+  overflow: hidden;
+  pointer-events: none;
+}
+#scene::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.85));
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+/* ── SLIDE STAGE ── */
+#stage {
+  position: absolute; inset: 0;
+  will-change: transform, filter;
+  transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease;
+  transform-style: preserve-3d;
+  pointer-events: auto;
+}
+
+/* ── INDIVIDUAL SLIDES ── */
+.slide {
+  position: absolute;
+  width: 100vw; height: 100vh;
+  top: 0; left: 0;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  opacity: 0.97;
+  transform: translateZ(0);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+.slide::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(135deg, rgba(17,182,182,0.04), transparent 20%, rgba(191,125,64,0.06) 80%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+}
+.slide:hover::before { opacity: 1; }
+.slide.active { filter: saturate(1.05); }
+
+/* ── GRID NOISE / TEXTURE ── */
+.noise {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px),
+    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px);
+}
+
+/* ── GLOW CIRCLES ── */
+.glow {
+  position: absolute; border-radius: 50%; pointer-events: none; z-index: 0;
+  filter: blur(80px);
+}
+
+/* ── NAV ── */
+#nav {
+  position: fixed; bottom: 18px; right: 22px; left: auto;
+  transform: none;
+  z-index: 1100;
+  pointer-events: auto;
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(0, 28, 36, 0.42);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 100px;
+  padding: 5px 10px;
+  backdrop-filter: blur(10px) saturate(140%);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  opacity: 0.38;
+  transition: opacity 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+#nav:hover, #nav:focus-within {
+  opacity: 1;
+  background: rgba(0, 37, 50, 0.78);
+  border-color: rgba(191,125,64,0.18);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+}
+#nav-prev, #nav-next {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+  color: rgba(232,241,244,0.75); font-size: 12px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+  font-family: inherit;
+  box-shadow: none;
+}
+#nav:hover #nav-prev, #nav:hover #nav-next,
+#nav:focus-within #nav-prev, #nav:focus-within #nav-next {
+  background: rgba(191,125,64,0.22);
+  border-color: rgba(191,125,64,0.35);
+  color: var(--white);
+}
+#nav-prev:hover, #nav-next:hover { transform: translateY(-1px); background: rgba(191,125,64,0.32); color: var(--white); }
+#nav-prev:disabled, #nav-next:disabled { background: rgba(255,255,255,0.04); opacity: 0.35; cursor: default; transform: none; color: rgba(232,241,244,0.35); }
+#nav-counter { color: rgba(232,241,244,0.45); font-size: 10px; font-weight: 500; min-width: 44px; text-align: center; letter-spacing: 0.04em; font-family: 'Space Grotesk', sans-serif; transition: color 0.25s ease; }
+#nav:hover #nav-counter, #nav:focus-within #nav-counter { color: rgba(232,241,244,0.75); }
+#nav-fs {
+  background: transparent; border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px; color: rgba(232,241,244,0.4);
+  padding: 3px 8px; font-size: 9px; cursor: pointer; font-family: inherit;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  letter-spacing: 0.02em;
+}
+#nav:hover #nav-fs, #nav:focus-within #nav-fs { color: rgba(232,241,244,0.65); border-color: rgba(255,255,255,0.14); }
+#nav-fs:hover { color: var(--orange); border-color: rgba(191,125,64,0.4); background: rgba(191,125,64,0.08); }
+
+.nav-side {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1095;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(0, 28, 36, 0.38);
+  color: rgba(232,241,244,0.55);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px) saturate(140%);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+  opacity: 0.32;
+  transition: opacity 0.25s ease, background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.18s ease;
+  font-family: inherit;
+  padding: 0;
+}
+.nav-side svg { width: 18px; height: 18px; display: block; }
+.nav-side--prev { left: 18px; }
+.nav-side--next { right: 18px; }
+.nav-side:hover {
+  opacity: 1;
+  background: rgba(0, 37, 50, 0.78);
+  border-color: rgba(191,125,64,0.28);
+  color: var(--white);
+  transform: translateY(calc(-50% - 1px));
+}
+.nav-side:disabled {
+  opacity: 0.12;
+  cursor: default;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+body.overview-open #nav,
+body.overview-open .nav-side { opacity: 0; pointer-events: none; }
+
+/* ── PROGRESS BAR ── */
+#progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 1001;
+  background: rgba(255,255,255,0.06);
+}
+#progress-bar {
+  height: 100%; background: linear-gradient(90deg, var(--orange), var(--accent));
+  transition: width 0.72s cubic-bezier(0.76,0,0.24,1);
+  border-radius: 0 2px 2px 0;
+}
+
+/* ── SLIDE DOTS ── */
+#dots {
+  position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  z-index: 1100; display: flex; gap: 6px; align-items: center;
+  pointer-events: auto;
+}
+.dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.2); cursor: pointer;
+  transition: all 0.3s; border: none;
+}
+.dot.active { background: var(--orange); transform: scale(1.5); }
+.dot:hover:not(.active) { background: rgba(255,255,255,0.5); }
+
+/* ── SECTION LABEL ── */
+.section-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 16px;
+}
+.section-label::before {
+  content: ''; display: block; width: 20px; height: 1px; background: var(--orange);
+}
+
+/* ── CARD ── */
+.card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.bubble-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 26px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.32);
+  transform: translateY(0) scale(1);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.bubble-card::before,
+.bubble-card::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(191,125,64,0.18), rgba(191,125,64,0.02) 65%, transparent 66%);
+  filter: blur(8px);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.bubble-card::before { width: 90px; height: 90px; top: -18px; right: -10px; }
+.bubble-card::after { width: 70px; height: 70px; left: -10px; bottom: -12px; background: radial-gradient(circle, rgba(17,182,182,0.16), rgba(17,182,182,0.02) 65%, transparent 66%); }
+
+.bubble-card:hover {
+  transform: translateY(-4px) scale(1.04);
+  border-color: rgba(191,125,64,0.35);
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 24px 48px rgba(191,125,64,0.12), 0 16px 34px rgba(0,0,0,0.36);
+}
+
+/* ── 3 ÉTAPES — conteneurs ronds ── */
+.steps-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  max-width: 960px;
+  margin: 0 auto;
+  align-items: center;
+}
+.step-circle {
+  aspect-ratio: 1;
+  width: min(100%, 270px);
+  margin: 0 auto;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 28px 22px;
+  background: radial-gradient(circle at 35% 25%, rgba(255,255,255,0.08), rgba(255,255,255,0.03) 55%, rgba(0,37,50,0.35) 100%);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 20px 44px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.08);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s, box-shadow 0.25s;
+}
+.step-circle::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(191,125,64,0.14), transparent 62%);
+  pointer-events: none;
+}
+.step-circle:hover {
+  transform: scale(1.05);
+  border-color: rgba(191,125,64,0.4);
+  box-shadow: 0 26px 52px rgba(191,125,64,0.14), 0 18px 40px rgba(0,0,0,0.38);
+}
+.step-circle-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--orange);
+  letter-spacing: 0.14em;
+  margin-bottom: 12px;
+  position: relative;
+}
+.step-circle-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(191,125,64,0.16);
+  border: 1px solid rgba(191,125,64,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  position: relative;
+}
+.step-circle-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.25;
+  margin-bottom: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+  position: relative;
+}
+.step-circle-desc {
+  font-size: 11.5px;
+  color: var(--text-dim);
+  line-height: 1.55;
+  position: relative;
+}
+.card:hover,
+.tool-cell:hover,
+.a11y-item:hover,
+.sec-item:hover {
+  transform: translateY(-3px) scale(1.15);
+  border-color: rgba(191,125,64,0.35);
+  box-shadow: var(--shadow-glow);
+  z-index: 10;
+}
+.card-orange { background: rgba(191,125,64,0.12); border-color: var(--border-o); }
+.card-accent { background: rgba(17,182,182,0.08); border-color: rgba(17,182,182,0.18); }
+
+/* ── SCREEN MOCKUP ── */
+.mockup {
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(0, 28, 34, 0.95);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.1), inset 0 1px 0 rgba(255,255,255,0.06);
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+}
+.mockup:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.65), 0 0 0 1px rgba(191,125,64,0.28);
+  z-index: 10;
+}
+.mockup-titlebar {
+  height: 36px;
+  background: linear-gradient(180deg, rgba(0,54,64,0.98) 0%, rgba(0,42,50,0.98) 100%);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex; align-items: center; gap: 10px; padding: 0 14px;
+}
+.mockup-traffic { display: flex; align-items: center; gap: 7px; flex-shrink: 0; }
+.mockup-dot { width: 10px; height: 10px; border-radius: 50%; display: block; }
+.mockup-dot--close { background: #ff5f57; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12); }
+.mockup-dot--min { background: #febc2e; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12); }
+.mockup-dot--max { background: #28c840; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12); }
+.mockup-title {
+  flex: 1; text-align: center;
+  font-size: 11px; font-weight: 600; color: rgba(232,241,244,0.55);
+  font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.03em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.mockup-titlebar-spacer { width: 52px; flex-shrink: 0; }
+.mockup-viewport {
+  background: #0a1619;
+  line-height: 0;
+}
+.mockup-viewport img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+.mockup--compact { max-width: 100%; }
+.mockup--compact .mockup-titlebar { height: 28px; padding: 0 10px; }
+.mockup--compact .mockup-dot { width: 8px; height: 8px; }
+.mockup--compact .mockup-title { font-size: 9px; }
+.mockup--compact .mockup-titlebar-spacer { width: 40px; }
+.mockup-stack { display: flex; flex-direction: column; gap: 14px; }
+.mockup-stack--budget {
+  width: 75%;
+  max-width: 75%;
+  margin: 0 auto;
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(191,125,64,0.22);
+  background: rgba(0, 24, 30, 0.55);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.mockup-wrap--70 {
+  width: 70%;
+  max-width: 70%;
+  margin: 0 auto;
+}
+.mockup-wrap--80 {
+  width: 80%;
+  max-width: 80%;
+  margin: 0 auto;
+}
+.mockup-mobile-row--inline {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.mobile-shot-wrap {
+  width: clamp(110px, 42%, 150px);
+  flex-shrink: 0;
+}
+.mobile-shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.08);
+}
+.mobile-shot-label {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 9px;
+  font-weight: 600;
+  color: rgba(232,241,244,0.45);
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 0.04em;
+}
+.mockup-thumbs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+.mockup-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.mockup-mobile-row { display: flex; justify-content: center; align-items: flex-end; gap: 28px; margin-top: 28px; flex-wrap: wrap; }
+.mockup-mobile {
+  width: clamp(140px, 16vw, 190px);
+  border-radius: 32px;
+  padding: 12px 10px 14px;
+  background: linear-gradient(165deg, #3a3a40 0%, #1e1e22 40%, #121214 100%);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.12), inset 0 1px 0 rgba(255,255,255,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.mockup-mobile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 28px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(17,182,182,0.25);
+}
+.mockup-mobile-notch {
+  width: 52px; height: 5px; border-radius: 100px;
+  background: rgba(0,0,0,0.45); margin: 0 auto 10px;
+}
+.mockup-mobile-screen {
+  border-radius: 18px; overflow: hidden;
+  background: #0a1619; line-height: 0;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+}
+.mockup-mobile-screen img {
+  display: block; width: 100%; height: auto;
+}
+.mockup-mobile-label {
+  text-align: center; margin-top: 10px;
+  font-size: 10px; font-weight: 600; color: rgba(232,241,244,0.45);
+  font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.04em;
+}
+
+/* ── PILL TAG ── */
+.pill {
+  display: inline-flex; align-items: center;
+  background: rgba(191,125,64,0.15); border: 1px solid rgba(191,125,64,0.3);
+  border-radius: 100px; padding: 5px 13px;
+  font-size: 11px; font-weight: 600; color: var(--orange);
+  font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.04em;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.pill:hover { background: rgba(191,125,64,0.24); border-color: rgba(191,125,64,0.5); transform: translateY(-1px); }
+.pill-accent { background: rgba(17,182,182,0.12); border-color: rgba(17,182,182,0.3); color: var(--accent); }
+
+/* ── ANIMATED LINE ── */
+@keyframes line-in { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.line-anim {
+  height: 2px; background: linear-gradient(90deg, var(--orange), transparent);
+  transform-origin: left; animation: line-anim 0.8s 0.4s ease both;
+}
+
+/* ── FEATURE ROW ── */
+.feat-row {
+  display: flex; align-items: flex-start; gap: 12px; padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.feat-row:last-child { border-bottom: none; }
+.feat-icon {
+  width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
+  background: rgba(191,125,64,0.15); border: 1px solid rgba(191,125,64,0.2);
+  display: flex; align-items: center; justify-content: center;
+}
+.feat-icon svg { width: 14px; height: 14px; fill: var(--orange); }
+.feat-label { font-size: 12.5px; font-weight: 600; color: var(--light); line-height: 1; margin-bottom: 3px; }
+.feat-desc { font-size: 11.5px; color: var(--text-dim); line-height: 1.45; }
+
+/* ── STAT BLOCK ── */
+.stat-block { text-align: center; padding: 20px; }
+.stat-number {
+  font-size: 40px; font-weight: 900;
+  background: linear-gradient(120deg, var(--orange), var(--orange-lt) 60%, var(--accent));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  font-family: 'Space Grotesk', sans-serif; line-height: 1;
+  letter-spacing: -0.02em; margin-bottom: 6px;
+}
+.stat-label { font-size: 11px; font-weight: 600; color: var(--text-dim); letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* ── ANIMATIONS ── */
+@keyframes fade-up { from { opacity:0; transform:translateY(24px) scale(0.98); } to { opacity:1; transform:translateY(0) scale(1); } }
+@keyframes fade-in { from { opacity:0; } to { opacity:1; } }
+@keyframes slide-right { from { opacity:0; transform:translateX(-30px); } to { opacity:1; transform:translateX(0); } }
+@keyframes scale-in { from { opacity:0; transform:scale(0.92); } to { opacity:1; transform:scale(1); } }
+@keyframes drift { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(-3%, 2%, 0) scale(1.08); } }
+
+.anim-1 { animation: fade-up 0.65s 0.05s ease both; }
+.anim-2 { animation: fade-up 0.65s 0.15s ease both; }
+.anim-3 { animation: fade-up 0.65s 0.25s ease both; }
+.anim-4 { animation: fade-up 0.65s 0.35s ease both; }
+.anim-5 { animation: fade-up 0.65s 0.45s ease both; }
+.anim-r1 { animation: slide-right 0.65s 0.1s ease both; }
+.anim-r2 { animation: slide-right 0.65s 0.2s ease both; }
+.anim-sc { animation: scale-in 0.7s 0.2s ease both; }
+
+/* ── RESET ANIMATIONS WHEN SLIDE IS NOT CURRENT ── */
+.slide:not(.active) * { animation-play-state: paused !important; }
+.slide.active * { animation-play-state: running !important; }
+
+/* ── OVERVIEW MODE (Prezi) ── */
+#overview {
+  display: none; position: fixed; inset: 0; z-index: 500;
+  background: rgba(0,18,25,0.97);
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+}
+#overview.open { display: block; }
+#ov-canvas {
+  position: relative;
+  width: 100%; height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+}
+#ov-links {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+#ov-thumbs {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+#ov-links path {
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-dasharray: 9 9;
+  animation: ov-flow 14s linear infinite;
+}
+#ov-links .ov-link-main { stroke: rgba(17,182,182,0.46); }
+#ov-links .ov-link-side { stroke: rgba(191,125,64,0.34); }
+@keyframes ov-flow {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -180; }
+}
+#ov-canvas::before {
+  content: '';
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(74vw, 74vh); height: min(74vw, 74vh);
+  border: 1px dashed rgba(191,125,64,0.14);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+#ov-canvas::after {
+  content: '';
+  position: absolute;
+  left: var(--hub-guide-left, 50%);
+  top: var(--hub-guide-top, 50%);
+  width: var(--hub-guide-width, 220px);
+  height: var(--hub-guide-height, 420px);
+  transform: translate(-50%, 0);
+  border: 1px dashed rgba(17,182,182,0.28);
+  border-radius: 999px;
+  background: rgba(17,182,182,0.04);
+  pointer-events: none;
+  z-index: 0;
+}
+.ov-zone-label {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  font-family: 'Space Grotesk', sans-serif; pointer-events: none; z-index: 1;
+}
+.ov-zone-label.root { top: 22px; color: rgba(232,241,244,0.62); }
+.ov-zone-label.framework { top: 86px; left: 12%; transform: none; color: rgba(232,241,244,0.58); }
+.ov-zone-label.hub { top: calc(50% - min(30vh, 270px)); color: var(--accent); }
+.ov-zone-label.tools { top: 86px; left: auto; right: 12%; transform: none; color: var(--orange); opacity: 0.9; }
+.ov-zone-label.closing { bottom: 18px; left: 50%; transform: translateX(-50%); color: rgba(232,241,244,0.45); }
+.ov-thumb {
+  position: absolute;
+  border-radius: 12px; overflow: hidden; cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s cubic-bezier(0.22,1,0.36,1), z-index 0s;
+  background: #001922;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  pointer-events: auto;
+  z-index: 1;
+}
+.ov-thumb:hover { border-color: var(--orange); box-shadow: 0 14px 44px rgba(191,125,64,0.28); z-index: 20; }
+.ov-thumb.active { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 14px 44px rgba(17,182,182,0.32); }
+.ov-thumb.ov-root { width: 112px; }
+.ov-thumb.ov-hub { width: 196px; }
+.ov-thumb.ov-tool { width: 122px; }
+.ov-thumb.ov-framework, .ov-thumb.ov-closing { width: 108px; }
+.ov-thumb-inner {
+  overflow: hidden; position: relative; pointer-events: none;
+  display: flex; align-items: stretch; justify-content: stretch;
+}
+.ov-thumb.ov-root .ov-thumb-inner { height: 68px; }
+.ov-thumb.ov-hub .ov-thumb-inner { height: 122px; }
+.ov-thumb.ov-tool .ov-thumb-inner { height: 76px; }
+.ov-thumb.ov-framework .ov-thumb-inner, .ov-thumb.ov-closing .ov-thumb-inner { height: 64px; }
+
+/* ── OVERVIEW ART (SVG vignettes) ── */
+.ov-art {
+  position: relative; width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.ov-art::before {
+  content: ''; position: absolute; inset: 0;
+  transition: opacity 0.35s ease;
+}
+.ov-art::after {
+  content: ''; position: absolute; inset: -50%;
+  background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.06), transparent 30%);
+  animation: ov-shimmer 6s linear infinite;
+  opacity: 0; transition: opacity 0.35s;
+  pointer-events: none;
+}
+.ov-thumb:hover .ov-art::after { opacity: 1; }
+.ov-thumb.active .ov-art::after { opacity: 0.7; animation-duration: 3s; }
+
+.ov-art--root::before {
+  background: linear-gradient(145deg, #002532 0%, #003640 45%, rgba(191,125,64,0.55) 130%);
+}
+.ov-art--framework::before {
+  background: linear-gradient(145deg, #00161e 0%, #003640 50%, rgba(17,182,182,0.38) 120%);
+}
+.ov-art--tool::before {
+  background: linear-gradient(145deg, #001922 0%, #002532 40%, rgba(191,125,64,0.42) 115%);
+}
+.ov-art--hub::before {
+  background: linear-gradient(145deg, #001922 0%, #003640 35%, rgba(17,182,182,0.45) 110%);
+}
+.ov-art--closing::before {
+  background: linear-gradient(145deg, #002532 0%, rgba(191,125,64,0.28) 50%, rgba(17,182,182,0.32) 100%);
+}
+
+.ov-art-glow {
+  position: absolute; border-radius: 50%; filter: blur(18px); pointer-events: none;
+  opacity: 0.55; transition: opacity 0.35s, transform 0.35s;
+}
+.ov-art--root .ov-art-glow { width: 70px; height: 70px; background: rgba(191,125,64,0.35); top: -20px; right: -10px; }
+.ov-art--framework .ov-art-glow { width: 60px; height: 60px; background: rgba(17,182,182,0.28); bottom: -15px; left: -10px; }
+.ov-art--tool .ov-art-glow { width: 65px; height: 65px; background: rgba(191,125,64,0.32); top: 50%; left: 50%; transform: translate(-50%,-50%); }
+.ov-art--hub .ov-art-glow { width: 90px; height: 90px; background: rgba(17,182,182,0.3); top: -25px; right: -15px; }
+.ov-art--closing .ov-art-glow { width: 70px; height: 70px; background: rgba(191,125,64,0.25); bottom: -18px; right: -8px; }
+.ov-thumb:hover .ov-art-glow { opacity: 0.85; }
+.ov-thumb:hover .ov-art--root .ov-art-glow,
+.ov-thumb:hover .ov-art--framework .ov-art-glow,
+.ov-thumb:hover .ov-art--hub .ov-art-glow,
+.ov-thumb:hover .ov-art--closing .ov-art-glow { transform: scale(1.15); }
+.ov-thumb:hover .ov-art--tool .ov-art-glow { transform: translate(-50%,-50%) scale(1.2); }
+
+.ov-art-num {
+  position: absolute; top: 5px; left: 7px; z-index: 3;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.08em;
+  font-family: 'Space Grotesk', sans-serif;
+  color: rgba(255,255,255,0.32);
+  transition: color 0.3s;
+}
+.ov-thumb:hover .ov-art-num { color: rgba(255,255,255,0.55); }
+.ov-thumb.active .ov-art-num { color: rgba(17,182,182,0.85); }
+
+.ov-art-icon {
+  position: relative; z-index: 2;
+  width: 46%; height: 46%;
+  color: rgba(255,255,255,0.4);
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), color 0.35s ease, filter 0.35s;
+  animation: ov-icon-float 4s ease-in-out infinite;
+}
+.ov-thumb.ov-hub .ov-art-icon { width: 38%; height: 38%; }
+.ov-thumb:hover .ov-art-icon {
+  color: rgba(255,255,255,0.72);
+  transform: scale(1.14) translateY(-2px);
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.15));
+}
+.ov-thumb.active .ov-art-icon {
+  color: rgba(255,255,255,0.85);
+  animation: ov-icon-pulse 2s ease-in-out infinite;
+}
+
+.ov-art-accent {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px; z-index: 4;
+  opacity: 0.7; transition: opacity 0.3s, height 0.3s;
+}
+.ov-art--root .ov-art-accent { background: linear-gradient(90deg, transparent, var(--orange), transparent); }
+.ov-art--framework .ov-art-accent { background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+.ov-art--tool .ov-art-accent { background: linear-gradient(90deg, transparent, var(--orange-lt), transparent); }
+.ov-art--hub .ov-art-accent { background: linear-gradient(90deg, transparent, var(--accent), var(--orange-lt), transparent); }
+.ov-art--closing .ov-art-accent { background: linear-gradient(90deg, var(--orange), var(--accent)); }
+.ov-thumb:hover .ov-art-accent { opacity: 1; height: 3px; }
+
+@keyframes ov-shimmer {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes ov-icon-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+@keyframes ov-icon-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.08); opacity: 0.92; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ov-art-icon { animation: none !important; }
+  .ov-art::after { animation: none !important; opacity: 0 !important; }
+  .ov-thumb.active .ov-art-icon { animation: none !important; }
+}
+
+.ov-label { padding: 5px 8px; font-size: 9px; font-weight: 600; color: var(--text-dim); font-family: 'Space Grotesk', sans-serif; line-height: 1.3; background: rgba(0,25,34,0.92); }
+.ov-root .ov-label { color: rgba(232,241,244,0.7); }
+.ov-hub .ov-label { font-size: 10px; color: var(--light); }
+.ov-hub .ov-label::before { content: 'Tableau de bord · '; color: var(--accent); font-weight: 700; }
+.ov-tool .ov-label { border-top: 1px solid rgba(191,125,64,0.15); }
+.ov-framework .ov-label { border-top: 1px solid rgba(17,182,182,0.12); }
+.ov-closing .ov-label { border-top: 1px solid rgba(255,255,255,0.06); }
+
+/* ── OVERVIEW TOGGLE BUTTON ── */
+#ov-btn {
+  position: fixed; top: 14px; right: 20px; z-index: 1100;
+  pointer-events: auto;
+  background: rgba(0,37,50,0.85); border: 1px solid var(--border-o);
+  border-radius: 10px; color: rgba(232,241,244,0.75);
+  padding: 7px 14px; font-size: 11px; font-weight: 600;
+  cursor: pointer; font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.04em;
+  backdrop-filter: blur(12px);
+  transition: color 0.2s, border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+#ov-btn:hover { color: var(--orange); border-color: var(--orange); }
+#ov-btn.active {
+  background: var(--orange); color: var(--white);
+  border-color: var(--orange); box-shadow: 0 4px 20px rgba(191,125,64,0.35);
+}
+#ov-btn.active:hover { background: var(--orange-h); color: var(--white); border-color: var(--orange-h); }
+
+/* ── TIMELINE (slide 3) ── */
+.timeline { position: relative; }
+.timeline::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px;
+  background: linear-gradient(to bottom, var(--orange), rgba(191,125,64,0.1));
+}
+.tl-item { padding: 0 0 24px 28px; position: relative; }
+.tl-item::before {
+  content: ''; position: absolute; left: -4px; top: 4px;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--orange); border: 2px solid var(--teal-dark);
+}
+.tl-num { font-size: 10px; font-weight: 700; color: var(--orange); letter-spacing: 0.1em; font-family: 'Space Grotesk', sans-serif; margin-bottom: 4px; }
+.tl-title { font-size: 13px; font-weight: 700; color: var(--light); margin-bottom: 4px; }
+.tl-text { font-size: 11.5px; color: var(--text-dim); line-height: 1.5; }
+
+/* ── TOOL GRID (slide 9) ── */
+.tool-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.tool-cell {
+  padding: 16px; border-radius: var(--radius);
+  background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s, background 0.25s, box-shadow 0.25s;
+  box-shadow: var(--shadow-soft);
+}
+.tool-cell:hover { border-color: var(--border-o); background: rgba(191,125,64,0.06); }
+.tool-cell-title { font-size: 13px; font-weight: 700; color: var(--light); margin-bottom: 6px; font-family: 'Space Grotesk', sans-serif; }
+.tool-cell-desc { font-size: 11px; color: var(--text-dim); line-height: 1.55; }
+.tool-cell-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+
+/* ── WIDE CONTENT WRAP ── */
+.wrap {
+  position: relative; z-index: 1;
+  width: min(100% - 48px, 1160px);
+  margin: 0 auto;
+}
+.col-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+.col-r { display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: center; }
+.col-l { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
+
+/* ── DARK BACKGROUND UTILITY ── */
+.bg-dark { background: var(--teal-dark); }
+.bg-mid  { background: var(--teal-mid); }
+
+/* Separator */
+.sep { width: 40px; height: 2px; background: var(--orange); margin: 14px 0; border-radius: 2px; }
+
+/* ── H styles ── */
+.h-kicker { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--orange); font-family: 'Space Grotesk', sans-serif; margin-bottom: 10px; }
+.h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 800; color: var(--white); line-height: 1.05; letter-spacing: -0.03em; text-shadow: 0 12px 30px rgba(0,0,0,0.35); }
+.h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; color: var(--white); line-height: 1.1; letter-spacing: -0.025em; text-shadow: 0 10px 26px rgba(0,0,0,0.28); }
+.h3 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 700; color: var(--white); line-height: 1.2; letter-spacing: -0.02em; text-shadow: 0 8px 18px rgba(0,0,0,0.24); }
+.h-accent {
+  color: var(--orange);
+  background: linear-gradient(120deg, var(--orange) 0%, var(--orange-lt) 55%, var(--accent) 130%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.body-text { font-size: 15px; color: var(--text-mid); line-height: 1.65; }
+.body-text strong { color: var(--white); font-weight: 700; }
+.small-text { font-size: 12.5px; color: var(--text-dim); line-height: 1.6; }
+.lead-text { font-size: clamp(16px, 1.4vw, 19px); color: var(--text-mid); line-height: 1.6; font-weight: 400; }
+
+/* ── BADGE / TRUST ROW ── */
+.trust-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 13px; border-radius: 100px;
+  background: rgba(17,182,182,0.08); border: 1px solid rgba(17,182,182,0.22);
+  font-size: 11.5px; font-weight: 600; color: var(--text-mid);
+  font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.02em;
+}
+.badge svg { width: 13px; height: 13px; flex-shrink: 0; }
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+
+/* ── QUOTE / EXPERTISE CARD ── */
+.quote-card {
+  position: relative; overflow: hidden;
+  padding: 32px; border-radius: var(--radius-lg);
+  background: linear-gradient(150deg, rgba(191,125,64,0.10), rgba(255,255,255,0.03) 60%);
+  border: 1px solid var(--border-o);
+  box-shadow: var(--shadow-soft);
+}
+.quote-card::before {
+  content: '\201C';
+  position: absolute; top: -18px; right: 18px;
+  font-family: 'Space Grotesk', sans-serif; font-size: 140px; font-weight: 700;
+  color: rgba(191,125,64,0.14); line-height: 1; pointer-events: none;
+}
+.quote-text { font-size: 16px; line-height: 1.62; color: var(--text-mid); font-weight: 400; position: relative; }
+.quote-author { margin-top: 18px; display: flex; align-items: center; gap: 12px; position: relative; }
+.quote-author-line { width: 28px; height: 2px; background: var(--orange); border-radius: 2px; }
+.quote-author-name { font-size: 12px; font-weight: 700; color: var(--light); font-family: 'Space Grotesk', sans-serif; }
+.quote-author-role { font-size: 11px; color: var(--text-dim); }
+
+/* ── CREDENTIAL CHIPS ── */
+.cred-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.cred-chip {
+  padding: 14px 16px; border-radius: 14px;
+  background: rgba(255,255,255,0.035); border: 1px solid var(--border);
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), border-color 0.25s, background 0.25s;
+}
+.cred-chip:hover { transform: translateY(-3px); border-color: var(--border-o); background: rgba(191,125,64,0.06); }
+.cred-chip-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); margin-bottom: 6px; font-family: 'Space Grotesk', sans-serif; }
+.cred-chip-text { font-size: 12px; color: var(--text-mid); line-height: 1.45; font-weight: 600; }
+
+/* A11Y items */
+.a11y-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.a11y-item { padding: 16px; border-radius: var(--radius); background: rgba(17,182,182,0.05); border: 1px solid rgba(17,182,182,0.12); }
+.a11y-title { font-size: 12.5px; font-weight: 700; color: var(--light); margin-bottom: 4px; }
+.a11y-desc { font-size: 11px; color: var(--text-dim); line-height: 1.55; }
+.a11y-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+
+/* Security grid */
+.sec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.sec-item { padding: 14px 16px; border-radius: 12px; background: rgba(255,255,255,0.03); border-left: 2px solid var(--orange); }
+.sec-title { font-size: 12.5px; font-weight: 700; color: var(--light); margin-bottom: 3px; }
+.sec-desc  { font-size: 11px; color: var(--text-dim); line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div id="progress"><div id="progress-bar" style="width:6.67%"></div></div>
+
+<!-- Dots -->
+<div id="dots"></div>
+
+<!-- Overview toggle -->
+<button id="ov-btn" type="button" onclick="toggleOverview()" aria-pressed="false" aria-expanded="false">Vue d'ensemble</button>
+
+<!-- Main Scene -->
+<div id="scene">
+<div id="stage"></div>
+</div>
+
+<!-- Nav -->
+<div id="nav">
+  <button id="nav-prev" onclick="prev()" disabled>&#8592;</button>
+  <span id="nav-counter">01 / 15</span>
+  <button id="nav-next" onclick="next()">&#8594;</button>
+  <button id="nav-fs" onclick="toggleFS()">Plein écran</button>
+</div>
+
+<button id="nav-side-prev" class="nav-side nav-side--prev" type="button" onclick="prev()" disabled aria-label="Diapositive précédente">
+  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+<button id="nav-side-next" class="nav-side nav-side--next" type="button" onclick="next()" aria-label="Diapositive suivante">
+  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<!-- Overview panel (Prezi) -->
+<div id="overview" aria-hidden="true">
+  <div id="ov-canvas">
+    <svg id="ov-links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+    <div id="ov-thumbs"></div>
+    <div class="ov-zone-label root">Vision</div>
+    <div class="ov-zone-label framework">Cadre de présentation</div>
+    <div class="ov-zone-label tools">Outils participatifs</div>
+    <div class="ov-zone-label hub">Tableaux de bord</div>
+    <div class="ov-zone-label closing">Synthèse / conclusion</div>
+  </div>
+</div>
+
+<script>
+const IMGS = {
+  logo: "images/logo.webp",
+  carte: "images/carte.png",
+  planSujet: "images/plan-sujet-ouvert.png",
+  planQuestion: "images/plan-question-ouverte.png",
+  planAccessibilite: "images/plan-accessibilite.png",
+  forum: "images/forum.png",
+  idees: "images/idees.png",
+  ideesVote: "images/idees-vote.png",
+  sondages: "images/sondages.png",
+  actualites: "images/actu.png",
+  collaboratif: "images/espace-collaboratif.png",
+  comparaison: "images/comparaison.png",
+  gestion: "images/gestion.png",
+  mobilePlan: "images/mobile-plan.png",
+  mobileControle: "images/mobile-controle.png"
+};
+
+
+// ══════════════════════════════════════════════════════════════════
+// SVG ICONS (inline, no emoji)
+// ══════════════════════════════════════════════════════════════════
+const ic = {
+  map:    `<svg viewBox="0 0 16 16"><path d="M6 1L1 3v11l5-2 4 2 5-2V1L10 3 6 1zm0 1.6 4 1.8v8.4l-4-1.8V3.4zm-1 0V12l-3 1.2V4.6L5 3.4zm10 0v8.6L11 13.4V4.8l4-1.4z"/></svg>`,
+  chat:   `<svg viewBox="0 0 16 16"><path d="M2 2h12a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H5l-3 3V3a1 1 0 0 1 1-1z"/></svg>`,
+  bulb:   `<svg viewBox="0 0 16 16"><path d="M8 1a5 5 0 0 0-2 9.53V12h4v-1.47A5 5 0 0 0 8 1zm-1 13h2v1H7v-1z"/></svg>`,
+  bar:    `<svg viewBox="0 0 16 16"><rect x="1" y="8" width="3" height="7"/><rect x="6" y="4" width="3" height="11"/><rect x="11" y="1" width="3" height="14"/></svg>`,
+  collab: `<svg viewBox="0 0 16 16"><circle cx="5" cy="5" r="3"/><circle cx="11" cy="5" r="3"/><path d="M1 14c0-3 2-4 4-4h1c2 0 4 1 4 4M7 14c0-2 1.5-3 3-3h1c1.5 0 3 1 3 3"/></svg>`,
+  compare:`<svg viewBox="0 0 16 16"><path d="M2 3h5v10H2zM9 3h5v10H9zM7.5 8H8.5"/></svg>`,
+  news:   `<svg viewBox="0 0 16 16"><rect x="1" y="2" width="14" height="12" rx="2"/><path d="M4 6h8M4 9h5"/></svg>`,
+  lock:   `<svg viewBox="0 0 16 16"><rect x="3" y="7" width="10" height="8" rx="2"/><path d="M5 7V5a3 3 0 0 1 6 0v2"/></svg>`,
+  cloud:  `<svg viewBox="0 0 16 16"><path d="M12 9a4 4 0 0 0-7.74-1.4A3 3 0 1 0 4 13h8a3 3 0 0 0 0-6z"/></svg>`,
+  shield: `<svg viewBox="0 0 16 16"><path d="M8 1l6 2.5v4C14 11 11.5 14 8 15 4.5 14 2 11 2 7.5v-4L8 1z"/></svg>`,
+  eye:    `<svg viewBox="0 0 16 16"><path d="M1 8s2.5-5 7-5 7 5 7 5-2.5 5-7 5-7-5-7-5z"/><circle cx="8" cy="8" r="2"/></svg>`,
+  text:   `<svg viewBox="0 0 16 16"><path d="M2 3h12M2 7h8M2 11h10"/></svg>`,
+  nav:    `<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>`,
+  export: `<svg viewBox="0 0 16 16"><path d="M8 1v9M5 7l3 3 3-3"/><rect x="2" y="12" width="12" height="3" rx="1"/></svg>`,
+  gear:   `<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41"/></svg>`,
+  dash:   `<svg viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>`,
+};
+
+function icon(key) { return `<div class="feat-icon"><svg viewBox="0 0 16 16" fill="none" stroke="var(--orange)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">${ic[key]||ic.bar}</svg></div>`; }
+function iconSvg(key) { return `<svg viewBox="0 0 16 16" fill="none" stroke="var(--orange)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">${ic[key]||ic.bar}</svg>`; }
+
+// ── OVERVIEW VIGNETTES (SVG blanc 40 %, une icône par diapo) ──
+const ovPaths = {
+  spark:   `<circle cx="8" cy="8" r="2.2"/><path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2M3.6 3.6l1.4 1.4M11 11l1.4 1.4M3.6 12.4l1.4-1.4M11 5l1.4-1.4"/>`,
+  target:  `<circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="3"/><circle cx="8" cy="8" r="0.9" fill="currentColor" stroke="none"/>`,
+  steps:   `<path d="M2.5 11.5h2.5v2.5H2.5zM6.5 8h2.5v6H6.5zM10.5 4.5h2.5v9.5h-2.5z"/>`,
+  balance: `<path d="M8 2v11M4 5.5h8M5 5.5L3 10h4L5 5.5zM11 5.5L9 10h4l-2-4.5z"/>`,
+  layers:  `<path d="M2 5.5 8 2.5l6 3-6 3-6-3z"/><path d="M2 9l6 3 6-3"/><path d="M2 12.5l6 3 6-3"/>`,
+  map:     `<path d="M6 1.5 1.5 3.5v9l4.5-2 4 2 4.5-2v-9L10 3.5 6 1.5z"/><path d="M6 3v8.5"/>`,
+  chat:    `<path d="M2.5 2.5h11a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H6l-3.5 3v-10a1 1 0 0 1 1-1z"/>`,
+  bulb:    `<path d="M8 1.5a4.5 4.5 0 0 0-1.8 8.58V12h3.6v-1.92A4.5 4.5 0 0 0 8 1.5z"/><path d="M6.5 13.5h3M7 15h2"/>`,
+  bar:     `<path d="M2 13V8M6 13V4M10 13V6M14 13V2"/>`,
+  collab:  `<circle cx="5.5" cy="5" r="2.5"/><circle cx="10.5" cy="5" r="2.5"/><path d="M1.5 13.5c0-2.5 1.8-3.5 4-3.5h.5c2.2 0 4 1 4 3.5M8.5 13.5c0-1.8 1.3-2.5 2.5-2.5h.5c1.2 0 2.5.7 2.5 2.5"/>`,
+  compare: `<rect x="2" y="3" width="5" height="10" rx="1"/><rect x="9" y="3" width="5" height="10" rx="1"/><path d="M7.5 8h1"/>`,
+  grid:    `<rect x="1.5" y="1.5" width="5.5" height="5.5" rx="1"/><rect x="9" y="1.5" width="5.5" height="5.5" rx="1"/><rect x="1.5" y="9" width="5.5" height="5.5" rx="1"/><rect x="9" y="9" width="5.5" height="5.5" rx="1"/>`,
+  dash:    `<rect x="1.5" y="1.5" width="6" height="6" rx="1"/><rect x="8.5" y="1.5" width="6" height="6" rx="1"/><rect x="1.5" y="8.5" width="6" height="6" rx="1"/><rect x="8.5" y="8.5" width="6" height="6" rx="1"/>`,
+  gear:    `<circle cx="8" cy="8" r="2"/><path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2M3.2 3.2l1.4 1.4M11.4 11.4l1.4 1.4M3.2 12.8l1.4-1.4M11.4 4.6l1.4-1.4"/>`,
+  analyze: `<path d="M2.5 12.5V7M6 12.5V5M9.5 12.5V8.5M13 12.5V3"/><path d="M2.5 12.5h11"/>`,
+  a11y:    `<path d="M1.5 8s2.2-4.5 6.5-4.5S14.5 8 14.5 8s-2.2 4.5-6.5 4.5S1.5 8 1.5 8z"/><circle cx="8" cy="8" r="1.8"/><path d="M8 1.5v1.5M8 13v1.5"/>`,
+  contact: `<rect x="2" y="4" width="12" height="8.5" rx="1.5"/><path d="M2 5l6 4.5L14 5"/>`,
+};
+const OV_ICON_KEYS = [
+  'spark', 'target', 'steps', 'balance', 'layers',
+  'map', 'chat', 'bulb', 'bar', 'collab',
+  'compare', 'grid', 'dash', 'gear', 'analyze',
+  'a11y', 'contact'
+];
+function ovArtHtml(i, cat) {
+  const key = OV_ICON_KEYS[i] || 'spark';
+  const num = String(i + 1).padStart(2, '0');
+  const path = ovPaths[key];
+  const delay = ((i * 0.37) % 2.4).toFixed(2);
+  return `<div class="ov-art ov-art--${cat}">
+    <div class="ov-art-glow"></div>
+    <span class="ov-art-num">${num}</span>
+    <svg class="ov-art-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" style="animation-delay:${delay}s">${path}</svg>
+    <div class="ov-art-accent"></div>
+  </div>`;
+}
+
+function mockup(imgKey, opts = {}) {
+  const size = opts.size ? ` mockup--${opts.size}` : '';
+  const label = opts.label || 'inconcertta.fr';
+  return `<div class="mockup anim-sc${size}">
+    <div class="mockup-titlebar">
+      <div class="mockup-traffic">
+        <span class="mockup-dot mockup-dot--close"></span>
+        <span class="mockup-dot mockup-dot--min"></span>
+        <span class="mockup-dot mockup-dot--max"></span>
+      </div>
+      <span class="mockup-title">${label}</span>
+      <div class="mockup-titlebar-spacer"></div>
+    </div>
+    <div class="mockup-viewport">
+      <img src="${IMGS[imgKey]||''}" alt="" loading="eager">
+    </div>
+  </div>`;
+}
+function mockupMobile(imgKey, label = '') {
+  return `<div class="mockup-mobile anim-sc">
+    <div class="mockup-mobile-notch"></div>
+    <div class="mockup-mobile-screen">
+      <img src="${IMGS[imgKey]||''}" alt="" loading="eager">
+    </div>
+    ${label ? `<div class="mockup-mobile-label">${label}</div>` : ''}
+  </div>`;
+}
+function mobileShot(imgKey, label = '') {
+  return `<div class="mobile-shot-wrap">
+    <img src="${IMGS[imgKey]||''}" alt="" class="mobile-shot" loading="eager">
+    ${label ? `<div class="mobile-shot-label">${label}</div>` : ''}
+  </div>`;
+}
+
+function featRow(iconKey, label, desc) {
+  return `<div class="feat-row anim-4">
+    ${icon(iconKey)}
+    <div><div class="feat-label">${label}</div><div class="feat-desc">${desc}</div></div>
+  </div>`;
+}
+
+// ══════════════════════════════════════════════════════════════════
+// SLIDES CONTENT
+// ══════════════════════════════════════════════════════════════════
+const slides = [
+
+// ── 0 : COUVERTURE ──────────────────────────────────────────────
+{ label: 'Couverture', html: `
+  <div class="noise"></div>
+  <div class="glow" style="width:600px;height:600px;top:-100px;right:-100px;background:radial-gradient(circle,rgba(191,125,64,0.18) 0%,transparent 70%)"></div>
+  <div class="glow" style="width:400px;height:400px;bottom:-80px;left:-60px;background:radial-gradient(circle,rgba(17,182,182,0.1) 0%,transparent 70%)"></div>
+  <div class="wrap" style="max-width:720px;margin:0 auto">
+    <div>
+      <div class="anim-1" style="margin-bottom:24px">
+        <img src="${IMGS.logo}" alt="InConcertta" style="height:300px;width:auto">
+      </div>
+      <div class="h1 anim-2" style="margin-bottom:16px">
+        L'intelligence collective<br><span class="h-accent">au service</span> des territoires
+      </div>
+      <div class="sep anim-3"></div>
+      <p class="lead-text anim-3" style="max-width:48ch;margin-top:16px">
+        InConcertta transforme les contributions citoyennes en <strong style="color:var(--white)">données structurées</strong> pour éclairer, arbitrer et expliquer les décisions publiques.
+      </p>
+      <div class="anim-4" style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:28px;flex-wrap:wrap">
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <div class="pill">Concerter</div>
+          <div class="pill">Structurer</div>
+          <div class="pill">Analyser</div>
+          <div class="pill">Décider</div>
+        </div>
+        <p class="small-text anim-5" style="margin:0;white-space:nowrap">inconcertta.fr &nbsp;·&nbsp; Édité par InCitta</p>
+      </div>
+    </div>
+  </div>
+`},
+
+// ── 1 : POSITIONNEMENT ──────────────────────────────────────────
+{ label: 'Positionnement', html: `
+  <div class="noise"></div>
+  <div class="glow" style="width:500px;height:500px;top:-60px;left:-80px;background:radial-gradient(circle,rgba(17,182,182,0.08) 0%,transparent 70%)"></div>
+  <div class="wrap col-r">
+    <div>
+      <div class="section-label anim-1">Positionnement</div>
+      <div class="h2 anim-2" style="margin-bottom:16px">
+        La concertation ne doit pas être une option.<br><span class="h-accent">Elle doit être un levier de décision.</span>
+      </div>
+      <div class="sep anim-3"></div>
+      <p class="body-text anim-3" style="max-width:46ch;margin-top:16px">
+        InConcertta est un outil de <strong>pilotage participatif</strong> qui viabilise chaque étape de votre démarche : de l'information réglementaire à la co-construction active.
+      </p>
+      <div style="margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="card card-orange anim-4" style="padding:16px">
+          <div class="h-kicker">Porteur de projet</div>
+          <div style="font-size:13px;color:var(--light);font-weight:600">Pilotage sur-mesure</div>
+          <div class="small-text" style="margin-top:4px">Interface de gestion pour paramétrer les outils, gérer les contributions et analyser les données en temps réel.</div>
+        </div>
+        <div class="card card-accent anim-4" style="padding:16px">
+          <div class="h-kicker" style="color:var(--accent)">Interface publique</div>
+          <div style="font-size:13px;color:var(--light);font-weight:600">Participation simple</div>
+          <div class="small-text" style="margin-top:4px">Accès sécurisé depuis mobile ou ordinateur, sans installation. Interface intuitive et accessible à tous.</div>
+        </div>
+      </div>
+      <p class="body-text anim-5" style="max-width:46ch;margin-top:20px;font-size:13.5px">
+        Elle transforme la parole citoyenne en <strong>données exploitables</strong> pour valider, enrichir et légitimer vos choix politiques.
+      </p>
+    </div>
+    <div>
+      <div class="card anim-sc" style="padding:28px;display:flex;flex-direction:column;gap:16px;margin-bottom:16px">
+        <div class="h-kicker">InCitta &amp; InConcertta</div>
+        <p class="body-text" style="font-size:13.5px">
+          <strong style="color:var(--light)">InCitta</strong> accompagne les territoires sur la programmation, la concertation et la stratégie de projet.
+        </p>
+        <p class="body-text" style="font-size:13.5px">
+          InConcertta en est le <strong style="color:var(--orange)">prolongement numérique</strong> : un outil modulaire qui se déploie par projet, annuel avec ou sans accompagnement.
+        </p>
+        <div style="border-top:1px solid var(--border);padding-top:16px;display:flex;flex-direction:column;gap:12px">
+          <div>
+            <div class="small-text" style="font-weight:700;color:var(--light);margin-bottom:4px">Déploiement instantané</div>
+            <div class="small-text">L'espace de gestion est disponible immédiatement pour concevoir et lancer votre première concertation.</div>
+          </div>
+          <div>
+            <div class="small-text" style="font-weight:700;color:var(--light);margin-bottom:4px">Aucune barrière à la participation</div>
+            <div class="small-text">Pour le citoyen, l'accès au projet est simple. Consultation libre sans compte, ou engagement simplifié par e-mail.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+`},
+
+// ── 2 : 3 ÉTAPES POUR PARTICIPER ────────────────────────────────────
+{ label: 'Simplicité', html: `
+  <div class="noise"></div>
+  <div class="glow" style="width:600px;height:400px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(ellipse,rgba(17,182,182,0.08) 0%,transparent 70%)"></div>
+  <div class="wrap">
+    <div class="section-label anim-1" style="justify-content:center">Simplicité d'utilisation</div>
+    <div class="h2 anim-2" style="text-align:center;margin-bottom:12px">3 étapes pour <span class="h-accent">participer</span></div>
+    <div class="line-anim" style="width:60px;margin:0 auto 40px;"></div>
+    <div class="steps-row">
+      ${[
+        {n:'01',t:'Accéder',d:'Un lien unique, aucune installation requise. Fonctionne sur mobile, tablette et ordinateur.',icon:'nav',delay:'0.1s'},
+        {n:'02',t:'Contribuer',d:'Exprimez-vous via les outils proposés : carte interactive, forum, sondages, boîte à idées.',icon:'chat',delay:'0.2s'},
+        {n:'03',t:'Suivre',d:'Consultez les réponses, les actualités du projet et les résultats en temps réel.',icon:'news',delay:'0.3s'},
+      ].map((s,i)=>`
+        <article class="anim-3 step-circle" style="animation-delay:${s.delay}">
+          <div class="step-circle-num">${s.n}</div>
+          <div class="step-circle-icon">${iconSvg(s.icon)}</div>
+          <div class="step-circle-title">${s.t}</div>
+          <p class="step-circle-desc">${s.d}</p>
+        </article>
+      `).join('')}
+    </div>
+    <div class="anim-4" style="margin-top:36px;text-align:center">
+      <div class="card card-orange" style="padding:16px 24px;display:inline-block">
+        <span class="small-text" style="color:var(--orange);font-weight:600">Aucune compétence technique requise — conçu pour tous les publics</span>
+      </div>
+    </div>
+  </div>
+`},
+
+// ── 3 : LA PROMESSE (VALEUR AJOUTÉE) ────────────────────────────────
+{ label: 'Valeur ajoutée', html: `
+  <div class="noise"></div>
+  <div class="glow" style="width:600px;height:400px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(ellipse,rgba(191,125,64,0.08) 0%,transparent 70%)"></div>
+  <div class="wrap">
+    <div class="section-label anim-1" style="justify-content:center">Pourquoi InConcertta ?</div>
+    <div class="h2 anim-2" style="text-align:center;margin-bottom:12px">Modernisez et simplifiez votre <span class="h-accent">action publique</span></div>
+    <div class="line-anim" style="width:60px;margin:0 auto 36px;"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:1100px;margin:0 auto">
+      <div class="card anim-3" style="padding:28px;animation-delay:0.1s;border:1px solid rgba(255,255,255,0.08)">
+        <div class="h-kicker" style="margin-bottom:16px;color:rgba(232,241,244,0.6)">Méthodes traditionnelles</div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          ${[
+            {t:'Registre en papier',d:'Saisie manuelle, risque de perte, accès limité, difficulté d\'analyse'},
+            {t:'Courriels dispersés',d:'Silos d\'information, pas de vue synthétique'},
+            {t:'Réunions physiques',d:'Déplacement requis, participation limitée aux présents'},
+            {t:'Excel pour l\'analyse des données',d:'Traitement chronophage, risque d\'erreurs'},
+          ].map(m=>`
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(255,255,255,0.02);border-radius:8px">
+              <div style="width:8px;height:8px;border-radius:50%;background:rgba(232,241,244,0.3);flex-shrink:0;margin-top:4px"></div>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--text-mid);margin-bottom:4px">${m.t}</div>
+                <div class="small-text">${m.d}</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      <div class="card card-orange anim-3" style="padding:28px;animation-delay:0.2s">
+        <div class="h-kicker" style="margin-bottom:16px">Avec InConcertta</div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          ${[
+            {t:'Analyse automatique',d:'Tris croisés, tests statistiques, export en un clic'},
+            {t:'Centralisation',d:'Toutes les contributions au même endroit'},
+            {t:'Inclusif',d:'Accessibilité simple 24/7 et à distance'},
+            {t:'Neutralité',d:'Traçabilité et traitement homogène des contributions'},
+            {t:'Réduction des délais',d:'Mise en service en quelques heures'},
+          ].map(m=>`
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(191,125,64,0.08);border-radius:8px">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--orange);flex-shrink:0;margin-top:4px"></div>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--light);margin-bottom:4px">${m.t}</div>
+                <div class="small-text" style="color:var(--text-mid)">${m.d}</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+    <div class="anim-4" style="margin-top:32px;text-align:center">
+      <span class="small-text" style="color:var(--accent);font-weight:600">Un gain de temps, de qualité et de transparence pour vos démarches participatives</span>
+    </div>
+  </div>
+`},
+
+// ── 4 : NIVEAUX DE CONCERTATION ─────────────────────────────────
+{ label: 'Niveaux de concertation', html: `
+  <div class="noise"></div>
+  <div class="glow" style="width:700px;height:300px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(ellipse,rgba(191,125,64,0.08) 0%,transparent 70%)"></div>
+  <div class="wrap">
+    <div class="section-label anim-1" style="justify-content:center">Niveaux de concertation</div>
+    <div class="h2 anim-2" style="text-align:center;margin-bottom:12px">Pilotez votre démarche <span class="h-accent">selon vos ambitions</span></div>
+    <div class="line-anim" style="width:60px;margin:0 auto 36px;"></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+      ${[
+        {n:'01',t:'Communication & Consultation',d:'Informer et partager les clés de compréhension du projet. Sonder les premières attentes citoyennes via les outils d\'information et de sondage.',col:'var(--orange)',bg:'rgba(191,125,64,0.10)',border:'rgba(191,125,64,0.22)',delay:'0.1s'},
+        {n:'02',t:'Concertation & Dialogue',d:'Instaurer un échange sur carte interactive et avec des outils de dialogue dynamiques pour enrichir vos projets et recueillir des contributions qualifiées.',col:'var(--accent)',bg:'rgba(17,182,182,0.08)',border:'rgba(17,182,182,0.20)',delay:'0.2s'},
+        {n:'03',t:'Co-construction & Participation',d:'Impliquer les citoyens dans la co-création de solutions via des dispositifs interactifs et collaboratifs pour une appropriation collective du projet.',col:'rgba(232,241,244,0.90)',bg:'rgba(255,255,255,0.04)',border:'var(--border)',delay:'0.3s'},
+      ].map(l=>`
+        <article class="anim-3 bubble-card" style="animation-delay:${l.delay};padding:28px;background:${l.bg};border:1px solid ${l.border};">
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;color:${l.col};letter-spacing:0.12em;margin-bottom:12px">${l.n}</div>
+          <div style="font-size:15px;font-weight:700;color:var(--white);line-height:1.3;margin-bottom:14px;font-family:'Space Grotesk',sans-serif">${l.t}</div>
+          <div style="width:24px;height:2px;background:${l.col};margin-bottom:14px;border-radius:2px"></div>
+          <p class="small-text">${l.d}</p>
+        </article>
+      `).join('')}
+    </div>
+    <div class="anim-4" style="margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:960px;margin-left:auto;margin-right:auto">
+      ${[
+        {tag:'Politiques publiques',d:'Évaluation de dispositif, programmation, recueil d\'idées…'},
+        {tag:'Planification & transition écologique',d:'Usages, mobilités, concertation de SCOT, PLU, PCAET…'},
+        {tag:'Aménagement urbain',d:'Réaménagement d\'une place, d\'un quartier, d\'un centre-bourg…'},
+      ].map(e=>`<div class="card anim-4" style="padding:14px 16px;text-align:center"><div class="h-kicker" style="justify-content:center;margin-bottom:8px;font-size:9px">${e.tag}</div><div class="small-text">${e.d}</div></div>`).join('')}
+    </div>
+    <div class="anim-5" style="margin-top:20px;text-align:center">
+      <span class="small-text" style="color:var(--orange);font-weight:600">InConcertta peut accompagner différents types de projet</span>
+    </div>
+  </div>
+`},
+
+// ── 5 : CARTE INTERACTIVE ───────────────────────────────────────
+{ label: 'Cartographie interactive', html: `
+  <div class="noise"></div>
+  <div class="glow" style="width:500px;height:500px;bottom:-100px;right:-100px;background:radial-gradient(circle,rgba(191,125,64,0.14) 0%,transparent 70%)"></div>
+  <div class="wrap col-l">
+    <div>
+      ${mockup('carte')}
+      <div class="mockup-thumbs anim-4">
+        ${mockup('planQuestion', {size:'compact', label:'Plan — question ouverte'})}
+        ${mockup('planSujet', {size:'compact', label:'Plan — sujet ouvert'})}
+      </div>
+    </div>
+    <div>
+      <div class="section-label anim-1">Outil — Cartographie</div>
+      <div class="h2 anim-2" style="margin-bottom:10px">Le territoire devient<br>l'<span class="h-accent">interface de participation</span></div>
+      <div class="sep anim-3"></div>
+      <p class="body-text anim-3" style="margin:14px 0 20px;font-size:14px">Permettez aux citoyens de dessiner leurs attentes directement sur le plan.</p>
+      ${featRow('map','Modélisation territoriale','Grille paramétrée sur n\'importe quel fond de plan, catalogue d\'objets')}
+      ${featRow('collab','Collaboration temps réel','Mode personnel ou collaboratif simultané — plusieurs participants interagissant sur un même plan')}
+      ${featRow('bar','Pédagogique','Budget, eco-score et paramètres calculés automatiquement — implique les citoyens dans les arbitrages réels')}
+      ${featRow('gear','Grille d\'objets personnalisée','Rattachez un catalogue d\'objets sur-mesure à chaque carte de projet, sondez et observez les volontés et besoins des habitants')}
+      <div class="card card-orange anim-5" style="padding:14px 16px;margin-top:12px">
+        <div class="small-text" style="color:var(--orange);font-weight:600">L'outil remplace le papier pour une concertation plus dynamique et continue</div>
+      </div>
+    </div>
+  </div>
+`},
+
+// ── 6 : DIALOGUE ──────────────────────────────────────
+{ label: 'Dialogue', html: `
+  <div class="noise"></div>
+  <div class="glow" style="width:500px;height:400px;top:-60px;left:-60px;background:radial-gradient(circle,rgba(17,182,182,0.08) 0%,transparent 70%)"></div>
+  <div class="wrap col-r">
+    <div>
+      <div class="section-label anim-1">Outil — Dialogue</div>
+      <div class="h2 anim-2" style="margin-bottom:10px">Maîtriser &amp; contextualiser<br>le <span class="h-accent">débat public</span></div>
+      <div class="sep anim-3"></div>
+      <p class="body-text anim-3" style="margin:14px 0 20px;font-size:14px">Les fils de discussion sont ancrés pour garantir des échanges pragmatiques, connectés à la réalité du terrain.</p>
+      ${featRow('chat','Sujets de discussion','Fils de discussion créés par le porteur de projet, ouverts aux contributions citoyennes avec modération intégrée')}
+      ${featRow('map','Ancrage cartographique','Sujets et actualités rattachés à des zones du plan interactif permettant de contextualiser le dialogue')}
+      ${featRow('dash','Communication directe','Réponses directes depuis l\'espace de gestion — gain de temps et traçabilité complète des échanges')}
+      <div class="card card-orange anim-5" style="padding:14px 16px;margin-top:12px">
+        <div class="small-text" style="color:var(--orange);font-weight:600">La perte de courriels est évitée et le dialogue centralisé pour une meilleure réactivité</div>
+      </div>
+    </div>
+    <div>
+      ${mockup('forum')}
+    </div>
+  </div>
+`},
+
+// ── 7 : BOÎTE À IDÉES ───────────────────────────────────────────
+{ label: 'Boîte à idées', html: `
+  <div class="noise"></div>
+  <div class="glow" style="width:450px;height:450px;bottom:-80px;left:-60px;background:radial-gradient(circle,rgba(191,125,64,0.12) 0%,transparent 70%)"></div>
+  <div class="wrap col-l">
+    <div>
+      <div class="mockup-stack mockup-stack--budget anim-sc">
+        ${mockup('idees', {label:'Boîte à idées'})}
+        ${mockup('ideesVote', {label:'Vote budget participatif'})}
+      </div>
+    </div>
+    <div>
+      <div class="section-label anim-1">Outil — Co-construction</div>
+      <div class="h2 anim-2" style="margin-bottom:10px">Collecte des idées &amp;<br><span class="h-accent">Budget participatif</span></div>
+      <div class="sep anim-3"></div>
+      <p class="body-text anim-3" style="margin:14px 0 20px;font-size:14px">Du dépôt libre d'idées à l'arbitrage budgétaire, collectez les idées et sondez les habitants en un seul outil.</p>
+      ${featRow('bulb','Dépôt libre ou cadré','Paramétrage des besoins budgétaires et de temporalité')}
+      ${featRow('gear','Sélection en amont','Tri et traitement par l\'équipe projet permettant d\'éviter les propositions hors cadre')}
+      ${featRow('bar','Vote avec enveloppe','Vote par critères de satisfaction ou avec plafond budgétaire permettant de prioriser selon un budget réel')}
+      ${featRow('dash','Suivi & réponses','Historique des contributions et réponses aux participants')}
+      <div class="card card-orange anim-5" style="padding:14px 16px;margin-top:12px">
+        <div class="small-text" style="color:var(--orange);font-weight:600">InConcertta digitalise la collecte d'idées et le vote pour une démocratie participative plus inclusive</div>
+      </div>
+    </div>
+  </div>
+`},
+
+// ── 8 : SONDAGES ────────────────────────────────────────────────
+{ label: 'Enquêtes & Sondages', html: `
+  <div class="noise"></div>
+  <div class="glow" style="width:400px;height:400px;top:-40px;right:-60px;background:radial-gradient(circle,rgba(17,182,182,0.1) 0%,transparent 70%)"></div>
+  <div class="wrap col-r">
+    <div>
+      <div class="section-label anim-1">Outil — Sondage</div>
+      <div class="h2 anim-2" style="margin-bottom:10px">Des analyses fiables pour<br><span class="h-accent">éclairer vos décisions</span></div>
+      <div class="sep anim-3"></div>
+      <p class="body-text anim-3" style="margin:14px 0 20px;font-size:14px">Du questionnaire à l'exploitation structurée des données directement sur la plateforme.</p>
+      ${featRow('bar','Conception structurée','Questions prédéfinies paramétrables, gestion du consentement et des accès répondant aux exigences légales')}
+      ${featRow('dash','Tris croisés','Analyses multivariées par profil ou par réponse en quelques clics')}
+      ${featRow('gear','Tests statistiques','Khi-deux (χ²), redressements par pondération, indicateurs synthétiques')}
+      ${featRow('export','Export rapport','Résultats exportables pour le dossier de concertation officiel')}
+      <div class="card card-orange anim-5" style="padding:14px 16px;margin-top:12px">
+        <div class="small-text" style="color:var(--orange);font-weight:600">Évite le traitement manuel des données et garantit la fiabilité des analyses pour la prise de décision</div>
+      </div>
+    </div>
+    <div>
+      ${mockup('sondages')}
+    </div>
+  </div>
+`},
+
+// ── 9 : ESPACE COLLABORATIF & COMPARATIF ────────────────────────
+{ label: 'Collaboratif & Comparatif', html: `
+  <div class="noise"></div>
+  <div class="glow" style="width:600px;height:300px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(ellipse,rgba(191,125,64,0.07) 0%,transparent 70%)"></div>
+  <div class="wrap">
+    <div class="section-label anim-1" style="justify-content:center">Outils complémentaires</div>
+    <div class="h2 anim-2" style="text-align:center;margin-bottom:8px">Espace collaboratif &amp; <span class="h-accent">module comparatif</span></div>
+    <div class="line-anim" style="width:60px;margin:0 auto 32px"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div>
+        <div class="mockup-wrap--70 anim-sc">
+          ${mockup('collaboratif', {label:'Espace collaboratif'})}
+        </div>
+        <div class="card anim-3" style="padding:24px;margin-top:16px;animation-delay:0.1s">
+          <div class="pill" style="margin-bottom:12px">Espace collaboratif</div>
+          <div class="h3" style="margin-bottom:10px;font-size:1rem">Pour les partenaires du dispositif</div>
+          <p class="small-text" style="margin-bottom:14px">Accès réservé aux acteurs institutionnels — centralisation des échanges multi-partenaires hors sphère publique.</p>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            ${['Échange de documents entre partenaires','Fils de discussion thématiques','Collecte d\'avis et arbitrages','Vue centralisée des échanges institutionnels'].map(t=>`<div style="display:flex;gap:8px;align-items:flex-start"><div style="width:1px;background:var(--border-o);flex-shrink:0;margin-top:5px;height:12px"></div><div class="small-text">${t}</div></div>`).join('')}
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="mockup-wrap--70 anim-sc">
+          ${mockup('comparaison', {label:'Module comparatif'})}
+        </div>
+        <div class="card card-accent anim-3" style="padding:24px;margin-top:16px;animation-delay:0.2s">
+          <div class="pill pill-accent" style="margin-bottom:12px">Module comparatif</div>
+          <div class="h3" style="margin-bottom:10px;font-size:1rem">Visualiser l'impact Avant / Après</div>
+          <p class="small-text" style="margin-bottom:14px">Outil de communication et co-décision : montrez concrètement l'effet d'un projet urbain ou paysager.</p>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            ${['Glissière interactive Avant / Après','Comparaison visuelle de scénarios','Partage et votes sur les créations','Catalogue d\'images (équipements, essences…)'].map(t=>`<div style="display:flex;gap:8px;align-items:flex-start"><div style="width:1px;background:rgba(17,182,182,0.35);flex-shrink:0;margin-top:5px;height:12px"></div><div class="small-text">${t}</div></div>`).join('')}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+`},
+
+// ── 10 : ACTUALITÉS ─────────────────────────────────────────────
+{ label: 'Actualités & Communication', html: `
+  <div class="noise"></div>
+  <div class="glow" style="width:400px;height:400px;top:-60px;right:-40px;background:radial-gradient(circle,rgba(191,125,64,0.1) 0%,transparent 70%)"></div>
+  <div class="wrap col-l">
+    <div>
+      ${mockup('actualites')}
+    </div>
+    <div>
+      <div class="section-label anim-1">Outil — Information</div>
+      <div class="h2 anim-2" style="margin-bottom:10px">Actualités &amp;<br><span class="h-accent">communication de projet</span></div>
+      <div class="sep anim-3"></div>
+      <p class="body-text anim-3" style="margin:14px 0 20px;font-size:14px">Tenez vos participants informés à chaque étape du projet via un fil d'information vivant intégré à la plateforme.</p>
+      ${featRow('news','Publication d\'actualités','Articles, informations clés et événements liés au projet')}
+      ${featRow('export','Documents partagés','Mise à disposition de pièces, plans et rapports aux participants')}
+      ${featRow('dash','Archivage','Conservation des contributions pour le rapport final de concertation')}
+    </div>
+  </div>
+  
+`},
+
+// ── 11 : RÉCAPITULATIF OUTILS ───────────────────────────────────
+{ label: 'Récapitulatif outils', html: `
+  <div class="noise"></div>
+  <div class="glow" style="width:700px;height:300px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(ellipse,rgba(17,182,182,0.07) 0%,transparent 70%)"></div>
+  <div class="wrap">
+    <div class="section-label anim-1" style="justify-content:center">Boîte à outils</div>
+    <div class="h2 anim-2" style="text-align:center;margin-bottom:8px">Les <span class="h-accent">différents outils disponibles</span></div>
+    <div class="line-anim" style="width:60px;margin:0 auto 28px"></div>
+    <div class="tool-grid anim-3">
+      ${[
+        {tag:'Dialogue',t:'Forum & Messagerie',d:'Fils modérés, ancrage cartographique, courriels centralisés'},
+        {tag:'Co-construction',t:'Boîte à idées',d:'Dépôt et vote des propositions citoyennes avec enveloppe budgétaire'},
+        {tag:'Territoire',t:'Cartographie interactive',d:'Modélisation sur grille, budget participatif, collaboration temps réel'},
+        {tag:'Données',t:'Enquêtes & Sondages',d:'Questionnaires paramétrables, tris croisés, tests statistiques, export'},
+        {tag:'Partenaires',t:'Espace collaboratif',d:'Échanges institutionnels privés, programmation d\'actions multi-acteurs'},
+        {tag:'Visualisation',t:'Comparatif Avant / Après',d:'Glissière interactive, catalogue visuel, vote sur scénarios'},
+      ].map((t,i)=>`
+        <div class="tool-cell" style="animation-delay:${0.05*i}s">
+          <div class="tool-cell-tag">${t.tag}</div>
+          <div class="tool-cell-title">${t.t}</div>
+          <div class="tool-cell-desc">${t.d}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="anim-4" style="margin-top:18px;text-align:center">
+      <span class="small-text">Chaque outil est activable selon les besoins et la phase du projet</span>
+    </div>
+  </div>
+`},
+
+// ── 12 : GESTION VUE D'ENSEMBLE ────────────────────────────────
+{ label: 'Interface de gestion', html: `
+  <div class="noise"></div>
+  <div class="glow" style="width:500px;height:500px;top:-80px;right:-80px;background:radial-gradient(circle,rgba(191,125,64,0.12) 0%,transparent 70%)"></div>
+  <div class="wrap col-r">
+    <div>
+      <div class="section-label anim-1">Back-office</div>
+      <div class="h2 anim-2" style="margin-bottom:10px">Interface de<br><span class="h-accent">gestion</span></div>
+      <div class="sep anim-3"></div>
+      <p class="body-text anim-3" style="margin:14px 0 20px;font-size:14px">Réservé aux porteurs de projet. <strong>Construisez &amp; pilotez</strong> l'ensemble du dispositif depuis une interface unique.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
+        ${[
+          {icon:'gear',t:'Paramètres',d:'Accès et permissions, outils activés'},
+          {icon:'map',t:'Cartographie',d:'Fond de plan et paramètre de la grille'},
+          {icon:'bar',t:'Sondages',d:'Conception & analyse'},
+          {icon:'bulb',t:'Idées',d:'Suivi, modération et mise en vote'},
+          {icon:'chat',t:'Forum / Courriels',d:'Dialogue centralisé et modéré'},
+          {icon:'export',t:'Exports',d:'PDF, archives, rapports préétablis'},
+        ].map((m,i)=>`
+          <div class="card anim-4" style="padding:12px 14px;animation-delay:${0.08*i}s">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+              ${iconSvg(m.icon)}
+              <span style="font-size:13px;font-weight:600;color:var(--light)">${m.t}</span>
+            </div>
+            <div class="small-text">${m.d}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+    <div>
+      ${mockup('gestion', {label:'Panneau de contrôle — gestion'})}
+    </div>
+  </div>
+`},
+
+// ── 13 : PARAMÉTRAGE ───────────────────────────────────────────
+{ label: 'Paramétrage & Configuration', html: `
+  <div class="noise"></div>
+  <div class="glow" style="width:400px;height:400px;bottom:-60px;right:-60px;background:radial-gradient(circle,rgba(17,182,182,0.08) 0%,transparent 70%)"></div>
+  <div class="wrap col-l">
+    <div>
+      <div class="card anim-sc" style="padding:24px">
+        <div class="pill" style="margin-bottom:16px">Paramètres du projet</div>
+        <div style="display:flex;flex-direction:column;gap:0">
+          ${[
+            {t:'Accès libre ou restreint',d:'Ouverture large, invitation nominative ou liste fermée — selon le cadre légal et la démarche'},
+            {t:'Outils actionnables à la carte',d:'Activez uniquement les modules pertinents pour chaque phase du projet'},
+            {t:'Niveaux de participation configurables',d:'Configurez les droits d\'action des participants (lire, contribuer, voter, co-créer)'},
+          ].map((item,i)=>`
+            <div class="feat-row anim-${i+2}">
+              ${icon('gear')}
+              <div><div class="feat-label">${item.t}</div><div class="feat-desc">${item.d}</div></div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="section-label anim-1">Back-office</div>
+      <div class="h2 anim-2" style="margin-bottom:10px">Paramétrage &amp;<br><span class="h-accent">configuration</span></div>
+      <div class="sep anim-3"></div>
+      <p class="body-text anim-3" style="margin:14px 0 24px;font-size:14px"><strong>Un pilotage adapté à chaque démarche.</strong> Chaque projet est unique. L'interface de gestion s'adapte à votre démarche, vos contraintes et vos délais.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="card card-accent anim-4" style="padding:16px">
+          <div class="stat-number" style="font-size:28px">Quelques heures</div>
+          <div class="stat-label">De mise en service</div>
+        </div>
+        <div class="card card-orange anim-4" style="padding:16px">
+          <div class="stat-number" style="font-size:28px">100%</div>
+          <div class="stat-label">Numérique</div>
+        </div>
+      </div>
+      <p class="small-text anim-5" style="margin-top:16px">Aucune installation nécessaire, accessible depuis un navigateur. Le déploiement est rapide et sans infrastructure requise.
+        Possibilité de déployer la plateforme sur votre propre site officiel via Iframe.</p>
+    </div>
+  </div>
+`},
+
+// ── 14 : ANALYSE & DIALOGUE ─────────────────────────────────
+{ label: 'Analyse & Dialogue', html: `
+  <div class="noise"></div>
+  <div class="glow" style="width:600px;height:300px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(ellipse,rgba(191,125,64,0.08) 0%,transparent 70%)"></div>
+  <div class="wrap">
+    <div class="section-label anim-1" style="justify-content:center">Back-office</div>
+    <div class="h2 anim-2" style="text-align:center;margin-bottom:8px">Analyse des données <span class="h-accent">&amp;</span> modération</div>
+    <div class="line-anim" style="width:60px;margin:0 auto 28px"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div class="card anim-3" style="padding:28px;animation-delay:0.1s">
+        <div class="pill" style="margin-bottom:16px">Analyse des sondages</div>
+        <p class="small-text" style="margin-bottom:20px">Outil d'analyse intégré : pas besoin d'un logiciel externe pour exploiter vos résultats.</p>
+        ${['Tris croisés par profil ou par réponse','Redressements par pondération','Tests statistiques khi-deux (χ²)','Indicateurs synthétiques automatiques','Export pour rapport de concertation officiel'].map(t=>`<div class="feat-row">${icon('bar')}<div><div class="feat-desc">${t}</div></div></div>`).join('')}
+      </div>
+      <div class="card card-orange anim-3" style="padding:28px;animation-delay:0.2s">
+        <div class="pill" style="margin-bottom:16px">Modération &amp; dialogue</div>
+        <p class="small-text" style="margin-bottom:20px">Tout le dialogue avec les participants est centralisé dans un seul espace de gestion.</p>
+        ${['Réponses aux idées directement depuis la gestion','Modération du forum (validation, suppression)','Traitement des courriels au même endroit','Envoi d\'invitations ciblées aux participants','Historique complet des échanges horodaté'].map(t=>`<div class="feat-row">${icon('chat')}<div><div class="feat-desc">${t}</div></div></div>`).join('')}
+      </div>
+    </div>
+  </div>
+`},
+
+// ── 15 : ACCESSIBILITÉ & SÉCURITÉ ───────────────────────────────
+{ label: 'Accessibilité & Conformité', html: `
+  <div class="noise"></div>
+  <div class="glow" style="width:500px;height:300px;bottom:0;left:0;background:radial-gradient(ellipse,rgba(17,182,182,0.08) 0%,transparent 70%)"></div>
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start">
+      <div>
+        <div class="section-label anim-1">Accessibilité</div>
+        <div class="h2 anim-2" style="margin-bottom:10px;font-size:clamp(1.4rem,2.5vw,2rem)">Une plateforme accessible<br><span class="h-accent">&amp; inclusive</span></div>
+        <div class="sep anim-3"></div>
+        <p class="body-text anim-3" style="margin:14px 0 20px;font-size:13.5px">InConcertta est accessible depuis n'importe quel navigateur d'ordinateur, de tablette ou smartphone.</p>
+        <div class="a11y-grid anim-4">
+          ${[
+            {tag:'Dyslexie',t:'Lecture sur-mesure',d:'Police adaptée, espacement renforcé, mode concentration'},
+            {tag:'Malvoyance',t:'Confort visuel',d:'Taille du texte ajustable, contrastes renforcés, filtre daltonisme'},
+            {tag:'Motricité',t:'Navigation simplifiée',d:'Zones cliquables agrandies, réduction des animations, lecture vocale'},
+          ].map(a=>`
+            <div class="a11y-item">
+              <div class="a11y-tag">${a.tag}</div>
+              <div class="a11y-title">${a.t}</div>
+              <div class="a11y-desc">${a.d}</div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="anim-5 mockup-wrap--80" style="margin-top:20px">
+          ${mockup('planAccessibilite', {label:'Panneau accessibilité sur le plan'})}
+        </div>
+      </div>
+      <div>
+        <div class="section-label anim-1" style="color:var(--accent)">Conformité</div>
+        <div class="h2 anim-2" style="margin-bottom:10px;font-size:clamp(1.4rem,2.5vw,2rem)">Sécurité &amp;<br><span style="color:var(--accent)">conformité</span></div>
+        <div class="sep anim-3" style="background:var(--accent)"></div>
+        <p class="body-text anim-3" style="margin:14px 0 20px;font-size:13.5px">L'architecture numérique a été pensée et conçue pour les collectivités territoriales et dans le respect de la législation.</p>
+        <div class="sec-grid anim-4">
+          ${[
+            {t:'RGPD',d:'Base légale documentée, information des personnes, exercice des droits, sous-traitance encadrée'},
+            {t:'Hébergement UE',d:'Données hébergées sur une solution en Union européenne'},
+            {t:'Sécurité',d:'Accès authentifiés, cloisonnement des projets et transmissions des données chiffrées'},
+          ].map(s=>`
+            <div class="sec-item">
+              <div class="sec-title">${s.t}</div>
+              <div class="sec-desc">${s.d}</div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="mockup-mobile-row--inline anim-5">
+          ${mobileShot('mobilePlan', 'Interface mobile')}
+          ${mobileShot('mobileControle', 'Panneau de contrôle mobile')}
+        </div>
+      </div>
+    </div>
+  </div>
+`},
+
+// ── 17 : CONCLUSION ─────────────────────────────────────────────
+{ label: 'Contact & Conclusion', html: `
+  <div class="noise"></div>
+  <div class="glow" style="width:700px;height:700px;top:-200px;right:-200px;background:radial-gradient(circle,rgba(191,125,64,0.16) 0%,transparent 70%)"></div>
+  <div class="glow" style="width:400px;height:400px;bottom:-100px;left:-60px;background:radial-gradient(circle,rgba(17,182,182,0.1) 0%,transparent 70%)"></div>
+  <div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center">
+    <div>
+      <div class="anim-1" style="margin-bottom:32px">
+        <img src="${IMGS.logo}" alt="InConcertta" style="height:80px;width:auto">
+      </div>
+      <div class="h1 anim-2" style="font-size:clamp(2rem,4vw,3.2rem);margin-bottom:16px">
+        Prêt à transformer<br>vos <span class="h-accent">concertations ?</span>
+      </div>
+      <div class="sep anim-3"></div>
+      <p class="body-text anim-3" style="max-width:44ch;margin-top:16px">
+        Solution entièrement numérique, déployable partout en France. Déploiement sur mesure avec ou sans accompagnement d'InCitta. Échangeons sur votre projet de concertation ou de budget participatif.
+      </p>
+      <div class="trust-row anim-4" style="margin-top:20px">
+        <div class="badge"><span class="badge-dot"></span>Démarches réglementaires</div>
+        <div class="badge"><span class="badge-dot"></span>Adaptée aux collectivités</div>
+      </div>
+      <div class="trust-row anim-4" style="margin-top:8px">
+        <div class="badge"><span class="badge-dot"></span>Expertise terrain</div>
+        <div class="badge"><span class="badge-dot"></span>Accompagnement InCitta</div>
+      </div>
+      <div class="anim-5" style="display:flex;flex-direction:column;gap:10px;margin-top:28px">
+        <a href="https://inconcertta.fr/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:18px 32px;border-radius:12px;background:linear-gradient(135deg,var(--orange),#d19b67);border:1px solid rgba(255,255,255,0.15);color:white;font-size:16px;font-weight:700;text-decoration:none;transition:transform 0.2s ease,box-shadow 0.2s ease;box-shadow:0 12px 32px rgba(191,125,64,0.3);font-family:'Space Grotesk',sans-serif;letter-spacing:0.02em">
+          Essayez sur inconcertta.fr
+        </a>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">
+          <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,0.04);border:1px solid var(--border)">
+            ${iconSvg('news')}
+            <span class="small-text" style="color:var(--light)">contact@incitta.eu</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,0.04);border:1px solid var(--border)">
+            ${iconSvg('nav')}
+            <span class="small-text" style="color:var(--light)">inconcertta.fr</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,0.04);border:1px solid var(--border)">
+            ${iconSvg('map')}
+            <span class="small-text" style="color:var(--light)">incitta.eu</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card card-orange anim-3" style="padding:24px">
+        <div class="h3" style="margin-bottom:12px;font-size:1.1rem">Une solution pensée pour les territoires</div>
+        <p class="small-text" style="line-height:1.65">Issu de l'ingénierie territoriale — InConcertta est le prolongement numérique d'une expertise terrain.</p>
+      </div>
+      <div class="card anim-4" style="padding:20px">
+        <div class="h-kicker" style="margin-bottom:12px">Les formules d'accompagnement</div>
+        ${[
+          {t:'Atelier de concertation',d:'Organisation d\'une session participative encadrée'},
+          {t:'Projet accompagné',d:'Suivi complet d\'une démarche de concertation'},
+          {t:'Plateforme en autonomie',d:'Accès à l\'outil pour vos propres démarches'},
+        ].map(f=>`<div style="padding:10px 0;border-bottom:1px solid var(--border-o)"><div style="font-size:13px;font-weight:700;color:var(--light);margin-bottom:3px">${f.t}</div><div class="small-text">${f.d}</div></div>`).join('')}
+      </div>
+    </div>
+  </div>
+`},
+
+];
+
+// ══════════════════════════════════════════════════════════════════
+// ENGINE
+// ══════════════════════════════════════════════════════════════════
+
+const stage = document.getElementById('stage');
+const total = slides.length;
+let current = 0;
+
+// Build slides
+slides.forEach((s, i) => {
+  const el = document.createElement('div');
+  el.className = 'slide' + (i === 0 ? ' active' : '');
+  el.id = 'slide-' + i;
+  el.style.transform = `translateX(${i * 100}vw)`;
+  el.innerHTML = s.html;
+  stage.appendChild(el);
+});
+
+// Build dots
+const dotsEl = document.getElementById('dots');
+slides.forEach((_, i) => {
+  const d = document.createElement('button');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => goto(i);
+  d.setAttribute('aria-label', `Diapositive ${i+1}`);
+  dotsEl.appendChild(d);
+});
+
+// Build overview thumbnails (Prezi layout)
+const ovCanvas = document.getElementById('ov-canvas');
+const ovThumbs = document.getElementById('ov-thumbs');
+const ovLinks = document.getElementById('ov-links');
+function getOvCategory(i) {
+  if (i === 0) return 'root';
+  if (i >= 12 && i <= 14) return 'hub';
+  if (i >= 5 && i <= 11) return 'tool';
+  if (i >= 1 && i <= 4) return 'framework';
+  if (i >= 15) return 'closing';
+  return 'framework';
+}
+slides.forEach((s, i) => {
+  const cat = getOvCategory(i);
+  const th = document.createElement('div');
+  th.className = 'ov-thumb ov-' + cat + (i === 0 ? ' active' : '');
+  th.dataset.index = i;
+  th.onclick = () => { goto(i); setOverview(false); };
+  th.innerHTML = `<div class="ov-thumb-inner">${ovArtHtml(i, cat)}</div><div class="ov-label">${String(i+1).padStart(2,'0')} — ${s.label}</div>`;
+  ovThumbs.appendChild(th);
+});
+
+function placeThumb(th, x, y, transform) {
+  th.style.left = x + 'px';
+  th.style.top = y + 'px';
+  th.style.transform = transform || 'translate(-50%, -50%)';
+}
+
+function ovThumbImageCenter(th) {
+  const inner = th.querySelector('.ov-thumb-inner');
+  const canvasRect = ovCanvas.getBoundingClientRect();
+  const rect = inner.getBoundingClientRect();
+  return {
+    x: rect.left - canvasRect.left + rect.width / 2,
+    y: rect.top - canvasRect.top + rect.height / 2
+  };
+}
+
+function ovLinePath(a, b) {
+  return `M ${a.x} ${a.y} L ${b.x} ${b.y}`;
+}
+
+function ovCurvePath(a, b, bend = 0.26) {
+  const dx = b.x - a.x;
+  const dy = b.y - a.y;
+  if (Math.abs(dx) < 6) return ovLinePath(a, b);
+  const cx1 = a.x + dx * bend;
+  const cy1 = a.y + dy * 0.08;
+  const cx2 = b.x - dx * bend;
+  const cy2 = b.y - dy * 0.08;
+  return `M ${a.x} ${a.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${b.x} ${b.y}`;
+}
+
+function nearestHubCenter(target, hubEls) {
+  let best = ovThumbImageCenter(hubEls[0]);
+  let bestDist = Infinity;
+  for (const h of hubEls) {
+    const c = ovThumbImageCenter(h);
+    const d = (target.x - c.x) ** 2 + (target.y - c.y) ** 2;
+    if (d < bestDist) {
+      bestDist = d;
+      best = c;
+    }
+  }
+  return best;
+}
+
+function updateHubGuide(hubEls) {
+  if (!hubEls.length) return;
+  const canvasRect = ovCanvas.getBoundingClientRect();
+  const rects = hubEls.map(th => th.querySelector('.ov-thumb-inner').getBoundingClientRect());
+  const pad = 18;
+  const left = Math.min(...rects.map(r => r.left)) - canvasRect.left - pad;
+  const right = Math.max(...rects.map(r => r.right)) - canvasRect.left + pad;
+  const top = Math.min(...rects.map(r => r.top)) - canvasRect.top - pad;
+  const bottom = Math.max(...rects.map(r => r.bottom)) - canvasRect.top + pad;
+  ovCanvas.style.setProperty('--hub-guide-left', (left + (right - left) / 2) + 'px');
+  ovCanvas.style.setProperty('--hub-guide-top', top + 'px');
+  ovCanvas.style.setProperty('--hub-guide-width', (right - left) + 'px');
+  ovCanvas.style.setProperty('--hub-guide-height', (bottom - top) + 'px');
+}
+
+function drawOverviewLinks(rootEls, hubEls, toolEls, frameworkEls, closingEls) {
+  const W = ovCanvas.clientWidth;
+  const H = ovCanvas.clientHeight;
+  if (!W || !H) return;
+  ovLinks.setAttribute('viewBox', `0 0 ${W} ${H}`);
+
+  const roots = rootEls.map(ovThumbImageCenter);
+  const hubs = hubEls.map(ovThumbImageCenter);
+  const tools = toolEls.map(ovThumbImageCenter);
+  const framework = frameworkEls.map(ovThumbImageCenter);
+  const closing = closingEls.map(ovThumbImageCenter);
+  if (!hubs.length) return;
+
+  const lines = [];
+  const rootRef = roots[0] || hubs[0];
+
+  // Tronc principal bleu (centres des vignettes, aligné sur la colonne hub).
+  lines.push(`<path class="ov-link-main" d="${ovCurvePath(rootRef, hubs[0], 0.16)}"></path>`);
+  for (let i = 0; i < hubs.length - 1; i++) {
+    lines.push(`<path class="ov-link-main" d="${ovLinePath(hubs[i], hubs[i + 1])}"></path>`);
+  }
+
+  // Branches orange (cadre + outils) — centre vignette vers centre vignette hub le plus proche.
+  for (const p of framework) {
+    const ref = nearestHubCenter(p, hubEls);
+    lines.push(`<path class="ov-link-side" d="${ovCurvePath(ref, p, 0.22)}"></path>`);
+  }
+  for (const p of tools) {
+    const ref = nearestHubCenter(p, hubEls);
+    lines.push(`<path class="ov-link-side" d="${ovCurvePath(ref, p, 0.22)}"></path>`);
+  }
+
+  // Branche de synthèse.
+  for (const p of closing) {
+    const ref = hubs[hubs.length - 1];
+    lines.push(`<path class="ov-link-side" d="${ovCurvePath(ref, p, 0.18)}"></path>`);
+  }
+
+  ovLinks.innerHTML = lines.join('');
+}
+
+function layoutOverview() {
+  const W = ovCanvas.clientWidth;
+  const H = ovCanvas.clientHeight;
+  const cx = W / 2;
+  const cy = H / 2;
+  const root = [...ovCanvas.querySelectorAll('.ov-thumb.ov-root')];
+  const hub = [...ovCanvas.querySelectorAll('.ov-thumb.ov-hub')];
+  const tools = [...ovCanvas.querySelectorAll('.ov-thumb.ov-tool')];
+  const framework = [...ovCanvas.querySelectorAll('.ov-thumb.ov-framework')];
+  const closing = [...ovCanvas.querySelectorAll('.ov-thumb.ov-closing')];
+
+  root.forEach(th => placeThumb(th, cx, 58, 'translate(-50%, 0)'));
+
+  const hubStep = 168;
+  hub.forEach((th, i) => {
+    placeThumb(th, cx, cy + (i - (hub.length - 1) / 2) * hubStep);
+  });
+
+  const toolRadiusX = Math.min(W * 0.31, 340);
+  const toolRadiusY = Math.min(H * 0.33, 250);
+  const branchShift = Math.min(150, Math.max(82, W * 0.12));
+  tools.forEach((th, i) => {
+    const t = i / Math.max(tools.length - 1, 1);
+    const angle = -Math.PI / 2 + (t * Math.PI);
+    const x = cx + toolRadiusX * Math.cos(angle);
+    const y = cy + toolRadiusY * Math.sin(angle);
+    placeThumb(th, x + branchShift, y);
+  });
+
+  const frameRadiusX = Math.min(W * 0.28, 300);
+  const frameRadiusY = Math.min(H * 0.3, 230);
+  framework.forEach((th, i) => {
+    const t = i / Math.max(framework.length - 1, 1);
+    const angle = Math.PI / 2 + (t * Math.PI);
+    const x = cx + frameRadiusX * Math.cos(angle);
+    const y = cy + frameRadiusY * Math.sin(angle);
+    placeThumb(th, x - branchShift, y);
+  });
+
+  const closeBottom = H - 22;
+  const closeSpan = Math.min(W * 0.5, 620);
+  const closeStart = cx - closeSpan / 2;
+  closing.forEach((th, i) => {
+    const x = closeStart + (i / Math.max(closing.length - 1, 1)) * closeSpan;
+    placeThumb(th, x, closeBottom, 'translate(-50%, -100%)');
+  });
+
+  updateHubGuide(hub);
+  requestAnimationFrame(() => drawOverviewLinks(root, hub, tools, framework, closing));
+}
+
+const AUTO_MS = 60000;
+let autoTimer = null;
+
+function scheduleAuto() {
+  clearTimeout(autoTimer);
+  if (overviewOpen) return;
+  autoTimer = setTimeout(() => {
+    const nextIdx = current < total - 1 ? current + 1 : 0;
+    goto(nextIdx, { auto: true });
+  }, AUTO_MS);
+}
+
+function onUserActivity() {
+  scheduleAuto();
+}
+
+function goto(n, opts = {}) {
+  if (n < 0 || n >= total) return;
+  document.getElementById('slide-' + current).classList.remove('active');
+  document.querySelectorAll('.dot')[current].classList.remove('active');
+  document.querySelectorAll('.ov-thumb')[current].classList.remove('active');
+  current = n;
+  stage.style.transform = `translateX(-${current * 100}vw)`;
+  document.getElementById('slide-' + current).classList.add('active');
+  document.querySelectorAll('.dot')[current].classList.add('active');
+  document.querySelectorAll('.ov-thumb')[current].classList.add('active');
+  document.getElementById('nav-counter').textContent = String(current+1).padStart(2,'0') + ' / ' + String(total).padStart(2,'0');
+  document.getElementById('progress-bar').style.width = ((current+1)/total*100) + '%';
+  document.getElementById('nav-prev').disabled = current === 0;
+  document.getElementById('nav-next').disabled = current === total - 1;
+  document.getElementById('nav-side-prev').disabled = current === 0;
+  document.getElementById('nav-side-next').disabled = current === total - 1;
+  scheduleAuto();
+}
+
+function prev() { goto(current - 1); }
+function next() { goto(current + 1); }
+
+let overviewOpen = false;
+
+function setOverview(open) {
+  overviewOpen = open;
+  document.body.classList.toggle('overview-open', open);
+  const ov = document.getElementById('overview');
+  const btn = document.getElementById('ov-btn');
+  ov.classList.toggle('open', open);
+  ov.setAttribute('aria-hidden', open ? 'false' : 'true');
+  btn.classList.toggle('active', open);
+  btn.setAttribute('aria-pressed', open ? 'true' : 'false');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  if (open) {
+    clearTimeout(autoTimer);
+    requestAnimationFrame(layoutOverview);
+  } else {
+    scheduleAuto();
+  }
+}
+
+function toggleOverview() {
+  setOverview(!overviewOpen);
+}
+
+window.addEventListener('resize', () => { if (overviewOpen) layoutOverview(); });
+
+function toggleFS() {
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(()=>{});
+  else document.exitFullscreen();
+}
+
+// Diffusion auto — 1 min sans interaction (souris, clavier, tactile)
+['mousemove', 'mousedown', 'click', 'keydown', 'touchstart', 'wheel'].forEach(ev => {
+  document.addEventListener(ev, () => { if (!overviewOpen) onUserActivity(); }, { passive: true });
+});
+
+// Keyboard
+window.addEventListener('keydown', e => {
+  if (overviewOpen) {
+    if (e.key === 'Escape') { e.preventDefault(); setOverview(false); }
+    return;
+  }
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+  if (e.key === 'f' || e.key === 'F') toggleFS();
+  if (e.key === 'Tab') { e.preventDefault(); next(); }
+  if (e.key >= '1' && e.key <= '9') goto(parseInt(e.key)-1);
+});
+
+// Touch swipe
+let ts = 0;
+document.addEventListener('touchstart', e => { ts = e.touches[0].clientX; }, {passive:true});
+document.addEventListener('touchend', e => {
+  if (overviewOpen) return;
+  const d = ts - e.changedTouches[0].clientX;
+  if (Math.abs(d) > 50) d > 0 ? next() : prev();
+}, {passive:true});
+
+// Init
+goto(0);
+</script>
+</body>
+</html>

@@ -13,7 +13,8 @@ import { initContactForm } from './hooks/contact-form.js';
 import { initLazyImages } from './hooks/lazy-images.js';
 import { initHeroParallax } from './hooks/hero-parallax.js';
 import { initRevealOnScroll } from './hooks/reveal-on-scroll.js';
-import { initInconcerttaDemo } from './hooks/inconcertta-demo.js';
+import { initInconcerttaEmbed } from './hooks/inconcertta-embed.js';
+import { injectGrain } from './lux/grain.js';
 import { initGoatCounter } from './goatcounter.js';
 import { initPresentationA11y } from './accessibility/init-a11y.js';
 import { initSiteI18n } from './i18n/site-i18n.js';
@@ -23,6 +24,8 @@ initNavbarScroll();
 initMobileEnv();
 
 async function boot() {
+  injectGrain();
+
   try {
     await bootLuxuryStack();
   } catch (err) {
@@ -37,7 +40,7 @@ async function boot() {
   initLazyImages();
   initHeroParallax();
   initRevealOnScroll();
-  initInconcerttaDemo();
+  initInconcerttaEmbed();
 
   try {
     const a11y = initPresentationA11y();

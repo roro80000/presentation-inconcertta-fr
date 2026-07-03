@@ -1,0 +1,29 @@
+================================================================================
+  GUIDE DES IMAGES — Diaporama InConcertta (presentation.html)
+================================================================================
+
+Dossier : images/  ·  Objet IMGS dans presentation.html
+
+Fichiers actifs (15 images + logo) :
+
+  logo.webp                  — Diapos 01 & 17 (couverture, conclusion)
+  carte.png                  — Diapo 06 Cartographie
+  plan-question-ouverte.png  — Diapo 06 (vignette plan)
+  plan-sujet-ouvert.png      — Diapo 06 (vignette plan)
+  forum.png                  — Diapo 07 Dialogue
+  idees.png                  — Diapo 08 Boîte à idées
+  idees-vote.png             — Diapo 08 Vote budget participatif
+  sondages.png               — Diapo 09 Sondages
+  espace-collaboratif.png    — Diapo 10 Espace collaboratif
+  comparaison.png            — Diapo 10 Module comparatif
+  actu.png                   — Diapo 11 Actualités
+  gestion.png                — Diapo 12 Interface de gestion
+  plan-accessibilite.png     — Diapo 15 Accessibilité
+  mobile-plan.png            — Diapo 15 Sécurité (capture mobile)
+  mobile-controle.png        — Diapo 15 Sécurité (capture mobile)
+
+Remplacement : copier le nouveau fichier avec le même nom, puis Cmd+Maj+R.
+
+================================================================================
+  Dernière mise à jour : juillet 2026
+================================================================================

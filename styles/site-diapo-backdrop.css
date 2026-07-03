@@ -1,0 +1,106 @@
+/**
+ * Fond diaporama InConcertta — dégradé teal + halos + grille (presentation.html).
+ * Couche fixe #site-diapo-backdrop + cartes .main-read semi-transparentes.
+ */
+
+:root {
+  --diapo-bg-deep: #00161e;
+  --diapo-bg-mid: #002532;
+  --diapo-grid-line: rgba(255, 255, 255, 0.035);
+  --diapo-grid-fine: rgba(255, 255, 255, 0.015);
+}
+
+html {
+  background-color: var(--diapo-bg-deep);
+}
+
+body {
+  background: transparent;
+}
+
+/* Couche fixe unique (injectée par js/lux/grain.js) */
+#site-diapo-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(1200px 600px at 10% 0%, rgba(17, 182, 182, 0.08), transparent 45%),
+    radial-gradient(900px 500px at 100% 10%, rgba(191, 125, 64, 0.12), transparent 35%),
+    linear-gradient(135deg, #000 0%, var(--diapo-bg-deep) 45%, #001b22 100%);
+}
+
+#site-diapo-backdrop::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(17, 182, 182, 0.08), transparent 22%),
+    radial-gradient(circle at 80% 30%, rgba(191, 125, 64, 0.1), transparent 18%),
+    radial-gradient(circle at 50% 70%, rgba(255, 255, 255, 0.04), transparent 18%);
+  filter: blur(18px);
+  animation: diapo-glow-drift 20s ease-in-out infinite alternate;
+}
+
+#site-diapo-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--diapo-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--diapo-grid-line) 1px, transparent 1px),
+    repeating-linear-gradient(0deg, transparent, transparent 40px, var(--diapo-grid-fine) 40px, var(--diapo-grid-fine) 41px),
+    repeating-linear-gradient(90deg, transparent, transparent 40px, var(--diapo-grid-fine) 40px, var(--diapo-grid-fine) 41px);
+  background-size: 72px 72px, 72px 72px, auto, auto;
+  opacity: 0.34;
+}
+
+@keyframes diapo-glow-drift {
+  from { transform: translate3d(-1.5%, -1%, 0) scale(1); }
+  to { transform: translate3d(1.5%, 1%, 0) scale(1.04); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #site-diapo-backdrop::before {
+    animation: none;
+  }
+}
+
+/* Contenu au-dessus du fond fixe */
+.incitta-a11y-content-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+#lux-grain {
+  z-index: 2;
+}
+
+.incitta-a11y-root {
+  z-index: 100010;
+}
+
+/* Cartes : fond semi-transparent pour laisser passer la grille globale */
+.main-read {
+  position: relative;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0, 37, 50, 0.82) 0%,
+      rgba(0, 54, 64, 0.76) 45%,
+      rgba(0, 20, 28, 0.86) 100%
+    ) !important;
+  backdrop-filter: blur(6px) saturate(115%);
+  -webkit-backdrop-filter: blur(6px) saturate(115%);
+}
+
+.main-read .content-wrap,
+.main-read .content-wrap > section,
+.main-read .content-wrap > aside,
+.main-read > .incitta-intro-lead,
+.main-read > .incitta-paircols,
+.main-read > .incitta-synthesis,
+.main-read > .incitta-follow-footer {
+  position: relative;
+  z-index: 1;
+}

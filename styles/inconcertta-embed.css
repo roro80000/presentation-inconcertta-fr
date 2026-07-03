@@ -1,0 +1,134 @@
+/**
+ * InConcertta embed — iframe live + plein écran (presentation.inconcertta.fr).
+ */
+
+:root {
+  --ic-embed-accent: #bf7d40;
+  --ic-embed-frame-bg: #1a1a1a;
+}
+
+/* —— Iframe live (inline) — aligné incitta.eu —— */
+.main-read .demo-frame--live {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  aspect-ratio: 2924 / 1671;
+  min-height: min(68vh, 780px);
+  overflow: hidden;
+  border-radius: 14px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--ic-embed-frame-bg);
+}
+
+.main-read .demo-frame--live iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background: var(--ic-embed-frame-bg);
+}
+
+.demo-embed-expand {
+  position: absolute;
+  bottom: max(10px, env(safe-area-inset-bottom));
+  right: max(10px, env(safe-area-inset-right));
+  z-index: 2;
+  margin: 0;
+  padding: 0.35rem 0.75rem;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #053b3b;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.demo-embed-expand:hover {
+  transform: scale(1.06);
+}
+
+.demo-embed-expand:focus-visible {
+  outline: 2px solid var(--ic-embed-accent);
+  outline-offset: 2px;
+}
+
+.demo-frame--live.is-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646;
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  aspect-ratio: unset;
+  min-height: 0;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+}
+
+html.demo-embed-fullscreen,
+body.demo-embed-fullscreen {
+  overflow: hidden;
+}
+
+/* Curseur lux : rétablir le curseur système sur la zone embed */
+html.lux-cursor-on #demo-live,
+html.lux-cursor-on #demo-live *,
+html.demo-embed-fullscreen,
+html.demo-embed-fullscreen * {
+  cursor: auto !important;
+}
+
+html.demo-embed-fullscreen #lux-cursor {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+#lux-cursor.is-hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+.main-read .demo-block--live {
+  margin: 1.25rem 0 0;
+}
+
+.main-read .demo-invite--live {
+  font-size: 0.98rem;
+  line-height: 1.62;
+  color: rgba(232, 241, 244, 0.92);
+  margin: 0 0 1rem;
+  max-width: 62ch;
+}
+
+.main-read .demo-live-heading {
+  margin: 0 0 0.55rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #f0f7fa;
+}
+
+.main-read .demo-block--static {
+  margin-top: 2rem;
+  padding-top: 1.65rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+@media (max-width: 720px) {
+  .main-read .demo-frame--live {
+    aspect-ratio: 16 / 10;
+    min-height: min(52vh, 520px);
+  }
+}

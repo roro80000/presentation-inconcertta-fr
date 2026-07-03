@@ -1,0 +1,6 @@
+Images du diaporama (presentation.html)
+
+Voir GUIDE-IMAGES.txt pour la liste complète diapo ↔ fichier.
+
+Format : PNG pour les captures, WebP pour le logo.
+Ne conserver que les fichiers listés dans GUIDE-IMAGES.txt.

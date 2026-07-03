@@ -169,8 +169,6 @@ export async function bootLuxuryStack() {
     return;
   }
 
-  injectGrain();
-
   const skipPreloader = shouldSkipLuxPreloader();
   if (!skipPreloader) {
     document.body.classList.add('lux-preloader-lock');

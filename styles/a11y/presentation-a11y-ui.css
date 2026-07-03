@@ -114,13 +114,47 @@
   width: var(--incitta-a11y-panel-w);
   height: min(100dvh, 100vh);
   max-height: 100dvh;
-  background: #f8f4ee;
-  color: #002532;
-  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.25);
+  isolation: isolate;
+  overflow: hidden;
+  color: #e8f1f4;
+  background:
+    radial-gradient(900px 420px at 0% 0%, rgba(17, 182, 182, 0.1), transparent 55%),
+    radial-gradient(700px 380px at 100% 8%, rgba(191, 125, 64, 0.12), transparent 50%),
+    linear-gradient(135deg, rgba(0, 37, 50, 0.98) 0%, rgba(0, 54, 64, 0.94) 45%, rgba(0, 20, 28, 0.99) 100%);
+  box-shadow:
+    -8px 0 32px rgba(0, 0, 0, 0.35),
+    inset 1px 0 0 rgba(255, 255, 255, 0.06);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   filter: none !important;
+}
+
+.incitta-a11y-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(17, 182, 182, 0.1), transparent 32%),
+    radial-gradient(circle at 88% 22%, rgba(191, 125, 64, 0.12), transparent 28%),
+    linear-gradient(135deg, rgba(17, 182, 182, 0.04), transparent 22%, rgba(191, 125, 64, 0.06) 78%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.incitta-a11y-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255, 255, 255, 0.015) 40px, rgba(255, 255, 255, 0.015) 41px),
+    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255, 255, 255, 0.015) 40px, rgba(255, 255, 255, 0.015) 41px);
+  background-size: 72px 72px, 72px 72px, auto, auto;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.88));
+  opacity: 0.32;
+  pointer-events: none;
+  z-index: 0;
 }
 
 body.incitta-a11y-panel-open {
@@ -141,8 +175,10 @@ body.incitta-a11y-panel-open {
 
   .incitta-a11y-panel {
     min-width: 0;
-    box-shadow: none;
-    border-left: 1px solid rgba(0, 37, 50, 0.08);
+    box-shadow:
+      -4px 0 24px rgba(0, 0, 0, 0.3),
+      inset 1px 0 0 rgba(255, 255, 255, 0.06);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .incitta-a11y-drawer--open .incitta-a11y-fab {

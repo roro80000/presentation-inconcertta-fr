@@ -33,6 +33,9 @@ export function initLuxCursor() {
     (e) => {
       tx = e.clientX;
       ty = e.clientY;
+      const overEmbed = e.target.closest('#demo-live, #inconcertta-live-embed');
+      const fullscreen = document.documentElement.classList.contains('demo-embed-fullscreen');
+      dot.classList.toggle('is-hidden', Boolean(overEmbed || fullscreen));
     },
     { passive: true }
   );

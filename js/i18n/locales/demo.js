@@ -2,6 +2,10 @@
 
 export const demo = {
   en: {
+    'demo.embed.expand': 'Expand',
+    'demo.embed.close': 'Close',
+    'demo.embed.ariaExpand': 'Expand InConcertta to full screen',
+    'demo.embed.ariaClose': 'Close full screen',
     'demo.logoutConfirm': 'Leave the demo and open the InConcertta login page (inconcertta.fr) in this tab?',
     'demo.captionPrefix': 'Display: ',
     'demo.alt.tool': 'InConcertta — {label}',
@@ -29,6 +33,10 @@ export const demo = {
     'demo.alt.viewport': 'InConcertta interface (preview)',
   },
   es: {
+    'demo.embed.expand': 'Ampliar',
+    'demo.embed.close': 'Cerrar',
+    'demo.embed.ariaExpand': 'Ampliar InConcertta a pantalla completa',
+    'demo.embed.ariaClose': 'Cerrar pantalla completa',
     'demo.logoutConfirm': '¿Salir de la demostración y abrir la página de inicio de sesión de InConcertta (inconcertta.fr) en esta pestaña?',
     'demo.captionPrefix': 'Visualización: ',
     'demo.alt.tool': 'InConcertta — {label}',
@@ -56,6 +64,10 @@ export const demo = {
     'demo.alt.viewport': 'Interfaz InConcertta (vista previa)',
   },
   it: {
+    'demo.embed.expand': 'Ingrandisci',
+    'demo.embed.close': 'Chiudi',
+    'demo.embed.ariaExpand': 'Ingrandisci InConcertta a schermo intero',
+    'demo.embed.ariaClose': 'Chiudi schermo intero',
     'demo.logoutConfirm': 'Uscire dalla dimostrazione e aprire la pagina di accesso InConcertta (inconcertta.fr) in questa scheda?',
     'demo.captionPrefix': 'Visualizzazione: ',
     'demo.alt.tool': 'InConcertta — {label}',
