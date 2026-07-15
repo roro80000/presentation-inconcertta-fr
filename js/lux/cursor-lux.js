@@ -12,6 +12,10 @@ export function initLuxCursor() {
 
   document.documentElement.classList.add('lux-cursor-on');
 
+  if (document.documentElement.classList.contains('cookie-banner-open')) {
+    dot.classList.add('is-hidden');
+  }
+
   let tx = window.innerWidth / 2;
   let ty = window.innerHeight / 2;
   let cx = tx;
@@ -34,8 +38,10 @@ export function initLuxCursor() {
       tx = e.clientX;
       ty = e.clientY;
       const overEmbed = e.target.closest('#demo-live, #inconcertta-live-embed');
+      const overCookie = e.target.closest('#cookie-banner-portal');
+      const cookieOpen = document.documentElement.classList.contains('cookie-banner-open');
       const fullscreen = document.documentElement.classList.contains('demo-embed-fullscreen');
-      dot.classList.toggle('is-hidden', Boolean(overEmbed || fullscreen));
+      dot.classList.toggle('is-hidden', Boolean(overEmbed || overCookie || cookieOpen || fullscreen));
     },
     { passive: true }
   );

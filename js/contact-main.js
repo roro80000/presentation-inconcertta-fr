@@ -1,15 +1,17 @@
 /**
- * Page contact — accessibilité uniquement (pas de Lux, i18n site, ni logique formulaire).
+ * Page contact — accessibilité + bannière cookies (pas de Lux / i18n site).
  */
 
 import { initPresentationA11y } from './accessibility/init-a11y.js';
+import { initCookieBanner } from './cookie-banner.js';
 
-function startContactA11y() {
+function startContactPage() {
+  initCookieBanner();
   initPresentationA11y();
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', startContactA11y);
+  document.addEventListener('DOMContentLoaded', startContactPage);
 } else {
-  startContactA11y();
+  startContactPage();
 }

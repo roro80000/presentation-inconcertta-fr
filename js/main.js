@@ -15,11 +15,11 @@ import { initHeroParallax } from './hooks/hero-parallax.js';
 import { initRevealOnScroll } from './hooks/reveal-on-scroll.js';
 import { initInconcerttaEmbed } from './hooks/inconcertta-embed.js';
 import { injectGrain } from './lux/grain.js';
-import { initGoatCounter } from './goatcounter.js';
+import { initCookieBanner } from './cookie-banner.js';
 import { initPresentationA11y } from './accessibility/init-a11y.js';
 import { initSiteI18n } from './i18n/site-i18n.js';
 
-initGoatCounter();
+initCookieBanner();
 initNavbarScroll();
 initMobileEnv();
 

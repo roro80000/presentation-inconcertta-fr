@@ -7,6 +7,7 @@
 @import url('styles/a11y/presentation-a11y-ui.css');
 @import url('styles/a11y/display-settings-panel.css');
 @import url('styles/site-diapo-backdrop.css');
+@import url('styles/cookie-banner.css');
 
 /* Lenis — aligné sur lenis@1.3.x (paquet officiel / README) */
 html.lenis,
