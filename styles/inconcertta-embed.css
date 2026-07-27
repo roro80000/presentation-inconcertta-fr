@@ -110,7 +110,10 @@ html.demo-embed-fullscreen #lux-cursor {
   line-height: 1.62;
   color: rgba(232, 241, 244, 0.92);
   margin: 0 0 1rem;
-  max-width: 62ch;
+  max-width: none;
+  width: 100%;
+  text-align: left;
+  text-wrap: pretty;
 }
 
 .main-read .demo-live-heading {

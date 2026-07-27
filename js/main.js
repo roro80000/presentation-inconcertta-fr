@@ -3,7 +3,7 @@
  */
 
 import './seo/init-seo.js';
-import { bootLuxuryStack } from './lux/boot-luxury.js';
+import { bootLuxuryStack, runHeroTitleEffects } from './lux/boot-luxury.js';
 import { initNavbarScroll, attachNavbarToLenis } from './hooks/navbar-scroll.js';
 import { initMobileEnv } from './hooks/mobile-env.js';
 import { initNavMobile } from './hooks/nav-mobile.js';
@@ -17,7 +17,7 @@ import { initInconcerttaEmbed } from './hooks/inconcertta-embed.js';
 import { injectGrain } from './lux/grain.js';
 import { initCookieBanner } from './cookie-banner.js';
 import { initPresentationA11y } from './accessibility/init-a11y.js';
-import { initSiteI18n } from './i18n/site-i18n.js';
+import { initSiteI18n, snapshotDefaults } from './i18n/site-i18n.js';
 
 initCookieBanner();
 initNavbarScroll();
@@ -25,6 +25,7 @@ initMobileEnv();
 
 async function boot() {
   injectGrain();
+  snapshotDefaults();
 
   try {
     await bootLuxuryStack();
@@ -48,6 +49,12 @@ async function boot() {
   } catch (err) {
     console.warn('[boot] i18n / a11y indisponible', err);
   }
+
+  runHeroTitleEffects();
+
+  document.addEventListener('inconcertta:localechange', () => {
+    runHeroTitleEffects();
+  });
 
   initContactForm();
 }

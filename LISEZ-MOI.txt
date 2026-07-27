@@ -11,9 +11,10 @@ Arborescence :
   styles.css       Copie depuis Site_InCitta
   js/              Copie depuis Site_InCitta (point d’entrée : js/main.js)
   assets/
-    Inconcertta/   Captures, galerie admin…
-    Logo/          Logo pied de page, favicon InConcertta
-    images/logos/  Logo chapô
+    Inconcertta/admin/galerie/  Captures écran page gestion (WebP)
+    Logo/                       Favicon, pied de page, LinkedIn
+    images/logos/               Logos navigation et partage social
+    Flyer-InConcertta_VF.pdf    Plaquette téléchargeable
 
 Déploiement : publier le dossier à la racine du domaine (chemins absolus /assets/...).
 Mise à jour du contenu : reporter les changements depuis Site_InCitta/inconcertta.html ou resynchroniser les copies.

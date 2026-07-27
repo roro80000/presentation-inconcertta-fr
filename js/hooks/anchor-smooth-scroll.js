@@ -3,9 +3,9 @@
  * `anchors: false` sur Lenis : pas de double prise en charge ; scrollTo explicite + offset.
  */
 
-/** Défilement ancres : lent et aérien, aligné sur le ressenti Lenis */
+/** Défilement ancres : plus direct, moins d’emphase sur la durée */
 function easeAerial(t) {
-  return 1 - Math.pow(1 - t, 2.85);
+  return 1 - Math.pow(1 - t, 2.1);
 }
 
 function scrollToAnchor(target) {
@@ -15,7 +15,7 @@ function scrollToAnchor(target) {
   if (lenis && typeof lenis.scrollTo === 'function') {
     lenis.scrollTo(target, {
       offset: -pad,
-      duration: 2.15,
+      duration: 1.35,
       easing: easeAerial,
     });
     return;

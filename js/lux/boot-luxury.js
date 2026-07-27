@@ -49,21 +49,29 @@ function shouldRunCurtainOnlyPreloader() {
   return /gestion\.html$/i.test(window.location.pathname);
 }
 
-/** Révélation titre : SplitType + blur → net, montée 10px, rythme très lent */
+/** Révélation titre : SplitType + blur → net, montée légère */
 const HERO_CHAR_FROM = {
-  y: 10,
+  y: 6,
   opacity: 0,
-  filter: 'blur(14px)',
-  stagger: 0.088,
-  duration: 1.62,
-  ease: 'power2.out',
+  filter: 'blur(6px)',
+  stagger: 0.026,
+  duration: 0.52,
+  ease: 'power3.out',
 };
 
 function initHeroReveal(gsap, SplitType) {
   const h1 = document.querySelector('.lux-h1-animate');
   if (!h1) return;
 
-  const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+  h1.classList.remove('lux-h1-revealed');
+
+  try {
+  const tl = gsap.timeline({
+    defaults: { ease: 'power2.out' },
+    onComplete: () => {
+      h1.classList.add('lux-h1-revealed');
+    },
+  });
   const lines = h1.querySelectorAll('.lux-line--mask');
   let first = true;
 
@@ -71,7 +79,7 @@ function initHeroReveal(gsap, SplitType) {
     const brand = line.querySelector('.inconcertta-brand');
     const tail = line.querySelector('.lux-h1-tail');
     const sub = line.querySelector('.lux-h1-sub');
-    const insert = first ? 0 : '>-0.28';
+    const insert = first ? 0 : '>-0.42';
     first = false;
 
     if (brand) {
@@ -90,18 +98,25 @@ function initHeroReveal(gsap, SplitType) {
       tl.from(st.chars, { ...HERO_CHAR_FROM }, insert);
     }
   });
+  } catch (err) {
+    console.warn('[lux] hero title reveal', err);
+    h1.classList.add('lux-h1-revealed');
+    gsap.set(h1.querySelectorAll('.char'), { opacity: 1, y: 0, filter: 'none' });
+  }
 }
 
 /**
  * Parallaxe inverse sur le h1 : souris vers le haut → le bloc titre descend légèrement (profondeur).
  */
 function initHeroH1MouseParallax(gsap, h1) {
-  if (!h1 || window.matchMedia('(pointer: coarse)').matches) return;
+  if (!h1 || h1.dataset.luxHeroParallax === '1') return;
+  if (window.matchMedia('(pointer: coarse)').matches) return;
   const hero = h1.closest('.page-hero');
   if (!hero) return;
+  h1.dataset.luxHeroParallax = '1';
 
-  const maxX = 7;
-  const maxY = 6;
+  const maxX = 4;
+  const maxY = 3.5;
   gsap.set(h1, { x: 0, y: 0 });
 
   const quickX = gsap.quickTo(h1, 'x', { duration: 0.65, ease: 'power3.out' });
@@ -118,6 +133,16 @@ function initHeroH1MouseParallax(gsap, h1) {
     quickX(0);
     quickY(0);
   });
+}
+
+export function runHeroTitleEffects() {
+  const kit = window.__luxHeroReveal;
+  if (!kit?.gsap || !kit?.SplitType) return;
+  kit.init();
+  const heroH1 = document.querySelector('.lux-h1-animate');
+  if (heroH1?.closest('.page-hero')) {
+    initHeroH1MouseParallax(kit.gsap, heroH1);
+  }
 }
 
 function initSplitHeadings(gsap, ScrollTrigger, SplitType) {
@@ -212,7 +237,7 @@ export async function bootLuxuryStack() {
     if (shouldRunCurtainOnlyPreloader()) {
       await runPreloader({ curtainOnly: true, curtainHoldMs: 100 });
     } else {
-      await runPreloader({ minMs: document.querySelector('.lux-h1-animate') ? 720 : 420 });
+      await runPreloader({ minMs: document.querySelector('.lux-h1-animate') ? 460 : 380 });
     }
   }
 
@@ -220,15 +245,15 @@ export async function bootLuxuryStack() {
   let lenis = null;
 
   if (!skipLenis) {
-    /* Très fluide, presque aérien : lerp bas + moindre amplitude molette / touch */
+    /* Scroll lissé modéré (moins d’inertie / moins « aérien » au fil des sections) */
     lenis = new Lenis({
       smoothWheel: true,
       syncTouch: true,
-      syncTouchLerp: 0.034,
-      touchInertiaExponent: 1.38,
-      lerp: 0.034,
-      wheelMultiplier: 0.42,
-      touchMultiplier: 0.82,
+      syncTouchLerp: 0.052,
+      touchInertiaExponent: 1.22,
+      lerp: 0.052,
+      wheelMultiplier: 0.58,
+      touchMultiplier: 0.72,
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       autoRaf: false,
@@ -277,11 +302,8 @@ export async function bootLuxuryStack() {
   window.__presentationLenis = lenis;
   ScrollTrigger.refresh();
 
-  initHeroReveal(gsap, SplitType);
-  const heroH1 = document.querySelector('.lux-h1-animate');
-  if (heroH1?.closest('.page-hero')) {
-    initHeroH1MouseParallax(gsap, heroH1);
-  }
+  window.__luxHeroReveal = { gsap, SplitType, init: () => initHeroReveal(gsap, SplitType) };
+
   initSplitHeadings(gsap, ScrollTrigger, SplitType);
   initParallaxLux(gsap);
   initLuxCursor();

@@ -463,7 +463,7 @@ body.overview-open .nav-side { opacity: 0; pointer-events: none; }
   flex-wrap: wrap;
 }
 .mobile-shot-wrap {
-  width: clamp(110px, 42%, 150px);
+  width: clamp(120px, 42%, 180px);
   flex-shrink: 0;
 }
 .mobile-shot {
@@ -938,7 +938,7 @@ body.overview-open .nav-side { opacity: 0; pointer-events: none; }
 <body>
 
 <!-- Progress bar -->
-<div id="progress"><div id="progress-bar" style="width:6.67%"></div></div>
+<div id="progress"><div id="progress-bar" style="width:5.56%"></div></div>
 
 <!-- Dots -->
 <div id="dots"></div>
@@ -954,7 +954,7 @@ body.overview-open .nav-side { opacity: 0; pointer-events: none; }
 <!-- Nav -->
 <div id="nav">
   <button id="nav-prev" onclick="prev()" disabled>&#8592;</button>
-  <span id="nav-counter">01 / 15</span>
+  <span id="nav-counter">01 / 18</span>
   <button id="nav-next" onclick="next()">&#8594;</button>
   <button id="nav-fs" onclick="toggleFS()">Plein écran</button>
 </div>
@@ -1042,13 +1042,14 @@ const ovPaths = {
   gear:    `<circle cx="8" cy="8" r="2"/><path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2M3.2 3.2l1.4 1.4M11.4 11.4l1.4 1.4M3.2 12.8l1.4-1.4M11.4 4.6l1.4-1.4"/>`,
   analyze: `<path d="M2.5 12.5V7M6 12.5V5M9.5 12.5V8.5M13 12.5V3"/><path d="M2.5 12.5h11"/>`,
   a11y:    `<path d="M1.5 8s2.2-4.5 6.5-4.5S14.5 8 14.5 8s-2.2 4.5-6.5 4.5S1.5 8 1.5 8z"/><circle cx="8" cy="8" r="1.8"/><path d="M8 1.5v1.5M8 13v1.5"/>`,
+  shield:  `<path d="M8 1.5l6 2.5v4c0 3.5-2.5 6.5-6 7.5-3.5-1-6-4-6-7.5v-4L8 1.5z"/><path d="M5.5 8.2l1.8 1.8 3.2-3.5"/>`,
   contact: `<rect x="2" y="4" width="12" height="8.5" rx="1.5"/><path d="M2 5l6 4.5L14 5"/>`,
 };
 const OV_ICON_KEYS = [
   'spark', 'target', 'steps', 'balance', 'layers',
   'map', 'chat', 'bulb', 'bar', 'collab',
   'compare', 'grid', 'dash', 'gear', 'analyze',
-  'a11y', 'contact'
+  'a11y', 'shield', 'contact'
 ];
 function ovArtHtml(i, cat) {
   const key = OV_ICON_KEYS[i] || 'spark';
@@ -1165,9 +1166,11 @@ const slides = [
           <div class="small-text" style="margin-top:4px">Accès sécurisé depuis mobile ou ordinateur, sans installation. Interface intuitive et accessible à tous.</div>
         </div>
       </div>
-      <p class="body-text anim-5" style="max-width:46ch;margin-top:20px;font-size:13.5px">
-        Elle transforme la parole citoyenne en <strong>données exploitables</strong> pour valider, enrichir et légitimer vos choix politiques.
-      </p>
+      <div class="card card-orange anim-5" style="padding:14px 16px;margin-top:20px">
+        <div class="small-text" style="color:var(--orange);font-weight:600">
+          Elle transforme la parole citoyenne en <strong style="color:var(--orange)">données exploitables</strong> pour valider, enrichir et légitimer vos choix politiques.
+        </div>
+      </div>
     </div>
     <div>
       <div class="card anim-sc" style="padding:28px;display:flex;flex-direction:column;gap:16px;margin-bottom:16px">
@@ -1273,7 +1276,9 @@ const slides = [
       </div>
     </div>
     <div class="anim-4" style="margin-top:32px;text-align:center">
-      <span class="small-text" style="color:var(--accent);font-weight:600">Un gain de temps, de qualité et de transparence pour vos démarches participatives</span>
+      <div class="card card-orange" style="padding:14px 16px;display:inline-block">
+        <span class="small-text" style="color:var(--orange);font-weight:600">Un gain de temps, de qualité et de transparence pour vos démarches participatives</span>
+      </div>
     </div>
   </div>
 `},
@@ -1308,7 +1313,9 @@ const slides = [
       ].map(e=>`<div class="card anim-4" style="padding:14px 16px;text-align:center"><div class="h-kicker" style="justify-content:center;margin-bottom:8px;font-size:9px">${e.tag}</div><div class="small-text">${e.d}</div></div>`).join('')}
     </div>
     <div class="anim-5" style="margin-top:20px;text-align:center">
-      <span class="small-text" style="color:var(--orange);font-weight:600">InConcertta peut accompagner différents types de projet</span>
+      <div class="card card-orange" style="padding:14px 16px;display:inline-block">
+        <span class="small-text" style="color:var(--orange);font-weight:600">InConcertta peut accompagner différents types de projet</span>
+      </div>
     </div>
   </div>
 `},
@@ -1329,11 +1336,13 @@ const slides = [
       <div class="section-label anim-1">Outil — Cartographie</div>
       <div class="h2 anim-2" style="margin-bottom:10px">Le territoire devient<br>l'<span class="h-accent">interface de participation</span></div>
       <div class="sep anim-3"></div>
-      <p class="body-text anim-3" style="margin:14px 0 20px;font-size:14px">Permettez aux citoyens de dessiner leurs attentes directement sur le plan.</p>
-      ${featRow('map','Modélisation territoriale','Grille paramétrée sur n\'importe quel fond de plan, catalogue d\'objets')}
-      ${featRow('collab','Collaboration temps réel','Mode personnel ou collaboratif simultané — plusieurs participants interagissant sur un même plan')}
-      ${featRow('bar','Pédagogique','Budget, eco-score et paramètres calculés automatiquement — implique les citoyens dans les arbitrages réels')}
-      ${featRow('gear','Grille d\'objets personnalisée','Rattachez un catalogue d\'objets sur-mesure à chaque carte de projet, sondez et observez les volontés et besoins des habitants')}
+      <p class="body-text anim-3" style="margin:14px 0 20px;font-size:14px">Situez échanges et contributions sur un repère territorial lisible : fonds <strong>IGN</strong> ou <strong>OpenStreetMap</strong>, plan de concertation ou grille personnalisée.</p>
+      ${featRow('map','Fonds cartographiques','Fonds IGN et OpenStreetMap pour ancrer démarches et données sur le territoire réel, aux côtés de vos plans et grilles de concertation')}
+      ${featRow('map','Données géolocalisées','Chaque apport peut être rattaché à un lieu précis — lecture des enjeux à l\'échelle du quartier ou de la rue')}
+      ${featRow('chat','Signalements urbains','Signaler des dysfonctionnements géolocalisés sur la carte : repérer, documenter et suivre les problèmes du quotidien en gestion de proximité')}
+      ${featRow('export','Couches SIG (GeoJSON)','Superposition de vos données — périmètres, équipements, scénarios — pour enrichir l\'information autour des projets')}
+      ${featRow('collab','Collaboration temps réel','Mode personnel ou collaboratif : plusieurs participants sur un même plan, avec catalogue d\'objets paramétrable')}
+      ${featRow('bar','Pédagogique','Budget, éco-score et paramètres calculés automatiquement — implique les citoyens dans les arbitrages concrets')}
       <div class="card card-orange anim-5" style="padding:14px 16px;margin-top:12px">
         <div class="small-text" style="color:var(--orange);font-weight:600">L'outil remplace le papier pour une concertation plus dynamique et continue</div>
       </div>
@@ -1352,7 +1361,7 @@ const slides = [
       <div class="sep anim-3"></div>
       <p class="body-text anim-3" style="margin:14px 0 20px;font-size:14px">Les fils de discussion sont ancrés pour garantir des échanges pragmatiques, connectés à la réalité du terrain.</p>
       ${featRow('chat','Sujets de discussion','Fils de discussion créés par le porteur de projet, ouverts aux contributions citoyennes avec modération intégrée')}
-      ${featRow('map','Ancrage cartographique','Sujets et actualités rattachés à des zones du plan interactif permettant de contextualiser le dialogue')}
+      ${featRow('map','Ancrage cartographique','Sujets, actualités et contributions rattachés à la carte pour contextualiser le dialogue sur le terrain')}
       ${featRow('dash','Communication directe','Réponses directes depuis l\'espace de gestion — gain de temps et traçabilité complète des échanges')}
       <div class="card card-orange anim-5" style="padding:14px 16px;margin-top:12px">
         <div class="small-text" style="color:var(--orange);font-weight:600">La perte de courriels est évitée et le dialogue centralisé pour une meilleure réactivité</div>
@@ -1433,7 +1442,7 @@ const slides = [
           <div class="h3" style="margin-bottom:10px;font-size:1rem">Pour les partenaires du dispositif</div>
           <p class="small-text" style="margin-bottom:14px">Accès réservé aux acteurs institutionnels — centralisation des échanges multi-partenaires hors sphère publique.</p>
           <div style="display:flex;flex-direction:column;gap:6px">
-            ${['Échange de documents entre partenaires','Fils de discussion thématiques','Collecte d\'avis et arbitrages','Vue centralisée des échanges institutionnels'].map(t=>`<div style="display:flex;gap:8px;align-items:flex-start"><div style="width:1px;background:var(--border-o);flex-shrink:0;margin-top:5px;height:12px"></div><div class="small-text">${t}</div></div>`).join('')}
+            ${['Échange de documents entre partenaires','Collecte d\'avis et arbitrages','Vue centralisée des échanges institutionnels'].map(t=>`<div style="display:flex;gap:8px;align-items:flex-start"><div style="width:1px;background:var(--border-o);flex-shrink:0;margin-top:5px;height:12px"></div><div class="small-text">${t}</div></div>`).join('')}
           </div>
         </div>
       </div>
@@ -1446,7 +1455,7 @@ const slides = [
           <div class="h3" style="margin-bottom:10px;font-size:1rem">Visualiser l'impact Avant / Après</div>
           <p class="small-text" style="margin-bottom:14px">Outil de communication et co-décision : montrez concrètement l'effet d'un projet urbain ou paysager.</p>
           <div style="display:flex;flex-direction:column;gap:6px">
-            ${['Glissière interactive Avant / Après','Comparaison visuelle de scénarios','Partage et votes sur les créations','Catalogue d\'images (équipements, essences…)'].map(t=>`<div style="display:flex;gap:8px;align-items:flex-start"><div style="width:1px;background:rgba(17,182,182,0.35);flex-shrink:0;margin-top:5px;height:12px"></div><div class="small-text">${t}</div></div>`).join('')}
+            ${['Glissière interactive Avant / Après','Comparaison visuelle de scénarios',''].map(t=>`<div style="display:flex;gap:8px;align-items:flex-start"><div style="width:1px;background:rgba(17,182,182,0.35);flex-shrink:0;margin-top:5px;height:12px"></div><div class="small-text">${t}</div></div>`).join('')}
           </div>
         </div>
       </div>
@@ -1487,7 +1496,7 @@ const slides = [
       ${[
         {tag:'Dialogue',t:'Forum & Messagerie',d:'Fils modérés, ancrage cartographique, courriels centralisés'},
         {tag:'Co-construction',t:'Boîte à idées',d:'Dépôt et vote des propositions citoyennes avec enveloppe budgétaire'},
-        {tag:'Territoire',t:'Cartographie interactive',d:'Modélisation sur grille, budget participatif, collaboration temps réel'},
+        {tag:'Territoire',t:'Cartographie interactive',d:'Fonds IGN/OSM, géolocalisation, signalements urbains, couches GeoJSON, collaboration'},
         {tag:'Données',t:'Enquêtes & Sondages',d:'Questionnaires paramétrables, tris croisés, tests statistiques, export'},
         {tag:'Partenaires',t:'Espace collaboratif',d:'Échanges institutionnels privés, programmation d\'actions multi-acteurs'},
         {tag:'Visualisation',t:'Comparatif Avant / Après',d:'Glissière interactive, catalogue visuel, vote sur scénarios'},
@@ -1500,7 +1509,9 @@ const slides = [
       `).join('')}
     </div>
     <div class="anim-4" style="margin-top:18px;text-align:center">
-      <span class="small-text">Chaque outil est activable selon les besoins et la phase du projet</span>
+      <div class="card card-orange" style="padding:14px 16px;display:inline-block">
+        <span class="small-text" style="color:var(--orange);font-weight:600">Chaque outil est activable selon les besoins et la phase du projet</span>
+      </div>
     </div>
   </div>
 `},
@@ -1518,7 +1529,7 @@ const slides = [
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
         ${[
           {icon:'gear',t:'Paramètres',d:'Accès et permissions, outils activés'},
-          {icon:'map',t:'Cartographie',d:'Fond de plan et paramètre de la grille'},
+          {icon:'map',t:'Cartographie',d:'Fonds IGN/OSM, grille, géolocalisation, couches GeoJSON'},
           {icon:'bar',t:'Sondages',d:'Conception & analyse'},
           {icon:'bulb',t:'Idées',d:'Suivi, modération et mise en vote'},
           {icon:'chat',t:'Forum / Courriels',d:'Dialogue centralisé et modéré'},
@@ -1551,8 +1562,9 @@ const slides = [
         <div style="display:flex;flex-direction:column;gap:0">
           ${[
             {t:'Accès libre ou restreint',d:'Ouverture large, invitation nominative ou liste fermée — selon le cadre légal et la démarche'},
-            {t:'Outils actionnables à la carte',d:'Activez uniquement les modules pertinents pour chaque phase du projet'},
-            {t:'Niveaux de participation configurables',d:'Configurez les droits d\'action des participants (lire, contribuer, voter, co-créer)'},
+            {t:'Outils activables à la carte',d:'Activez uniquement les modules pertinents pour chaque phase du projet'},
+            {t:'Niveaux de participation configurables',d:'Droits des participants : lire, contribuer, voter, co-créer'},
+            {t:'Personnalisation visuelle',d:'Depuis l\'espace de gestion : palette de couleurs et interface aux couleurs de votre organisation ou de votre démarche'},
           ].map((item,i)=>`
             <div class="feat-row anim-${i+2}">
               ${icon('gear')}
@@ -1606,55 +1618,71 @@ const slides = [
   </div>
 `},
 
-// ── 15 : ACCESSIBILITÉ & SÉCURITÉ ───────────────────────────────
-{ label: 'Accessibilité & Conformité', html: `
+// ── 15 : ACCESSIBILITÉ ──────────────────────────────────────────
+{ label: 'Accessibilité', html: `
   <div class="noise"></div>
-  <div class="glow" style="width:500px;height:300px;bottom:0;left:0;background:radial-gradient(ellipse,rgba(17,182,182,0.08) 0%,transparent 70%)"></div>
-  <div class="wrap">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start">
-      <div>
-        <div class="section-label anim-1">Accessibilité</div>
-        <div class="h2 anim-2" style="margin-bottom:10px;font-size:clamp(1.4rem,2.5vw,2rem)">Une plateforme accessible<br><span class="h-accent">&amp; inclusive</span></div>
-        <div class="sep anim-3"></div>
-        <p class="body-text anim-3" style="margin:14px 0 20px;font-size:13.5px">InConcertta est accessible depuis n'importe quel navigateur d'ordinateur, de tablette ou smartphone.</p>
-        <div class="a11y-grid anim-4">
-          ${[
-            {tag:'Dyslexie',t:'Lecture sur-mesure',d:'Police adaptée, espacement renforcé, mode concentration'},
-            {tag:'Malvoyance',t:'Confort visuel',d:'Taille du texte ajustable, contrastes renforcés, filtre daltonisme'},
-            {tag:'Motricité',t:'Navigation simplifiée',d:'Zones cliquables agrandies, réduction des animations, lecture vocale'},
-          ].map(a=>`
-            <div class="a11y-item">
-              <div class="a11y-tag">${a.tag}</div>
-              <div class="a11y-title">${a.t}</div>
-              <div class="a11y-desc">${a.d}</div>
-            </div>
-          `).join('')}
-        </div>
-        <div class="anim-5 mockup-wrap--80" style="margin-top:20px">
-          ${mockup('planAccessibilite', {label:'Panneau accessibilité sur le plan'})}
-        </div>
+  <div class="glow" style="width:500px;height:400px;bottom:-60px;left:-60px;background:radial-gradient(ellipse,rgba(17,182,182,0.1) 0%,transparent 70%)"></div>
+  <div class="wrap col-l">
+    <div>
+      <div class="anim-sc mockup-wrap--80">
+        ${mockup('planAccessibilite', {label:'Panneau accessibilité sur le plan'})}
       </div>
-      <div>
-        <div class="section-label anim-1" style="color:var(--accent)">Conformité</div>
-        <div class="h2 anim-2" style="margin-bottom:10px;font-size:clamp(1.4rem,2.5vw,2rem)">Sécurité &amp;<br><span style="color:var(--accent)">conformité</span></div>
-        <div class="sep anim-3" style="background:var(--accent)"></div>
-        <p class="body-text anim-3" style="margin:14px 0 20px;font-size:13.5px">L'architecture numérique a été pensée et conçue pour les collectivités territoriales et dans le respect de la législation.</p>
-        <div class="sec-grid anim-4">
-          ${[
-            {t:'RGPD',d:'Base légale documentée, information des personnes, exercice des droits, sous-traitance encadrée'},
-            {t:'Hébergement UE',d:'Données hébergées sur une solution en Union européenne'},
-            {t:'Sécurité',d:'Accès authentifiés, cloisonnement des projets et transmissions des données chiffrées'},
-          ].map(s=>`
-            <div class="sec-item">
-              <div class="sec-title">${s.t}</div>
-              <div class="sec-desc">${s.d}</div>
-            </div>
-          `).join('')}
-        </div>
-        <div class="mockup-mobile-row--inline anim-5">
-          ${mobileShot('mobilePlan', 'Interface mobile')}
-          ${mobileShot('mobileControle', 'Panneau de contrôle mobile')}
-        </div>
+    </div>
+    <div>
+      <div class="section-label anim-1">Accessibilité</div>
+      <div class="h2 anim-2" style="margin-bottom:10px">Une plateforme accessible<br><span class="h-accent">&amp; inclusive</span></div>
+      <div class="sep anim-3"></div>
+      <p class="body-text anim-3" style="margin:14px 0 20px;font-size:14px">InConcertta est accessible depuis n'importe quel navigateur d'ordinateur, de tablette ou smartphone.</p>
+      <div class="a11y-grid anim-4">
+        ${[
+          {tag:'Dyslexie',t:'Lecture sur-mesure',d:'Police adaptée, espacement renforcé, mode concentration'},
+          {tag:'Malvoyance',t:'Confort visuel',d:'Taille du texte ajustable, contrastes renforcés, filtre daltonisme'},
+          {tag:'Motricité',t:'Navigation simplifiée',d:'Zones cliquables agrandies, réduction des animations, lecture vocale'},
+        ].map(a=>`
+          <div class="a11y-item">
+            <div class="a11y-tag">${a.tag}</div>
+            <div class="a11y-title">${a.t}</div>
+            <div class="a11y-desc">${a.d}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="card card-orange anim-5" style="padding:14px 16px;margin-top:16px">
+        <div class="small-text" style="color:var(--orange);font-weight:600">Conçue pour tous les publics — mobile, tablette et ordinateur</div>
+      </div>
+    </div>
+  </div>
+`},
+
+// ── 16 : SÉCURITÉ & CONFORMITÉ ──────────────────────────────────
+{ label: 'Sécurité & Conformité', html: `
+  <div class="noise"></div>
+  <div class="glow" style="width:500px;height:400px;top:-60px;right:-60px;background:radial-gradient(ellipse,rgba(191,125,64,0.1) 0%,transparent 70%)"></div>
+  <div class="wrap col-r">
+    <div>
+      <div class="section-label anim-1" style="color:var(--accent)">Conformité</div>
+      <div class="h2 anim-2" style="margin-bottom:10px">Sécurité &amp;<br><span style="color:var(--accent)">conformité</span></div>
+      <div class="sep anim-3" style="background:var(--accent)"></div>
+      <p class="body-text anim-3" style="margin:14px 0 20px;font-size:14px">L'architecture numérique a été pensée et conçue pour les collectivités territoriales et dans le respect de la législation.</p>
+      <div class="sec-grid anim-4">
+        ${[
+          {t:'RGPD',d:'Base légale documentée, information des personnes, exercice des droits, sous-traitance encadrée'},
+          {t:'Hébergement UE',d:'Données hébergées sur une solution en Union européenne'},
+          {t:'Sécurité',d:'Accès authentifiés, cloisonnement des projets et transmissions des données chiffrées'},
+        ].map(s=>`
+          <div class="sec-item">
+            <div class="sec-title">${s.t}</div>
+            <div class="sec-desc">${s.d}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="card card-orange anim-5" style="padding:14px 16px;margin-top:16px">
+        <div class="small-text" style="color:var(--orange);font-weight:600">Une plateforme accessible aussi sur mobile, en toute conformité</div>
+      </div>
+    </div>
+    <div>
+      <div class="mockup-mobile-row--inline anim-sc" style="margin-top:0;justify-content:center;gap:28px">
+        ${mobileShot('mobilePlan', 'Interface mobile')}
+        ${mobileShot('mobileControle', 'Panneau de contrôle mobile')}
       </div>
     </div>
   </div>

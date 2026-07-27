@@ -21,8 +21,8 @@ export function initScrollDistortLux() {
 
     vy *= 0.94;
 
-    const skew = Math.max(-2.4, Math.min(2.4, vy * 0.032));
-    const blur = Math.min(1.6, Math.abs(vy) * 0.011);
+    const skew = Math.max(-1.35, Math.min(1.35, vy * 0.018));
+    const blur = Math.min(0.9, Math.abs(vy) * 0.0065);
 
     els.forEach((el) => {
       el.style.transform = Math.abs(skew) > 0.04 ? `skewY(${skew}deg)` : '';
