@@ -8,7 +8,7 @@
 }
 
 /* —— Iframe live (inline) — aligné incitta.eu —— */
-.main-read .demo-frame--live {
+.demo-frame--live {
   position: relative;
   display: block;
   width: 100%;
@@ -23,7 +23,7 @@
   background: var(--ic-embed-frame-bg);
 }
 
-.main-read .demo-frame--live iframe {
+.demo-frame--live iframe {
   position: absolute;
   inset: 0;
   width: 100%;
